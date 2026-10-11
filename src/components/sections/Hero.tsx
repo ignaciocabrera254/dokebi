@@ -34,7 +34,7 @@ export function Hero() {
           <span className="font-marker bg-ink text-yolk -rotate-3 self-start rounded-md px-3.5 py-1.5 text-[17px] md:px-[18px] md:py-2 md:text-[22px]">
             ¡Annyeong, Santiago!
           </span>
-          <h1 id="titulo-principal" className="font-display text-ink m-0 scroll-mt-24 text-[70px] leading-[0.9] text-balance md:text-h1">
+          <h1 id="titulo-principal" tabIndex={-1} className="font-display text-ink m-0 scroll-mt-24 text-[70px] leading-[0.9] text-balance md:text-h1">
             <span className="hero-word">Korean</span>{" "}<span className="hero-word">Street</span>{" "}<span className="hero-word">Food</span> <span className="block"><span className="hero-word">·</span>{" "}<span className="hero-word">Santiago</span></span>
           </h1>
           <div className="flex flex-wrap items-end justify-between gap-10">

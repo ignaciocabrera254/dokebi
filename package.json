@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:hero": "node --test tests/hero-camera.test.mjs",
+    "build:webpack": "next build --webpack"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",
@@ -18,6 +20,7 @@
     "three": "^0.186.1"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
     "@tailwindcss/turbopack": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

@@ -6,6 +6,8 @@ import { site } from "@/data/site";
 
 export function Header({ immersive = false }: { immersive?: boolean }) {
   return (
+    <>
+    {immersive && <div className="hero-browser-bar" aria-hidden="true"><span className="hero-browser-dots"><i /><i /><i /></span><span className="hero-browser-address">dokebi.cl</span></div>}
     <header data-immersive={immersive || undefined} className="site-header border-gray-850 bg-ink sticky top-0 z-30 border-b-2">
       <div className="px-gutter mx-auto flex h-16 w-full max-w-site items-center justify-between gap-4 md:h-[76px]">
         <Link href="/" aria-label="DOKEBI, ir al inicio" className="text-paper flex items-center gap-2.5 no-underline md:gap-3">
@@ -31,5 +33,6 @@ export function Header({ immersive = false }: { immersive?: boolean }) {
         </div>
       </div>
     </header>
+    </>
   );
 }

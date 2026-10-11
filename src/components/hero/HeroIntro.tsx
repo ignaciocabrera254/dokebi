@@ -22,11 +22,13 @@ export function HeroIntro({ children }: { children: ReactNode }) {
   const skip = useRef<HTMLAnchorElement>(null);
   const hud = useRef<HTMLOutputElement>(null);
   const progress = useRef(0);
+  const failed = useRef(false);
   const lenis = useRef<Lenis | null>(null);
   const [enabled, setEnabled] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [active, setActive] = useState(false);
   const [debug, setDebug] = useState(false);
+  const [orbit, setOrbit] = useState(true);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -34,6 +36,7 @@ export function HeroIntro({ children }: { children: ReactNode }) {
     const media = matchMedia("(prefers-reduced-motion: reduce)");
     const query = new URLSearchParams(location.search);
     const capture = query.has("captureHero");
+    const reduced = () => media.matches || query.has("reducedMotion");
     const isDebug = query.has("debug");
     const element = intro.current!;
     const title = document.getElementById("titulo-principal")!;
@@ -45,7 +48,7 @@ export function HeroIntro({ children }: { children: ReactNode }) {
     let smoothScroll: Lenis | null = null;
 
     const syncPreference = () => {
-      const animate = !media.matches && !capture;
+      const animate = !reduced() && !capture && !failed.current;
       setEnabled(animate);
       setDebug(isDebug);
       root.classList.toggle("hero-motion", animate);
@@ -57,7 +60,7 @@ export function HeroIntro({ children }: { children: ReactNode }) {
       lenis.current = null;
       if (animate) {
         void import("lenis").then(({ default: Lenis }) => {
-          if (disposed || media.matches) return;
+          if (disposed || reduced() || failed.current) return;
           smoothScroll = new Lenis({ autoRaf: true, anchors: true, lerp: 0.1 });
           lenis.current = smoothScroll;
           root.classList.add("hero-lenis");
@@ -77,8 +80,9 @@ export function HeroIntro({ children }: { children: ReactNode }) {
       const target = clamp(-rect.top / Math.max(1, element.offsetHeight - stageHeight));
       progress.current += (target - progress.current) * 0.12;
       if (Math.abs(target - progress.current) < 0.0005) progress.current = target;
-      const p = progress.current;
-      const solid = capture || media.matches || p > 0.82 || rect.bottom < stageHeight;
+      const p = reduced() || failed.current ? 0 : progress.current;
+      element.dataset.progress = p.toFixed(4);
+      const solid = capture || reduced() || p > 0.82 || rect.bottom < stageHeight;
       if (solid !== lastSolid) { root.classList.toggle("hero-header-solid", solid); lastSolid = solid; }
       if (decoration.current) decoration.current.style.opacity = String(1 - clamp(p / 0.12));
       if (wash.current) wash.current.style.opacity = String(clamp((p - 0.72) / 0.08));
@@ -89,16 +93,16 @@ export function HeroIntro({ children }: { children: ReactNode }) {
         skip.current.tabIndex = hidden ? -1 : 0;
       }
       if (hud.current) hud.current.value = `p ${p.toFixed(3)} · ${p < 0.38 ? "Patio" : p < 0.52 ? "Guiño" : p < 0.72 ? "Pantalla" : "Amarillo"}`;
-      const needsScene = !capture && !media.matches && visible && !document.hidden && (p < 0.81 || isDebug);
+      const needsScene = !capture && !reduced() && !failed.current && visible && !document.hidden && (p < 0.81 || isDebug);
       setActive(needsScene);
       if (needsScene !== sceneMounted) { sceneMounted = needsScene; setMounted(needsScene); }
-      if (visible && !document.hidden && !media.matches && !capture) schedule();
+      if (visible && !document.hidden && !reduced() && !capture && !failed.current && Math.abs(target - progress.current) >= 0.0005) schedule();
     };
     const schedule = () => { if (!frame && !disposed) frame = requestAnimationFrame(tick); };
     const visibility = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; schedule(); });
     visibility.observe(element);
     const reveal = new IntersectionObserver(([entry]) => {
-      if (media.matches || capture || entry.intersectionRatio >= 0.4) title.classList.add("title-in");
+      if (reduced() || capture || entry.intersectionRatio >= 0.4) title.classList.add("title-in");
       else if (entry.boundingClientRect.top > 0) title.classList.remove("title-in");
     }, { threshold: [0, 0.4] });
     reveal.observe(title);
@@ -130,9 +134,15 @@ export function HeroIntro({ children }: { children: ReactNode }) {
       <div className="hero-stage bg-ink">
         <Image src="/hero-fachada.svg" alt="Fachada del local DOKEBI con el letrero luminoso del smiley" fill priority sizes="100vw" className="object-cover" />
         {enabled && mounted && (
-          <SceneBoundary onError={() => setEnabled(false)}>
+          <SceneBoundary onError={() => {
+            failed.current = true;
+            setEnabled(false);
+            document.documentElement.classList.remove("hero-motion", "hero-lenis");
+            lenis.current?.destroy();
+            lenis.current = null;
+          }}>
             <div className="hero-canvas" style={{ opacity: ready ? 1 : 0 }} aria-hidden="true">
-              <HeroCanvas progress={progress} active={active} debug={debug} onReady={() => setReady(true)} />
+              <HeroCanvas progress={progress} active={active} debug={debug} orbit={orbit} onReady={() => setReady(true)} />
             </div>
           </SceneBoundary>
         )}
@@ -143,9 +153,24 @@ export function HeroIntro({ children }: { children: ReactNode }) {
             const title = document.getElementById("titulo-principal");
             if (!title || !lenis.current) return;
             event.preventDefault();
+            event.stopPropagation();
             lenis.current.scrollTo(title, { offset: -88, onComplete: () => { history.replaceState(null, "", "#titulo-principal"); title.focus({ preventScroll: true }); } });
           }}>Saltar intro</a>
-        {debug && <output ref={hud} className="hero-hud" aria-live="off">p 0.000 · Patio</output>}
+        {debug && <div className="hero-hud">
+          <output ref={hud} aria-live="off">p 0.000 · Patio</output>
+          <label><input type="checkbox" checked={orbit} onChange={(event) => setOrbit(event.target.checked)} /> Cámara libre</label>
+          <form onSubmit={(event) => {
+            event.preventDefault();
+            const element = intro.current!;
+            const value = Number(new FormData(event.currentTarget).get("progress"));
+            const target = element.getBoundingClientRect().top + window.scrollY + clamp(value) * (element.offsetHeight - element.firstElementChild!.clientHeight);
+            if (lenis.current) lenis.current.scrollTo(target, { immediate: true });
+            else window.scrollTo({ top: target, behavior: "instant" });
+          }}>
+            <label>Progreso <input name="progress" type="number" min="0" max="1" step="0.001" defaultValue="0" /></label>
+            <button type="submit">Ir</button>
+          </form>
+        </div>}
       </div>
     </div>
   );
