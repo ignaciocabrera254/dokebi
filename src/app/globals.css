@@ -111,9 +111,10 @@
 .hero-wash { background: var(--color-yolk); opacity: 0; }
 .hero-skip { z-index: 2; background: rgb(10 10 10 / 65%); }
 .hero-title { z-index: 3; }
-.hero-motion .hero-intro { height: 340svh; }
+.hero-motion .hero-intro { height: 177svh; }
 .hero-motion .hero-stage { position: sticky; top: 0; }
-.hero-motion .hero-title { margin-top: -60svh; }
+.hero-motion .hero-title { margin-top: -100svh; }
+.hero-motion:not(.hero-title-on) .hero-title { visibility: hidden; }
 .site-header[data-immersive] { position: fixed; inset: 0 0 auto; background: transparent; border-color: transparent; transition: background-color 200ms ease-out, border-color 200ms ease-out; }
 .hero-header-solid .site-header[data-immersive], .hero-capture .site-header[data-immersive] { background: var(--color-ink); border-color: var(--color-gray-850); }
 .hero-header-solid .site-header[data-immersive] > div { height: 64px; }
@@ -130,13 +131,13 @@
 .hero-capture .hero-title { margin-top: 76px; min-height: calc(100svh - 76px); }
 .hero-capture #titulo-principal .hero-word { opacity: 1; transform: none; }
 @media (max-width: 767px) {
-  .hero-motion .hero-intro { height: 280svh; }
+  .hero-motion .hero-intro { height: 154svh; }
   .hero-capture .hero-title { margin-top: 64px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-motion .hero-intro { height: 100svh; }
   .hero-motion .hero-stage { position: relative; }
-  .hero-motion .hero-title { margin-top: 0; }
+  .hero-motion .hero-title { margin-top: 0; visibility: visible; }
   .hero-motion .hero-word { opacity: 1; transform: none; transition: none; }
   .hero-canvas, .hero-wash { display: none; }
   .site-header[data-immersive], .hero-canvas { transition: none; }
@@ -160,3 +161,9 @@
 .hero-hud form { display: flex; align-items: center; gap: 8px; }
 .hero-hud input[type="number"] { width: 72px; padding: 6px; background: var(--color-paper); color: var(--color-ink); }
 .hero-hud button { min-height: 44px; min-width: 44px; cursor: pointer; background: var(--color-yolk); color: var(--color-ink); padding: 8px; }
+
+/* La imagen de respaldo no se pinta antes de que arranque la escena 3D; vuelve si hay reduced motion, fallo o sin JS. */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .hero-fallback { visibility: hidden; }
+  .hero-static .hero-fallback { visibility: visible; }
+}

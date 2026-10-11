@@ -11,12 +11,21 @@ export function progressToParameter(p: number) {
   return 1;
 }
 
-export function createCameraPath(screen: Vector3, orientation: Quaternion) {
+export type HeroVariant = "notebook" | "telefono";
+
+export function createCameraPath(screen: Vector3, orientation: Quaternion, variant: HeroVariant = "notebook") {
   const mouth = new Vector3(-3.263, 2.796, 0.637);
   const normal = new Vector3(Math.sin(0.4), 0, Math.cos(0.4));
   const screenNormal = new Vector3(0, 0, 1).applyQuaternion(orientation);
   const screenUp = new Vector3(0, 1, 0).applyQuaternion(orientation);
-  const aim = screen.clone().addScaledVector(screenUp, -0.008);
+  const phone = variant === "telefono";
+  const aim = phone ? screen.clone() : screen.clone().addScaledVector(screenUp, -0.008);
+  const head = [new Vector3(0.3, 1.75, 12), new Vector3(-0.5, 1.8, 7.5), new Vector3(-0.9, 1.85, 4.4), mouth.clone().addScaledVector(normal, 1.5)];
+  const headTarget = [new Vector3(0, 2.6, 0), new Vector3(-1, 2.7, 0), new Vector3(-3.1, 2.95, 0.55), mouth.clone().add(new Vector3(0, 0.1, 0))];
+  if (phone) return {
+    camera: new CatmullRomCurve3([...head, screen.clone().addScaledVector(screenNormal, 0.8).add(new Vector3(0, 0.2, 0)), screen.clone().addScaledVector(screenNormal, 0.3), screen.clone().addScaledVector(screenNormal, 0.11)]),
+    target: new CatmullRomCurve3([...headTarget, screen.clone().add(new Vector3(0, -0.03, 0)), screen.clone(), screen.clone()]),
+  };
   const camera = new CatmullRomCurve3([
     new Vector3(0.3, 1.75, 12), new Vector3(-0.5, 1.8, 7.5), new Vector3(-0.9, 1.85, 4.4),
     mouth.clone().addScaledVector(normal, 1.5),

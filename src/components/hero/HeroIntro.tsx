@@ -4,9 +4,12 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Component, useEffect, useRef, useState, type ReactNode } from "react";
 import type Lenis from "lenis";
+import type { HeroVariant } from "./camera-path";
 
 const HeroCanvas = dynamic(() => import("./HeroCanvas"), { ssr: false });
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
+// El pin termina con el fundido completo: sin tramo muerto antes del H1.
+const END = 0.77;
 
 class SceneBoundary extends Component<{ children: ReactNode; onError: () => void }, { failed: boolean }> {
   state = { failed: false };
@@ -22,6 +25,7 @@ export function HeroIntro({ children }: { children: ReactNode }) {
   const skip = useRef<HTMLAnchorElement>(null);
   const hud = useRef<HTMLOutputElement>(null);
   const progress = useRef(0);
+  const variantRef = useRef<HeroVariant>("notebook");
   const failed = useRef(false);
   const lenis = useRef<Lenis | null>(null);
   const [enabled, setEnabled] = useState(false);
@@ -30,10 +34,15 @@ export function HeroIntro({ children }: { children: ReactNode }) {
   const [debug, setDebug] = useState(false);
   const [orbit, setOrbit] = useState(true);
   const [ready, setReady] = useState(false);
+  const [variant, setVariant] = useState<HeroVariant>("notebook");
 
   useEffect(() => {
     const root = document.documentElement;
     const media = matchMedia("(prefers-reduced-motion: reduce)");
+    const vertical = matchMedia("(max-aspect-ratio: 1/1)");
+    const syncVariant = () => { variantRef.current = vertical.matches ? "telefono" : "notebook"; setVariant(variantRef.current); setReady(false); };
+    syncVariant();
+    vertical.addEventListener("change", syncVariant);
     const query = new URLSearchParams(location.search);
     const capture = query.has("captureHero");
     const reduced = () => media.matches || query.has("reducedMotion");
@@ -52,6 +61,7 @@ export function HeroIntro({ children }: { children: ReactNode }) {
       setEnabled(animate);
       setDebug(isDebug);
       root.classList.toggle("hero-motion", animate);
+      root.classList.toggle("hero-static", !animate);
       root.classList.toggle("hero-capture", capture);
       root.classList.toggle("hero-debug", isDebug);
       title.classList.toggle("title-in", !animate);
@@ -77,25 +87,27 @@ export function HeroIntro({ children }: { children: ReactNode }) {
       frame = 0;
       const rect = element.getBoundingClientRect();
       const stageHeight = element.firstElementChild!.clientHeight;
-      const target = clamp(-rect.top / Math.max(1, element.offsetHeight - stageHeight));
+      const target = clamp(-rect.top / Math.max(1, element.offsetHeight - stageHeight)) * END;
       progress.current += (target - progress.current) * 0.12;
       if (Math.abs(target - progress.current) < 0.0005) progress.current = target;
       const p = reduced() || failed.current ? 0 : progress.current;
       element.dataset.progress = p.toFixed(4);
-      const solid = capture || reduced() || p > 0.82 || rect.bottom < stageHeight;
+      const solid = capture || reduced() || p > 0.74 || rect.bottom < stageHeight;
+      root.classList.toggle("hero-title-on", reduced() || capture || p >= 0.76);
       if (solid !== lastSolid) { root.classList.toggle("hero-header-solid", solid); lastSolid = solid; }
       if (decoration.current) decoration.current.style.opacity = String(1 - clamp(p / 0.12));
-      if (wash.current) wash.current.style.opacity = String(clamp((p - 0.72) / 0.08));
+      if (wash.current) wash.current.style.opacity = String(clamp((p - 0.72) / 0.04));
       if (skip.current) {
         const hidden = p >= 0.85;
         skip.current.style.opacity = String(1 - clamp((p - 0.75) / 0.1));
         skip.current.style.visibility = hidden ? "hidden" : "visible";
         skip.current.tabIndex = hidden ? -1 : 0;
       }
-      if (hud.current) hud.current.value = `p ${p.toFixed(3)} · ${p < 0.38 ? "Patio" : p < 0.52 ? "Guiño" : p < 0.72 ? "Pantalla" : "Amarillo"}`;
-      const needsScene = !capture && !reduced() && !failed.current && visible && !document.hidden && (p < 0.81 || isDebug);
-      setActive(needsScene);
-      if (needsScene !== sceneMounted) { sceneMounted = needsScene; setMounted(needsScene); }
+      if (hud.current) hud.current.value = `${variantRef.current} · p ${p.toFixed(3)} · ${p < 0.38 ? "Patio" : p < 0.52 ? "Guiño" : p < 0.72 ? "Pantalla" : "Amarillo"}`;
+      // La escena sigue montada mientras el hero esté en pantalla (el scroll de vuelta no espera a reconstruirla); solo se pausa tras el fundido.
+      const needsScene = !capture && !reduced() && !failed.current && visible && !document.hidden;
+      setActive(needsScene && (p < 0.77 || isDebug));
+      if (needsScene !== sceneMounted) { sceneMounted = needsScene; setMounted(needsScene); if (!needsScene) setReady(false); }
       if (visible && !document.hidden && !reduced() && !capture && !failed.current && Math.abs(target - progress.current) >= 0.0005) schedule();
     };
     const schedule = () => { if (!frame && !disposed) frame = requestAnimationFrame(tick); };
@@ -121,10 +133,11 @@ export function HeroIntro({ children }: { children: ReactNode }) {
       visibility.disconnect();
       reveal.disconnect();
       media.removeEventListener("change", syncPreference);
+      vertical.removeEventListener("change", syncVariant);
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
       document.removeEventListener("visibilitychange", schedule);
-      root.classList.remove("hero-motion", "hero-capture", "hero-debug", "hero-lenis", "hero-header-solid");
+      root.classList.remove("hero-motion", "hero-static", "hero-title-on", "hero-capture", "hero-debug", "hero-lenis", "hero-header-solid");
       title.classList.remove("title-in");
     };
   }, []);
@@ -132,17 +145,18 @@ export function HeroIntro({ children }: { children: ReactNode }) {
   return (
     <div ref={intro} className="hero-intro" data-scene={mounted ? "mounted" : "paused"}>
       <div className="hero-stage bg-ink">
-        <Image src="/hero-fachada.svg" alt="Fachada del local DOKEBI con el letrero luminoso del smiley" fill priority sizes="100vw" className="object-cover" />
+        <Image src="/hero-fachada.svg" alt="Fachada del local DOKEBI con el letrero luminoso del smiley" fill priority sizes="100vw" className="hero-fallback object-cover" />
         {enabled && mounted && (
           <SceneBoundary onError={() => {
             failed.current = true;
             setEnabled(false);
             document.documentElement.classList.remove("hero-motion", "hero-lenis");
+            document.documentElement.classList.add("hero-static");
             lenis.current?.destroy();
             lenis.current = null;
           }}>
             <div className="hero-canvas" style={{ opacity: ready ? 1 : 0 }} aria-hidden="true">
-              <HeroCanvas progress={progress} active={active} debug={debug} orbit={orbit} onReady={() => setReady(true)} />
+              <HeroCanvas variant={variant} progress={progress} active={active} debug={debug} orbit={orbit} onReady={() => setReady(true)} />
             </div>
           </SceneBoundary>
         )}
@@ -157,13 +171,13 @@ export function HeroIntro({ children }: { children: ReactNode }) {
             lenis.current.scrollTo(title, { offset: -88, onComplete: () => { history.replaceState(null, "", "#titulo-principal"); title.focus({ preventScroll: true }); } });
           }}>Saltar intro</a>
         {debug && <div className="hero-hud">
-          <output ref={hud} aria-live="off">p 0.000 · Patio</output>
+          <output ref={hud} aria-live="off">notebook · p 0.000 · Patio</output>
           <label><input type="checkbox" checked={orbit} onChange={(event) => setOrbit(event.target.checked)} /> Cámara libre</label>
           <form onSubmit={(event) => {
             event.preventDefault();
             const element = intro.current!;
             const value = Number(new FormData(event.currentTarget).get("progress"));
-            const target = element.getBoundingClientRect().top + window.scrollY + clamp(value) * (element.offsetHeight - element.firstElementChild!.clientHeight);
+            const target = element.getBoundingClientRect().top + window.scrollY + clamp(value / END) * (element.offsetHeight - element.firstElementChild!.clientHeight);
             if (lenis.current) lenis.current.scrollTo(target, { immediate: true });
             else window.scrollTo({ top: target, behavior: "instant" });
           }}>

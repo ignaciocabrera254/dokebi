@@ -10,3 +10,5 @@ Para actualizarla cuando cambie el hero:
 4. Convertir la captura a WebP y guardar `public/hero/pantalla.webp`.
 
 El material de la pantalla es MeshBasicMaterial, sRGB, sin tone mapping ni iluminación.
+
+`pantalla-movil.webp` (teléfono, vertical): mismo procedimiento con viewport 390 × 844 (727 × 1553 px, recortado a la proporción 0.074 × 0.158).
