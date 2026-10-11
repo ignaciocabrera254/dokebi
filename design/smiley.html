@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Smiley DOKEBI</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="{{ boxStyle }}">
+<svg aria-hidden="true" viewBox="0 0 200 200" width="{{ s }}" height="{{ s }}" style="display: block; overflow: visible">
+<circle cx="100" cy="100" r="94" fill="{{ faceFill }}" stroke="#0A0A0A" stroke-width="7"></circle>
+<ellipse cx="72" cy="80" rx="11" ry="19" fill="#0A0A0A" display="{{ openEye }}"></ellipse>
+<path d="M58 84 Q72 66 86 84" fill="none" stroke="#0A0A0A" stroke-width="9" stroke-linecap="round" display="{{ winkEye }}"></path>
+<ellipse cx="128" cy="80" rx="11" ry="19" fill="#0A0A0A" display="{{ rightEye }}"></ellipse>
+<g display="{{ hotDisp }}" fill="none" stroke="#0A0A0A" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+<path d="M56 64 L84 80 L56 96"></path>
+<path d="M144 64 L116 80 L144 96"></path>
+<path d="M50 42 Q66 34 82 44" stroke-width="7"></path>
+<path d="M150 42 Q134 34 118 44" stroke-width="7"></path>
+</g>
+<path d="M52 118 Q100 168 148 118" fill="none" stroke="#0A0A0A" stroke-width="9" stroke-linecap="round" display="{{ plainMouth }}"></path>
+<g display="{{ fangMouth }}">
+<path d="M46 112 Q100 178 154 112 Q100 140 46 112 Z" fill="#0A0A0A" stroke="#0A0A0A" stroke-width="6" stroke-linejoin="round"></path>
+<path d="M66 120.5 L89 125.6 L78 150 Z" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="3.5" stroke-linejoin="round"></path>
+<path d="M111 125.6 L134 120.5 L122 150 Z" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="3.5" stroke-linejoin="round"></path>
+</g>
+<g display="{{ hotDisp }}">
+<path d="M40 104 Q100 196 160 104 Q100 128 40 104 Z" fill="#0A0A0A" stroke="#0A0A0A" stroke-width="6" stroke-linejoin="round"></path>
+<path d="M60 112.5 L84 119 L73 146 Z" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="3.5" stroke-linejoin="round"></path>
+<path d="M116 119 L140 112.5 L127 146 Z" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="3.5" stroke-linejoin="round"></path><path d="M170 46 Q182 66 176 76 Q168 84 160 76 Q156 66 170 46 Z" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round"></path>
+<path d="M64 -6 Q54 -18 64 -30 Q74 -42 64 -54" fill="none" stroke="#E4002B" stroke-width="9" stroke-linecap="round"></path>
+<path d="M100 -12 Q90 -26 100 -40 Q110 -54 100 -68" fill="none" stroke="#E4002B" stroke-width="9" stroke-linecap="round"></path>
+<path d="M136 -6 Q126 -18 136 -30 Q146 -42 136 -54" fill="none" stroke="#E4002B" stroke-width="9" stroke-linecap="round"></path>
+</g>
+</svg>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"size":{"editor":"int","default":240,"min":16,"max":800},"wink":{"editor":"boolean","default":false},"fangs":{"editor":"boolean","default":true},"spicy":{"editor":"boolean","default":false},"$preview":{"width":240,"height":240}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var s = parseInt(this.props.size, 10) || 240;
+    var spicy = this.props.spicy === true || this.props.spicy === 'true';
+    var wink = !spicy && (this.props.wink === true || this.props.wink === 'true');
+    var fangs = !(this.props.fangs === false || this.props.fangs === 'false');
+    return {
+      s: s,
+      boxStyle: 'width: ' + s + 'px; height: ' + s + 'px; line-height: 0',
+      faceFill: spicy ? '#E4002B' : '#FFD400',
+      openEye: spicy || wink ? 'none' : 'inline',
+      winkEye: wink ? 'inline' : 'none',
+      rightEye: spicy ? 'none' : 'inline',
+      hotDisp: spicy ? 'inline' : 'none',
+      plainMouth: !spicy && !fangs ? 'inline' : 'none',
+      fangMouth: !spicy && fangs ? 'inline' : 'none'
+    };
+  }
+}
+</script>
+</body>
+</html>

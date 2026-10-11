@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Storyboard de scroll · DOKEBI</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Archivo:wght@400;500;700;800&amp;family=Permanent+Marker&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;color:#0A0A0A}
+.dsp{font-family:'Anton','Impact','Arial Narrow Bold',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em}
+.mk{font-family:'Permanent Marker','Comic Sans MS',cursive}
+</style>
+</helmet>
+<div style="width: 1600px; height: 1180px; box-sizing: border-box; background: #FFFFFF; padding: 56px 52px; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 24px">
+<h1 class="dsp" style="margin: 0; font-size: 64px; line-height: 1">Storyboard de scroll</h1>
+<p style="margin: 0; font-size: 16px; color: #3A3A3A; max-width: 560px">Estados clave de las dos secciones pinned. El porcentaje es el avance del scroll dentro de cada sección.</p>
+</div>
+
+<section style="display: flex; flex-direction: column; gap: 18px">
+<h2 class="dsp" style="margin: 0; font-size: 30px">1 · Hero — el smiley gira, guiña y muestra los colmillos</h2>
+<ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px">
+<li style="display: flex; flex-direction: column; gap: 10px">
+<div style="height: 220px; border-radius: 8px; background: #0A0A0A; display: flex; align-items: center; justify-content: center; overflow: hidden">
+<dc-import name="Smiley" size="160" fangs="{{ false }}" hint-size="160px,160px"></dc-import>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.4"><strong class="dsp" style="font-size: 20px">0 %</strong><br>Smiley frontal a pantalla completa, sonrisa cerrada.</p>
+</li>
+<li style="display: flex; flex-direction: column; gap: 10px">
+<div style="height: 220px; border-radius: 8px; background: #0A0A0A; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative">
+<div style="rotate: 150deg"><dc-import name="Smiley" size="160" fangs="{{ false }}" hint-size="160px,160px"></dc-import></div>
+<svg aria-hidden="true" viewBox="0 0 100 100" width="200" height="200" style="position: absolute"><path d="M88 50 A38 38 0 1 1 70 17" fill="none" stroke="#FFD400" stroke-width="2" stroke-dasharray="4 5"></path><path d="M64 10 L71 17 L62 22" fill="none" stroke="#FFD400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.4"><strong class="dsp" style="font-size: 20px">0–35 %</strong><br>Gira 360° atado al scroll (scrub).</p>
+</li>
+<li style="display: flex; flex-direction: column; gap: 10px">
+<div style="height: 220px; border-radius: 8px; background: #0A0A0A; display: flex; align-items: center; justify-content: center; overflow: hidden">
+<div style="rotate: -6deg"><dc-import name="Smiley" size="160" wink="{{ true }}" fangs="{{ false }}" hint-size="160px,160px"></dc-import></div>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.4"><strong class="dsp" style="font-size: 20px">35–55 %</strong><br>Guiña el ojo izquierdo y se inclina.</p>
+</li>
+<li style="display: flex; flex-direction: column; gap: 10px">
+<div style="height: 220px; border-radius: 8px; background: #0A0A0A; display: flex; align-items: center; justify-content: center; overflow: hidden">
+<div style="rotate: -10deg"><dc-import name="Smiley" size="180" wink="{{ true }}" fangs="{{ true }}" hint-size="180px,180px"></dc-import></div>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.4"><strong class="dsp" style="font-size: 20px">55–75 %</strong><br>La sonrisa se abre y salen los colmillos.</p>
+</li>
+<li style="display: flex; flex-direction: column; gap: 10px">
+<div style="height: 220px; border-radius: 8px; background: #0A0A0A; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative">
+<div aria-hidden="true" style="position: absolute; width: 420px; height: 420px; border-radius: 50%; background: #FFD400"></div>
+<div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px">
+<dc-import name="Smiley" size="64" fangs="{{ true }}" hint-size="64px,64px"></dc-import>
+<span class="dsp" style="font-size: 26px; line-height: 0.9; text-align: center">Korean Street Food<br>· Santiago</span>
+</div>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.4"><strong class="dsp" style="font-size: 20px">75–100 %</strong><br>Un círculo amarillo crece desde el smiley y revela el H1.</p>
+</li>
+</ol>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 18px">
+<h2 class="dsp" style="margin: 0; font-size: 30px">2 · Cómo se arma — una capa por tramo de scroll</h2>
+<ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 22px">
+<li style="display: flex; flex-direction: column; gap: 10px">
+<div style="height: 360px; border-radius: 8px; background: #FFD400; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 16px; box-sizing: border-box">
+<svg aria-hidden="true" viewBox="0 0 300 760" width="118" height="300">
+<rect x="139" y="560" width="22" height="190" rx="8" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="7"></rect>
+<rect x="106" y="90" width="88" height="490" rx="44" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="8"></rect>
+<path d="M130 150 L130 520 M170 150 L170 520" stroke="#0A0A0A" stroke-width="4" stroke-dasharray="14 12"></path>
+</svg>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.4"><strong class="dsp" style="font-size: 20px">00 · Base</strong><br>Baja desde arriba del viewport.</p>
+</li>
+<li style="display: flex; flex-direction: column; gap: 10px">
+<div style="height: 360px; border-radius: 8px; background: #FFD400; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 16px; box-sizing: border-box">
+<svg aria-hidden="true" viewBox="0 0 300 760" width="118" height="300">
+<rect x="139" y="560" width="22" height="190" rx="8" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="7"></rect>
+<rect x="66" y="30" width="168" height="580" rx="84" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="8"></rect>
+<rect x="106" y="90" width="88" height="490" rx="44" fill="none" stroke="#0A0A0A" stroke-width="4" stroke-dasharray="12 12"></rect>
+</svg>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.4"><strong class="dsp" style="font-size: 20px">01 · Masa</strong><br>La masa la envuelve de abajo hacia arriba.</p>
+</li>
+<li style="display: flex; flex-direction: column; gap: 10px">
+<div style="height: 360px; border-radius: 8px; background: #FFD400; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 16px; box-sizing: border-box">
+<svg aria-hidden="true" viewBox="0 0 300 760" width="118" height="300">
+<defs><pattern id="sb2" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="2.8" fill="#0A0A0A"></circle><circle cx="13" cy="12" r="2" fill="#0A0A0A"></circle></pattern></defs>
+<rect x="139" y="560" width="22" height="190" rx="8" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="7"></rect>
+<rect x="66" y="30" width="168" height="580" rx="84" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="8"></rect>
+<rect x="70" y="34" width="160" height="572" rx="80" fill="url(#sb2)"></rect>
+</svg>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.4"><strong class="dsp" style="font-size: 20px">02 · Panko</strong><br>Las migas caen como lluvia y se pegan.</p>
+</li>
+<li style="display: flex; flex-direction: column; gap: 10px">
+<div style="height: 360px; border-radius: 8px; background: #FFD400; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 16px; box-sizing: border-box">
+<svg aria-hidden="true" viewBox="0 0 300 760" width="118" height="300">
+<defs><pattern id="sb3" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="2.8" fill="#0A0A0A"></circle><circle cx="13" cy="12" r="2" fill="#0A0A0A"></circle></pattern></defs>
+<rect x="139" y="560" width="22" height="190" rx="8" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="7"></rect>
+<rect x="66" y="30" width="168" height="580" rx="84" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="8"></rect>
+<rect x="70" y="34" width="160" height="572" rx="80" fill="url(#sb3)"></rect>
+<g fill="#FFD400" stroke="#0A0A0A" stroke-width="6" stroke-linejoin="round">
+<rect x="84" y="270" width="34" height="34" rx="5" transform="rotate(12 101 287)"></rect>
+<rect x="140" y="256" width="34" height="34" rx="5" transform="rotate(-8 157 273)"></rect>
+<rect x="182" y="300" width="34" height="34" rx="5" transform="rotate(20 199 317)"></rect>
+<rect x="100" y="350" width="34" height="34" rx="5" transform="rotate(-15 117 367)"></rect>
+<rect x="158" y="370" width="34" height="34" rx="5" transform="rotate(6 175 387)"></rect>
+<rect x="86" y="440" width="34" height="34" rx="5" transform="rotate(25 103 457)"></rect>
+<rect x="140" y="452" width="34" height="34" rx="5" transform="rotate(-20 157 469)"></rect>
+<rect x="186" y="420" width="34" height="34" rx="5" transform="rotate(10 203 437)"></rect>
+<rect x="116" y="520" width="34" height="34" rx="5" transform="rotate(4 133 537)"></rect>
+<rect x="168" y="526" width="34" height="34" rx="5" transform="rotate(-12 185 543)"></rect>
+</g>
+</svg>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.4"><strong class="dsp" style="font-size: 20px">03 · Papas</strong><br>Los cubos vuelan desde los lados.</p>
+</li>
+<li style="display: flex; flex-direction: column; gap: 10px">
+<div style="height: 360px; border-radius: 8px; background: #FFD400; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 16px; box-sizing: border-box">
+<svg aria-hidden="true" viewBox="0 0 300 760" width="118" height="300">
+<defs><pattern id="sb4" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="2.8" fill="#0A0A0A"></circle><circle cx="13" cy="12" r="2" fill="#0A0A0A"></circle></pattern></defs>
+<rect x="139" y="560" width="22" height="190" rx="8" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="7"></rect>
+<rect x="66" y="30" width="168" height="580" rx="84" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="8"></rect>
+<rect x="70" y="34" width="160" height="572" rx="80" fill="url(#sb4)"></rect>
+<g fill="#FFD400" stroke="#0A0A0A" stroke-width="6" stroke-linejoin="round">
+<rect x="84" y="270" width="34" height="34" rx="5" transform="rotate(12 101 287)"></rect>
+<rect x="140" y="256" width="34" height="34" rx="5" transform="rotate(-8 157 273)"></rect>
+<rect x="182" y="300" width="34" height="34" rx="5" transform="rotate(20 199 317)"></rect>
+<rect x="100" y="350" width="34" height="34" rx="5" transform="rotate(-15 117 367)"></rect>
+<rect x="158" y="370" width="34" height="34" rx="5" transform="rotate(6 175 387)"></rect>
+<rect x="86" y="440" width="34" height="34" rx="5" transform="rotate(25 103 457)"></rect>
+<rect x="140" y="452" width="34" height="34" rx="5" transform="rotate(-20 157 469)"></rect>
+<rect x="186" y="420" width="34" height="34" rx="5" transform="rotate(10 203 437)"></rect>
+<rect x="116" y="520" width="34" height="34" rx="5" transform="rotate(4 133 537)"></rect>
+<rect x="168" y="526" width="34" height="34" rx="5" transform="rotate(-12 185 543)"></rect>
+</g>
+<g fill="#FFFFFF" stroke="#0A0A0A" stroke-width="4" stroke-linejoin="round">
+<path transform="translate(110 90)" d="M0 -14 Q2.2 -2.2 14 0 Q2.2 2.2 0 14 Q-2.2 2.2 -14 0 Q-2.2 -2.2 0 -14 Z"></path>
+<path transform="translate(190 110)" d="M0 -14 Q2.2 -2.2 14 0 Q2.2 2.2 0 14 Q-2.2 2.2 -14 0 Q-2.2 -2.2 0 -14 Z"></path>
+<path transform="translate(150 170)" d="M0 -14 Q2.2 -2.2 14 0 Q2.2 2.2 0 14 Q-2.2 2.2 -14 0 Q-2.2 -2.2 0 -14 Z"></path>
+<path transform="translate(96 220)" d="M0 -14 Q2.2 -2.2 14 0 Q2.2 2.2 0 14 Q-2.2 2.2 -14 0 Q-2.2 -2.2 0 -14 Z"></path>
+<path transform="translate(204 220)" d="M0 -14 Q2.2 -2.2 14 0 Q2.2 2.2 0 14 Q-2.2 2.2 -14 0 Q-2.2 -2.2 0 -14 Z"></path>
+</g>
+</svg>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.4"><strong class="dsp" style="font-size: 20px">04 · Toppings</strong><br>Destellos de azúcar con un leve brillo.</p>
+</li>
+<li style="display: flex; flex-direction: column; gap: 10px">
+<div style="height: 360px; border-radius: 8px; background: #0A0A0A; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 16px; box-sizing: border-box">
+<svg aria-hidden="true" viewBox="0 0 300 760" width="118" height="300">
+<defs><pattern id="sb5" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="2.8" fill="#0A0A0A"></circle><circle cx="13" cy="12" r="2" fill="#0A0A0A"></circle></pattern></defs>
+<rect x="139" y="560" width="22" height="190" rx="8" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="7"></rect>
+<rect x="66" y="30" width="168" height="580" rx="84" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="8"></rect>
+<rect x="70" y="34" width="160" height="572" rx="80" fill="url(#sb5)"></rect>
+<g fill="#FFD400" stroke="#0A0A0A" stroke-width="6" stroke-linejoin="round">
+<rect x="84" y="270" width="34" height="34" rx="5" transform="rotate(12 101 287)"></rect>
+<rect x="140" y="256" width="34" height="34" rx="5" transform="rotate(-8 157 273)"></rect>
+<rect x="182" y="300" width="34" height="34" rx="5" transform="rotate(20 199 317)"></rect>
+<rect x="100" y="350" width="34" height="34" rx="5" transform="rotate(-15 117 367)"></rect>
+<rect x="158" y="370" width="34" height="34" rx="5" transform="rotate(6 175 387)"></rect>
+<rect x="86" y="440" width="34" height="34" rx="5" transform="rotate(25 103 457)"></rect>
+<rect x="140" y="452" width="34" height="34" rx="5" transform="rotate(-20 157 469)"></rect>
+<rect x="186" y="420" width="34" height="34" rx="5" transform="rotate(10 203 437)"></rect>
+<rect x="116" y="520" width="34" height="34" rx="5" transform="rotate(4 133 537)"></rect>
+<rect x="168" y="526" width="34" height="34" rx="5" transform="rotate(-12 185 543)"></rect>
+</g>
+<path d="M92 70 Q150 92 208 108 Q150 140 90 160 Q150 182 210 198 Q150 226 90 246 Q150 268 210 284" fill="none" stroke="#0A0A0A" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M92 70 Q150 92 208 108 Q150 140 90 160 Q150 182 210 198 Q150 226 90 246 Q150 268 210 284" fill="none" stroke="#FFD400" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.4"><strong class="dsp" style="font-size: 20px">05 · Salsa</strong><br>La salsa se dibuja en zigzag; el fondo pasa a negro y entra el menú.</p>
+</li>
+</ol>
+</section>
+<p class="mk" style="margin: 0; font-size: 18px">Reduced motion: se muestra directamente el frame final de cada sección.</p>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1600,"height":1180}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

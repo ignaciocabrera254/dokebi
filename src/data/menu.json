@@ -1,0 +1,361 @@
+{
+  "categorias": [
+    {
+      "id": "corndogs",
+      "label": "Corndogs"
+    },
+    {
+      "id": "pollo",
+      "label": "Pollo y brochetas"
+    },
+    {
+      "id": "picar",
+      "label": "Para picar"
+    },
+    {
+      "id": "compartir",
+      "label": "Para compartir"
+    },
+    {
+      "id": "bebidas",
+      "label": "Bebidas"
+    }
+  ],
+  "rellenosCorndog": [
+    "Salchicha vegana",
+    "Pastel de arroz (tteok)",
+    "Mixto: tteok + salchicha vegana"
+  ],
+  "items": [
+    {
+      "id": "doritos-corea",
+      "categoria": "corndogs",
+      "nombre": "Doritos Corea",
+      "descripcion": "Rebozado en Doritos sabor galbi BBQ coreano.",
+      "precio": 6550,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/doritos-corea.webp"
+    },
+    {
+      "id": "takis-original",
+      "categoria": "corndogs",
+      "nombre": "Takis Original",
+      "descripcion": "Cubierto con Takis originales.",
+      "precio": 6550,
+      "picante": true,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/takis-original.webp"
+    },
+    {
+      "id": "doritos-flamin-hot",
+      "categoria": "corndogs",
+      "nombre": "Doritos Flamin’ Hot",
+      "descripcion": "Rebozado en Doritos Flamin’ Hot.",
+      "precio": 6550,
+      "picante": true,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/doritos.webp"
+    },
+    {
+      "id": "dokebi-seul",
+      "categoria": "corndogs",
+      "nombre": "Dokebi Seúl",
+      "descripcion": "El picante de la casa: Doritos Flamin’ Hot con Takis Blue.",
+      "precio": 6550,
+      "picante": true,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/dokebi-seul.webp"
+    },
+    {
+      "id": "panko",
+      "categoria": "corndogs",
+      "nombre": "Panko",
+      "descripcion": "El clásico: masa y panko crujiente.",
+      "precio": 5895,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/panko.webp"
+    },
+    {
+      "id": "ramen",
+      "categoria": "corndogs",
+      "nombre": "Ramen",
+      "descripcion": "Envuelto en fideos de ramen crujientes.",
+      "precio": 6550,
+      "picante": false,
+      "vegano": true,
+      "etiqueta": "opción vegana",
+      "foto": "/menu/ramen.webp"
+    },
+    {
+      "id": "zucarita",
+      "categoria": "corndogs",
+      "nombre": "Zucarita",
+      "descripcion": "Cubierto con Zucaritas.",
+      "precio": 6550,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/zucarita.webp"
+    },
+    {
+      "id": "calamar",
+      "categoria": "corndogs",
+      "nombre": "Calamar",
+      "descripcion": "Corndog con calamar. Contiene mariscos.",
+      "precio": 6550,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/calamar.webp"
+    },
+    {
+      "id": "camote",
+      "categoria": "corndogs",
+      "nombre": "Camote",
+      "descripcion": "Cubos de camote, dulce y crocante.",
+      "precio": 7860,
+      "picante": false,
+      "vegano": true,
+      "etiqueta": "opción vegana",
+      "foto": "/menu/camote.webp"
+    },
+    {
+      "id": "quinoa-pop",
+      "categoria": "corndogs",
+      "nombre": "Quinoa Pop",
+      "descripcion": "Rebozado en quinoa inflada de colores.",
+      "precio": 5895,
+      "picante": false,
+      "vegano": true,
+      "etiqueta": "opción vegana",
+      "foto": "/menu/quinoa-pop.webp"
+    },
+    {
+      "id": "dak-kkochi",
+      "categoria": "pollo",
+      "nombre": "Dak Kkochi",
+      "descripcion": "Brocheta de pollo frito con salsa agridulce.",
+      "precio": 8515,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/dak-kkochi.webp"
+    },
+    {
+      "id": "dak-kkochi-con-queso",
+      "categoria": "pollo",
+      "nombre": "Dak Kkochi con Queso",
+      "descripcion": "Pollo frito con salsa agridulce y queso.",
+      "precio": 9170,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/dak-kkochi-con-queso.webp"
+    },
+    {
+      "id": "tteokkochi",
+      "categoria": "pollo",
+      "nombre": "Tteokkochi",
+      "descripcion": "Pastel de arroz tostado con salsa agridulce coreana y mix de semillas.",
+      "precio": 5895,
+      "picante": false,
+      "vegano": true,
+      "etiqueta": "vegano",
+      "foto": "/menu/tteokkochi.webp"
+    },
+    {
+      "id": "sotteok-sotteok",
+      "categoria": "pollo",
+      "nombre": "Sotteok Sotteok",
+      "descripcion": "Brocheta de pastel de arroz y longanicilla.",
+      "precio": 7205,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/sotteok-sotteok.webp"
+    },
+    {
+      "id": "rose-tteokbokki",
+      "categoria": "picar",
+      "nombre": "Rose Tteokbokki",
+      "descripcion": "Pasteles de arroz en salsa rosé picante.",
+      "precio": 11776,
+      "picante": true,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/rose-tteokbokki.webp"
+    },
+    {
+      "id": "mandu",
+      "categoria": "picar",
+      "nombre": "Mandu",
+      "descripcion": "6 empanadas coreanas fritas, de verdura o kimchi.",
+      "precio": 7205,
+      "picante": false,
+      "vegano": true,
+      "etiqueta": "vegano",
+      "foto": "/menu/mandu.webp"
+    },
+    {
+      "id": "kimari",
+      "categoria": "picar",
+      "nombre": "Kimari",
+      "descripcion": "6 rollitos de algas rellenos de fideos de camote.",
+      "precio": 7205,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/kimari.webp"
+    },
+    {
+      "id": "nuggets-originales",
+      "categoria": "picar",
+      "nombre": "Nuggets Originales",
+      "descripcion": "10 unidades.",
+      "precio": 7860,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/nuggets-originales.webp"
+    },
+    {
+      "id": "solo-set",
+      "categoria": "compartir",
+      "nombre": "Solo Set",
+      "descripcion": "1 Corndog Panko + 1 Rose Tteokbokki de 180 g.",
+      "precio": 13755,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/solo-set.webp"
+    },
+    {
+      "id": "couple-set",
+      "categoria": "compartir",
+      "nombre": "Couple Set",
+      "descripcion": "1 Corndog Papa + 1 Corndog Panko + 1 Rose Tteokbokki de 180 g.",
+      "precio": 20960,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/couple-set.webp"
+    },
+    {
+      "id": "3-corndogs",
+      "categoria": "compartir",
+      "nombre": "3 Corndogs",
+      "descripcion": "1 corndog panko, 1 ramen y 1 papa.",
+      "precio": 19650,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/3-corn-dogs.webp"
+    },
+    {
+      "id": "5-corndogs",
+      "categoria": "compartir",
+      "nombre": "5 Corndogs",
+      "descripcion": "3 corndogs panko, 1 papa y 1 camote.",
+      "precio": 34060,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/5-corn-dogs.webp"
+    },
+    {
+      "id": "5-pankos",
+      "categoria": "compartir",
+      "nombre": "5 Pankos",
+      "descripcion": "Cinco corndogs Panko.",
+      "precio": 29475,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/5-pankos.webp"
+    },
+    {
+      "id": "coco-palm-durazno",
+      "categoria": "bebidas",
+      "nombre": "Coco Palm Durazno",
+      "descripcion": "Bebida coreana · 355 ml.",
+      "precio": 3500,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/coco-palm-durazno-355-ml.webp"
+    },
+    {
+      "id": "sandia-soda",
+      "categoria": "bebidas",
+      "nombre": "Sandía Soda",
+      "descripcion": "Bebida coreana · 350 ml.",
+      "precio": 3500,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/sandia-soda-350-ml.webp"
+    },
+    {
+      "id": "milkis",
+      "categoria": "bebidas",
+      "nombre": "Milkis",
+      "descripcion": "Bebida coreana · 340 ml.",
+      "precio": 3500,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/milkis-340-ml.webp"
+    },
+    {
+      "id": "coca-cola-original",
+      "categoria": "bebidas",
+      "nombre": "Coca-Cola Original",
+      "descripcion": "350 ml.",
+      "precio": 2500,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/coca-cola-original-350-ml.webp"
+    },
+    {
+      "id": "coca-cola-zero",
+      "categoria": "bebidas",
+      "nombre": "Coca-Cola Zero",
+      "descripcion": "350 ml. Sin azúcar.",
+      "precio": 2500,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/coca-cola-zero-350-ml.webp"
+    },
+    {
+      "id": "fanta-naranja-zero",
+      "categoria": "bebidas",
+      "nombre": "Fanta Naranja Zero",
+      "descripcion": "350 ml. Sin azúcar.",
+      "precio": 2500,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/fanta-naranja-zero-350-ml.webp"
+    },
+    {
+      "id": "kem-pina",
+      "categoria": "bebidas",
+      "nombre": "Kem Piña",
+      "descripcion": "350 ml.",
+      "precio": 2500,
+      "picante": false,
+      "vegano": false,
+      "etiqueta": null,
+      "foto": "/menu/kem-pina-350-ml.webp"
+    }
+  ]
+}

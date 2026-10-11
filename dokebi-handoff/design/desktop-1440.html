@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>DOKEBI · Korean Street Food · Santiago</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Archivo:wght@400;500;700;800&amp;family=Permanent+Marker&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0A0A0A;font-family:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;color:#0A0A0A}
+a{color:#0A0A0A}a:hover{color:#0A0A0A}
+.dsp{font-family:'Anton','Impact','Arial Narrow Bold',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em}
+.mk{font-family:'Permanent Marker','Comic Sans MS',cursive}
+.draw{stroke-dasharray:400;animation:draw 1.8s ease-out}
+@keyframes draw{from{stroke-dashoffset:400}to{stroke-dashoffset:0}}
+.bob{animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -10px}}
+.btn{transition:transform .15s ease, box-shadow .15s ease}
+.btn:hover{transform:translate(-2px,-2px)}
+summary{list-style:none;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+details[open] .plus{rotate:45deg}
+.navl{color:#FFFFFF;text-decoration:none}
+.navl:hover{color:#FFD400}
+@media (prefers-reduced-motion: reduce){.draw,.bob{animation:none}.btn{transition:none}}
+</style>
+</helmet>
+<div style="width: 100%; background: #0A0A0A; overflow-x: hidden">
+
+<!-- HEADER -->
+<header style="position: sticky; top: 0; z-index: 30; background: #0A0A0A; border-bottom: 2px solid #1F1F1F">
+<div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); min-height: 76px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<a href="#inicio" aria-label="DOKEBI, ir al inicio" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #FFFFFF">
+<dc-import name="Smiley" size="44" fangs="{{ true }}" hint-size="44px,44px"></dc-import>
+<span class="dsp" style="font-size: 30px; color: #FFFFFF; letter-spacing: 0.04em">Dokebi</span>
+</a>
+<nav aria-label="Principal">
+<ul style="display: flex; flex-wrap: wrap; gap: 28px; list-style: none; margin: 0; padding: 0; font-weight: 700; font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase">
+<li><a class="navl" href="#menu">Menú</a></li>
+<li><a class="navl" href="#barrio">El barrio</a></li>
+<li><a class="navl" href="#locales">Locales</a></li>
+<li><a class="navl" href="#merch">Merch</a></li>
+<li><a class="navl" href="#faq">FAQ</a></li>
+</ul>
+</nav>
+<a class="btn dsp" href="https://www.ubereats.com/cl/store/dokebi-providencia/rYDa6_ZzUDK76ZOCxcTVFQ" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 28px; border-radius: 999px; background: #FFD400; color: #0A0A0A; text-decoration: none; font-size: 20px">Pedir
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</a>
+</div>
+</header>
+
+<main>
+<!-- 1 HERO -->
+<section id="inicio" aria-labelledby="titulo-principal">
+<div style="position: relative; overflow: hidden; background: #0A0A0A; min-height: 720px; display: flex; align-items: center; justify-content: center">
+<p style="position: absolute; left: clamp(16px, 4vw, 40px); top: 32px; margin: 0; color: #BDBDBD; font-size: 14px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase">Barrio Italia · Los Leones</p>
+<p style="position: absolute; right: clamp(16px, 4vw, 40px); top: 32px; margin: 0; color: #BDBDBD; font-size: 14px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase">Desde Seúl a Providencia</p>
+<svg aria-hidden="true" viewBox="0 0 100 100" width="120" height="120" style="position: absolute; left: 12%; top: 18%; rotate: -14deg"><path class="draw" pathLength="400" d="M50 6 L61 38 L95 39 L68 59 L78 92 L50 72 L22 92 L32 59 L5 39 L39 38 Z" fill="none" stroke="#FFD400" stroke-width="4" stroke-linejoin="round"></path></svg>
+<svg aria-hidden="true" viewBox="0 0 100 100" width="150" height="150" style="position: absolute; right: 11%; top: 14%; rotate: 12deg"><path class="draw" pathLength="400" d="M10 75 L18 30 L38 55 L50 18 L62 55 L82 30 L90 75 Z M10 86 L90 86" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"></path></svg>
+<svg aria-hidden="true" viewBox="0 0 200 60" width="220" height="66" style="position: absolute; left: 9%; bottom: 20%; rotate: 8deg"><path class="draw" pathLength="400" d="M6 34 C 26 4, 44 58, 64 30 S 102 4, 122 30 S 162 58, 194 22" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"></path></svg>
+<svg aria-hidden="true" viewBox="0 0 100 100" width="70" height="70" style="position: absolute; right: 17%; bottom: 22%"><path class="draw" pathLength="400" d="M50 5 Q55 45 95 50 Q55 55 50 95 Q45 55 5 50 Q45 45 50 5 Z" fill="none" stroke="#FFD400" stroke-width="4" stroke-linejoin="round"></path></svg>
+<div class="bob" style="rotate: -10deg; filter: drop-shadow(0 30px 0 rgba(255, 212, 0, 0.12))">
+<dc-import name="Smiley" size="460" wink="{{ true }}" fangs="{{ true }}" hint-size="460px,460px"></dc-import>
+</div>
+<div style="position: absolute; left: 50%; bottom: 36px; translate: -50% 0; display: flex; flex-direction: column; align-items: center; gap: 6px">
+<span class="mk" style="color: #FFD400; font-size: 22px; rotate: -3deg">baja… si te atreves</span>
+<svg aria-hidden="true" width="28" height="36" viewBox="0 0 28 36" fill="none" stroke="#FFD400" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3 C 10 12, 18 18, 14 32 M6 24 L14 33 L22 24"></path></svg>
+</div>
+</div>
+
+<div style="position: relative; overflow: hidden; background: #FFD400; padding: 96px 0 104px">
+<svg aria-hidden="true" viewBox="0 0 100 100" width="90" height="90" style="position: absolute; right: 6%; top: 40px; rotate: 18deg"><path class="draw" pathLength="400" d="M50 6 L61 38 L95 39 L68 59 L78 92 L50 72 L22 92 L32 59 L5 39 L39 38 Z" fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round"></path></svg>
+<div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); display: flex; flex-direction: column; gap: 40px">
+<span class="mk" style="align-self: flex-start; background: #0A0A0A; color: #FFD400; font-size: 22px; padding: 8px 18px; border-radius: 6px; rotate: -3deg">¡Annyeong, Santiago!</span>
+<h1 id="titulo-principal" class="dsp" style="margin: 0; font-size: clamp(56px, 9.6vw, 140px); line-height: 0.9; color: #0A0A0A; text-wrap: balance">Korean Street Food <span style="display: block">· Santiago</span></h1>
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 40px">
+<div style="flex: 1 1 420px; display: flex; flex-direction: column; gap: 28px; max-width: 600px">
+<p style="margin: 0; font-size: clamp(20px, 2vw, 26px); line-height: 1.35; font-weight: 500">Comida que te hace sonreír, pero con colmillo. Corndogs coreanos, tteokbokki y bebidas coreanas, fritos al momento en Barrio Italia y Los Leones.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 14px">
+<a class="btn dsp" href="https://www.ubereats.com/cl/store/dokebi-providencia/rYDa6_ZzUDK76ZOCxcTVFQ" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 32px; border-radius: 999px; background: #0A0A0A; color: #FFD400; text-decoration: none; font-size: 22px; box-shadow: 4px 4px 0 #FFFFFF">Pedir delivery</a>
+<a class="btn dsp" href="#menu" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 32px; border-radius: 999px; border: 3px solid #0A0A0A; color: #0A0A0A; text-decoration: none; font-size: 22px">Ver el menú</a>
+</div>
+<p style="margin: 0; display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">
+<span>Delivery</span><span aria-hidden="true">★</span><span>Opciones veganas</span><span aria-hidden="true">★</span><span>Merch</span>
+</p>
+</div>
+<div style="position: relative; width: 340px; height: 374px; flex: 0 0 auto">
+<svg aria-hidden="true" viewBox="0 -100 400 440" width="340" height="374">
+<defs><pattern id="pkBox" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="2" fill="#0A0A0A"></circle><circle cx="11" cy="10" r="1.5" fill="#0A0A0A"></circle></pattern></defs>
+<polygon points="60,120 130,80 370,80 300,120" fill="#FFD400" stroke="#0A0A0A" stroke-width="6" stroke-linejoin="round"></polygon>
+<g transform="rotate(-16 210 40)">
+<rect x="175" y="-80" width="74" height="200" rx="37" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="6"></rect>
+<rect x="178" y="-77" width="68" height="194" rx="34" fill="url(#pkBox)"></rect>
+<path d="M186 -50 L238 -34 L186 -14 L238 4 L186 24" fill="none" stroke="#0A0A0A" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M186 -50 L238 -34 L186 -14 L238 4 L186 24" fill="none" stroke="#FFD400" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+</g>
+<polygon points="300,120 370,80 370,270 300,320" fill="#FFD400" stroke="#0A0A0A" stroke-width="6" stroke-linejoin="round"></polygon>
+<path d="M318 130 L318 290 M336 120 L336 278 M354 110 L354 266" stroke="#0A0A0A" stroke-width="3" stroke-linecap="round"></path>
+<rect x="60" y="120" width="240" height="200" fill="#FFD400" stroke="#0A0A0A" stroke-width="6" stroke-linejoin="round"></rect>
+<path d="M60 150 L300 150" stroke="#0A0A0A" stroke-width="3" stroke-dasharray="10 8"></path>
+</svg>
+<div style="position: absolute; left: 105px; top: 224px">
+<dc-import name="Smiley" size="96" fangs="{{ true }}" hint-size="96px,96px"></dc-import>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 2 COMO SE ARMA -->
+<section id="como-se-arma" aria-labelledby="h2-arma" style="position: relative; overflow: hidden; background: #FFFFFF; padding: 120px 0">
+<div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(480px, 100%), 1fr)); gap: 64px; align-items: center">
+<div style="display: flex; flex-direction: column; gap: 28px">
+<span class="mk" style="align-self: flex-start; font-size: 20px; border: 3px solid #0A0A0A; padding: 6px 16px; border-radius: 999px; rotate: -2deg">paso a paso</span>
+<h2 id="h2-arma" class="dsp" style="margin: 0; font-size: clamp(52px, 6vw, 92px); line-height: 0.92; text-wrap: balance">Cómo se arma un corndog</h2>
+<p style="margin: 0; font-size: 19px; line-height: 1.5; color: #3A3A3A; max-width: 520px">Crujiente por fuera, elástico por dentro. Baja y míralo armarse capa por capa, igual que en la freidora.</p>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; border-bottom: 2px solid #0A0A0A">
+<li style="display: grid; grid-template-columns: 72px 1fr; align-items: baseline; gap: 12px; padding: 14px 16px; border-top: 2px solid #0A0A0A"><span class="dsp" style="font-size: 30px">00</span><span><strong style="font-size: 18px">Base.</strong> Salchicha vegana, pastel de arroz (tteok) o mixto, en palito.</span></li>
+<li style="display: grid; grid-template-columns: 72px 1fr; align-items: baseline; gap: 12px; padding: 14px 16px; border-top: 2px solid #0A0A0A"><span class="dsp" style="font-size: 30px">01</span><span><strong style="font-size: 18px">Masa.</strong> Masa de arroz que queda elástica al freír.</span></li>
+<li style="display: grid; grid-template-columns: 72px 1fr; align-items: baseline; gap: 12px; padding: 14px 16px; border-top: 2px solid #0A0A0A"><span class="dsp" style="font-size: 30px">02</span><span><strong style="font-size: 18px">Panko.</strong> Pan rallado japonés para el crunch.</span></li>
+<li style="display: grid; grid-template-columns: 72px 1fr; align-items: baseline; gap: 12px; padding: 14px 16px; border-top: 2px solid #0A0A0A"><span class="dsp" style="font-size: 30px">03</span><span><strong style="font-size: 18px">Papas.</strong> Cubos de papa o camote que se fríen pegados a la masa.</span></li>
+<li style="display: grid; grid-template-columns: 72px 1fr; align-items: baseline; gap: 12px; padding: 14px 16px; border-top: 2px solid #0A0A0A"><span class="dsp" style="font-size: 30px">04</span><span><strong style="font-size: 18px">Toppings.</strong> Azúcar, queso en polvo o [TOPPING].</span></li>
+<li aria-current="step" style="display: grid; grid-template-columns: 72px 1fr; align-items: baseline; gap: 12px; padding: 14px 16px; border-top: 2px solid #0A0A0A; background: #FFD400"><span class="dsp" style="font-size: 30px">05</span><span><strong style="font-size: 18px">Salsa.</strong> Ketchup, mostaza, mayo picante o [SALSA].</span></li>
+</ol>
+<div style="display: flex; align-items: center; gap: 16px">
+<span class="dsp" style="font-size: 18px">Capa 05 / 05</span>
+<div aria-hidden="true" style="flex: 1; height: 10px; border: 2px solid #0A0A0A; border-radius: 999px; overflow: hidden"><div style="width: 100%; height: 100%; background: #0A0A0A"></div></div>
+</div>
+</div>
+<div style="position: relative; display: flex; justify-content: center; align-items: center; min-height: 760px">
+<div aria-hidden="true" style="position: absolute; width: 560px; max-width: 100%; aspect-ratio: 1; border-radius: 50%; background: #FFD400"></div>
+<svg aria-hidden="true" viewBox="0 0 100 100" width="110" height="110" style="position: absolute; left: 4%; top: 6%; rotate: -12deg"><path class="draw" pathLength="400" d="M10 75 L18 30 L38 55 L50 18 L62 55 L82 30 L90 75 Z M10 86 L90 86" fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"></path></svg>
+<span class="mk" style="position: absolute; right: 4%; top: 22%; font-size: 30px; rotate: 10deg">¡crunch!</span>
+<span class="mk" style="position: absolute; left: 2%; bottom: 18%; font-size: 24px; rotate: -8deg">se estira ↓</span>
+<svg aria-hidden="true" viewBox="0 0 300 760" width="300" height="760" style="position: relative">
+<defs><pattern id="pkD" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="2.2" fill="#0A0A0A"></circle><circle cx="12" cy="11" r="1.6" fill="#0A0A0A"></circle><path d="M9 3 l3 2" stroke="#0A0A0A" stroke-width="1.4"></path></pattern></defs>
+<rect x="139" y="560" width="22" height="190" rx="8" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="5"></rect>
+<rect x="66" y="30" width="168" height="580" rx="84" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="6"></rect>
+<rect x="69" y="33" width="162" height="574" rx="81" fill="url(#pkD)"></rect>
+<g fill="#FFD400" stroke="#0A0A0A" stroke-width="4" stroke-linejoin="round">
+<rect x="84" y="260" width="26" height="26" rx="4" transform="rotate(12 97 273)"></rect>
+<rect x="130" y="250" width="26" height="26" rx="4" transform="rotate(-8 143 263)"></rect>
+<rect x="184" y="262" width="26" height="26" rx="4" transform="rotate(20 197 275)"></rect>
+<rect x="104" y="310" width="26" height="26" rx="4" transform="rotate(-15 117 323)"></rect>
+<rect x="160" y="305" width="26" height="26" rx="4" transform="rotate(6 173 318)"></rect>
+<rect x="80" y="360" width="26" height="26" rx="4" transform="rotate(25 93 373)"></rect>
+<rect x="136" y="356" width="26" height="26" rx="4" transform="rotate(-20 149 369)"></rect>
+<rect x="190" y="350" width="26" height="26" rx="4" transform="rotate(10 203 363)"></rect>
+<rect x="106" y="410" width="26" height="26" rx="4" transform="rotate(4 119 423)"></rect>
+<rect x="166" y="405" width="26" height="26" rx="4" transform="rotate(-12 179 418)"></rect>
+<rect x="84" y="460" width="26" height="26" rx="4" transform="rotate(18 97 473)"></rect>
+<rect x="140" y="458" width="26" height="26" rx="4" transform="rotate(-5 153 471)"></rect>
+<rect x="190" y="452" width="26" height="26" rx="4" transform="rotate(14 203 465)"></rect>
+<rect x="112" y="510" width="26" height="26" rx="4" transform="rotate(-22 125 523)"></rect>
+<rect x="166" y="505" width="26" height="26" rx="4" transform="rotate(8 179 518)"></rect>
+<rect x="138" y="556" width="26" height="26" rx="4" transform="rotate(15 151 569)"></rect>
+</g>
+<g fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2.5" stroke-linejoin="round">
+<path transform="translate(110 80)" d="M0 -10 Q1.6 -1.6 10 0 Q1.6 1.6 0 10 Q-1.6 1.6 -10 0 Q-1.6 -1.6 0 -10 Z"></path>
+<path transform="translate(190 96)" d="M0 -10 Q1.6 -1.6 10 0 Q1.6 1.6 0 10 Q-1.6 1.6 -10 0 Q-1.6 -1.6 0 -10 Z"></path>
+<path transform="translate(152 140)" d="M0 -10 Q1.6 -1.6 10 0 Q1.6 1.6 0 10 Q-1.6 1.6 -10 0 Q-1.6 -1.6 0 -10 Z"></path>
+<path transform="translate(96 186)" d="M0 -10 Q1.6 -1.6 10 0 Q1.6 1.6 0 10 Q-1.6 1.6 -10 0 Q-1.6 -1.6 0 -10 Z"></path>
+<path transform="translate(204 196)" d="M0 -10 Q1.6 -1.6 10 0 Q1.6 1.6 0 10 Q-1.6 1.6 -10 0 Q-1.6 -1.6 0 -10 Z"></path>
+<path transform="translate(146 228)" d="M0 -10 Q1.6 -1.6 10 0 Q1.6 1.6 0 10 Q-1.6 1.6 -10 0 Q-1.6 -1.6 0 -10 Z"></path>
+</g>
+<path d="M92 70 Q150 92 208 108 Q150 140 90 160 Q150 182 210 198 Q150 226 90 246 Q150 268 210 284" fill="none" stroke="#0A0A0A" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M92 70 Q150 92 208 108 Q150 140 90 160 Q150 182 210 198 Q150 226 90 246 Q150 268 210 284" fill="none" stroke="#FFD400" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+</section>
+
+<!-- 3 MENU -->
+<section id="menu" aria-labelledby="h2-menu" style="position: relative; overflow: hidden; background: #0A0A0A; color: #FFFFFF; padding: 120px 0">
+<div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 16px; max-width: 640px">
+<h2 id="h2-menu" class="dsp" style="margin: 0; font-size: clamp(64px, 9vw, 140px); line-height: 0.88; color: #FFD400">Menú</h2>
+<p style="margin: 0; font-size: 19px; line-height: 1.5; color: #D6D6D6">Todo frito al momento y servido en nuestra caja amarilla. 35 productos, de los corndogs a las bebidas coreanas.</p>
+</div>
+<button type="button" onClick="{{ toggleVegan }}" aria-pressed="{{ veganPressed }}" class="btn dsp" style="{{ veganStyle }}">
+<svg aria-hidden="true" width="26" height="26" viewBox="0 0 100 100"><path d="M50 6 L61 38 L95 39 L68 59 L78 92 L50 72 L22 92 L32 59 L5 39 L39 38 Z" fill="{{ veganStarFill }}" stroke="#0A0A0A" stroke-width="8" stroke-linejoin="round"></path></svg>
+Solo vegano
+</button>
+</div>
+<div role="group" aria-label="Filtrar por categoría" style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
+<sc-for list="{{ chips }}" as="chip" hint-placeholder-count="4">
+<button type="button" onClick="{{ chip.pick }}" aria-pressed="{{ chip.pressed }}" class="dsp" style="{{ chip.style }}">{{ chip.label }}</button>
+</sc-for>
+<span style="margin-left: auto; font-size: 15px; color: #BDBDBD; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase">{{ countLabel }}</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; padding: 16px 20px; border: 2px dashed #FFD400; border-radius: 8px">
+<span class="mk" style="color: #FFD400; font-size: 20px">Elige el relleno de tu corndog:</span>
+<span style="background: #FFFFFF; color: #0A0A0A; font-weight: 700; font-size: 15px; padding: 6px 14px; border-radius: 999px">Salchicha vegana</span>
+<span style="background: #FFFFFF; color: #0A0A0A; font-weight: 700; font-size: 15px; padding: 6px 14px; border-radius: 999px">Pastel de arroz (tteok)</span>
+<span style="background: #FFFFFF; color: #0A0A0A; font-weight: 700; font-size: 15px; padding: 6px 14px; border-radius: 999px">Mixto: tteok + salchicha vegana</span>
+<span style="font-size: 14px; color: #BDBDBD">Los tres son veganos.</span>
+</div>
+<ul style="list-style: none; margin: 0; padding: 4px 0 20px; display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-color: #FFD400 #1F1F1F">
+<sc-for list="{{ shown }}" as="item" hint-placeholder-count="8">
+<li style="flex: 0 0 284px; scroll-snap-align: start; background: #FFD400; color: #0A0A0A; border-radius: 6px; display: flex; flex-direction: column; overflow: hidden">
+<svg aria-hidden="true" viewBox="0 0 300 30" preserveAspectRatio="none" style="display: block; width: 100%; height: 30px; background: #0A0A0A"><path d="M0 30 L22 4 L146 4 L150 30 Z M150 30 L154 4 L278 4 L300 30 Z" fill="#E8C200" stroke="#0A0A0A" stroke-width="2"></path></svg>
+<div style="position: relative; margin: 14px 14px 0; aspect-ratio: 4 / 3; border-radius: 4px; background: repeating-linear-gradient(135deg, #1B1B1B 0 10px, #141414 10px 20px); display: flex; align-items: flex-end; padding: 12px; box-sizing: border-box">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #A8A8A8">{{ item.photo }}</span>
+<div style="position: absolute; right: -6px; top: -10px; rotate: 10deg">
+<dc-import name="Smiley" size="52" fangs="{{ true }}" spicy="{{ item.spicy }}" hint-size="52px,52px"></dc-import>
+</div>
+</div>
+<div style="padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1">
+<h3 class="dsp" style="margin: 0; font-size: 28px; line-height: 1">{{ item.name }}</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.45; flex: 1">{{ item.desc }}</p>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 10px; border-top: 2px dashed #0A0A0A">
+<span class="dsp" style="font-size: 22px">{{ item.price }}</span>
+<div style="display: flex; gap: 6px; align-items: center">
+<sc-if value="{{ item.spicy }}" hint-placeholder-val="{{ false }}"><span style="background: #0A0A0A; color: #FFD400; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase">Picante</span></sc-if>
+<sc-if value="{{ item.hasTag }}" hint-placeholder-val="{{ false }}"><span class="mk" style="background: #FFFFFF; border: 2px solid #0A0A0A; padding: 3px 10px; border-radius: 999px; font-size: 14px; rotate: -4deg; white-space: nowrap">{{ item.tag }}</span></sc-if>
+</div>
+</div>
+</div>
+</li>
+</sc-for>
+</ul>
+<sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; font-size: 18px; color: #D6D6D6">No hay productos veganos en esta categoría (todavía). Prueba con «Todo».</p>
+</sc-if>
+<p style="margin: 0; font-size: 14px; color: #BDBDBD">«vegano»: 100 % vegetal. «opción vegana»: pídelo con relleno vegano. Precios de referencia de delivery; en el local pueden variar. Consulta por alérgenos.</p>
+</div>
+</section>
+
+<!-- 4 EL BARRIO -->
+<section id="barrio" aria-labelledby="h2-barrio" style="position: relative; overflow: hidden; background: #FFD400; padding: 120px 0 128px">
+<svg aria-hidden="true" viewBox="0 0 100 100" width="130" height="130" style="position: absolute; left: 3%; top: 60px; rotate: -10deg"><path class="draw" pathLength="400" d="M10 75 L18 30 L38 55 L50 18 L62 55 L82 30 L90 75 Z M10 86 L90 86" fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"></path></svg>
+<svg aria-hidden="true" viewBox="0 0 200 60" width="260" height="78" style="position: absolute; right: 4%; top: 420px; rotate: -6deg"><path class="draw" pathLength="400" d="M6 34 C 26 4, 44 58, 64 30 S 102 4, 122 30 S 162 58, 194 22" fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linecap="round"></path></svg>
+<div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); display: flex; flex-direction: column; gap: 56px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px">
+<h2 id="h2-barrio" class="dsp" style="margin: 0; font-size: clamp(64px, 9vw, 140px); line-height: 0.88">El barrio</h2>
+<p style="margin: 0; font-size: 19px; line-height: 1.5; max-width: 520px; font-weight: 500">Nacimos en la calle y ahí seguimos: Barrio Italia, Los Leones y todo lo que pasa entre medio. Colabs, eventos y la fila de siempre.</p>
+</div>
+<div style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 28px; align-items: start">
+<figure style="margin: 0; background: #FFFFFF; padding: 12px 12px 14px; box-shadow: 8px 8px 0 #0A0A0A; rotate: -3deg; translate: 0 24px">
+<div style="aspect-ratio: 3 / 4; background: repeating-linear-gradient(135deg, #1B1B1B 0 10px, #141414 10px 20px); display: flex; align-items: flex-end; padding: 12px; box-sizing: border-box"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #A8A8A8">Foto · Fila en Av. Italia</span></div>
+<figcaption class="mk" style="padding-top: 10px; font-size: 18px">viernes, 8 pm</figcaption>
+</figure>
+<figure style="margin: 0; background: #FFFFFF; padding: 12px 12px 14px; box-shadow: 8px 8px 0 #0A0A0A; rotate: 2deg">
+<div style="aspect-ratio: 4 / 5; background: repeating-linear-gradient(135deg, #1B1B1B 0 10px, #141414 10px 20px); display: flex; align-items: flex-end; padding: 12px; box-sizing: border-box"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #A8A8A8">Foto · Corndog en mano, mural detrás</span></div>
+<figcaption class="mk" style="padding-top: 10px; font-size: 18px">el primer mordisco</figcaption>
+</figure>
+<figure style="margin: 0; background: #FFFFFF; padding: 12px 12px 14px; box-shadow: 8px 8px 0 #0A0A0A; rotate: -1.5deg; translate: 0 56px">
+<div style="aspect-ratio: 1; background: repeating-linear-gradient(135deg, #1B1B1B 0 10px, #141414 10px 20px); display: flex; align-items: flex-end; padding: 12px; box-sizing: border-box"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #A8A8A8">Foto · Cajas amarillas en la vereda</span></div>
+<figcaption class="mk" style="padding-top: 10px; font-size: 18px">delivery saliendo</figcaption>
+</figure>
+<figure style="margin: 0; background: #FFFFFF; padding: 12px 12px 14px; box-shadow: 8px 8px 0 #0A0A0A; rotate: 3.5deg; translate: 0 12px">
+<div style="aspect-ratio: 3 / 4; background: repeating-linear-gradient(135deg, #1B1B1B 0 10px, #141414 10px 20px); display: flex; align-items: flex-end; padding: 12px; box-sizing: border-box"><span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #A8A8A8">Foto · Bebidas coreanas en Los Leones</span></div>
+<figcaption class="mk" style="padding-top: 10px; font-size: 18px">melón soda, por favor</figcaption>
+</figure>
+<svg aria-hidden="true" viewBox="0 0 100 100" width="96" height="96" style="position: absolute; left: 22%; top: -40px; rotate: 14deg"><path class="draw" pathLength="400" d="M50 6 L61 38 L95 39 L68 59 L78 92 L50 72 L22 92 L32 59 L5 39 L39 38 Z" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round"></path></svg>
+<svg aria-hidden="true" viewBox="0 0 100 100" width="64" height="64" style="position: absolute; right: 24%; bottom: -60px"><path class="draw" pathLength="400" d="M50 5 Q55 45 95 50 Q55 55 50 95 Q45 55 5 50 Q45 45 50 5 Z" fill="#FFFFFF" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round"></path></svg>
+</div>
+<div style="margin-top: 56px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 24px">
+<article style="background: #0A0A0A; color: #FFFFFF; border-radius: 8px; padding: 32px; display: flex; flex-direction: column; gap: 18px">
+<h3 class="dsp" style="margin: 0; font-size: 36px; color: #FFD400">Colaboraciones</h3>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; font-size: 16px; line-height: 1.4">
+<li style="display: flex; flex-direction: column; gap: 2px; padding-bottom: 14px; border-bottom: 1px solid #333333"><strong>[MARCA O ARTISTA] × DOKEBI</strong><span style="color: #BDBDBD">[Qué hicieron juntos]</span></li>
+<li style="display: flex; flex-direction: column; gap: 2px; padding-bottom: 14px; border-bottom: 1px solid #333333"><strong>[MARCA O ARTISTA] × DOKEBI</strong><span style="color: #BDBDBD">[Qué hicieron juntos]</span></li>
+<li style="display: flex; flex-direction: column; gap: 2px"><strong>[MARCA O ARTISTA] × DOKEBI</strong><span style="color: #BDBDBD">[Qué hicieron juntos]</span></li>
+</ul>
+</article>
+<article style="background: #0A0A0A; color: #FFFFFF; border-radius: 8px; padding: 32px; display: flex; flex-direction: column; gap: 18px">
+<h3 class="dsp" style="margin: 0; font-size: 36px; color: #FFD400">Eventos</h3>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; font-size: 16px; line-height: 1.4">
+<li style="display: flex; gap: 14px; align-items: center"><span class="dsp" style="flex: 0 0 auto; background: #FFD400; color: #0A0A0A; border-radius: 6px; padding: 8px 10px; font-size: 18px; text-align: center; min-width: 64px">[DD MMM]</span><span><strong>[NOMBRE DEL EVENTO]</strong><br><span style="color: #BDBDBD">Barrio Italia</span></span></li>
+<li style="display: flex; gap: 14px; align-items: center"><span class="dsp" style="flex: 0 0 auto; background: #FFD400; color: #0A0A0A; border-radius: 6px; padding: 8px 10px; font-size: 18px; text-align: center; min-width: 64px">[DD MMM]</span><span><strong>[NOMBRE DEL EVENTO]</strong><br><span style="color: #BDBDBD">Los Leones</span></span></li>
+<li style="display: flex; gap: 14px; align-items: center"><span class="dsp" style="flex: 0 0 auto; background: #FFD400; color: #0A0A0A; border-radius: 6px; padding: 8px 10px; font-size: 18px; text-align: center; min-width: 64px">[DD MMM]</span><span><strong>[NOMBRE DEL EVENTO]</strong><br><span style="color: #BDBDBD">[LUGAR]</span></span></li>
+</ul>
+</article>
+<article style="background: #FFFFFF; border: 3px solid #0A0A0A; border-radius: 8px; padding: 32px; display: flex; flex-direction: column; gap: 18px; rotate: 1deg">
+<h3 class="dsp" style="margin: 0; font-size: 36px">En la prensa</h3>
+<blockquote style="margin: 0; font-size: 26px; line-height: 1.25; font-weight: 800">“[CITA DE PRENSA SOBRE DOKEBI]”</blockquote>
+<p style="margin: 0; font-size: 15px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase">— [MEDIO], [FECHA]</p>
+<a href="#" style="align-self: flex-start; font-weight: 700; font-size: 16px; min-height: 44px; display: inline-flex; align-items: center">Leer la nota</a>
+</article>
+</div>
+</div>
+</section>
+
+<!-- 5 LOCALES -->
+<section id="locales" aria-labelledby="h2-locales" style="position: relative; background: #0A0A0A">
+<h2 id="h2-locales" class="dsp" style="position: absolute; z-index: 2; left: 50%; top: 40px; translate: -50% 0; rotate: -6deg; margin: 0; width: 180px; height: 180px; border-radius: 50%; background: #FFD400; border: 4px solid #0A0A0A; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 40px; line-height: 0.9">Dos<br>locales</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(560px, 100%), 1fr))">
+<article style="background: #0A0A0A; color: #FFFFFF; padding: 160px clamp(16px, 4vw, 64px) 80px; display: flex; flex-direction: column; gap: 24px">
+<p style="margin: 0; font-size: 14px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #FFD400">Providencia</p>
+<h3 class="dsp" style="margin: 0; font-size: clamp(52px, 5.5vw, 84px); line-height: 0.9">Barrio Italia</h3>
+<p style="margin: 0; font-size: 20px; line-height: 1.4">Av. Italia 1187, local 2<br>Providencia, Santiago</p>
+<div style="position: relative; border-radius: 8px; overflow: hidden; border: 2px solid #2A2A2A">
+<svg role="img" aria-label="Mapa ilustrativo del local de Av. Italia 1187" viewBox="0 0 560 260" preserveAspectRatio="xMidYMid slice" style="display: block; width: 100%; height: 260px">
+<rect width="560" height="260" fill="#161616"></rect>
+<path d="M0 60 L560 40 M0 150 L560 135 M0 230 L560 220 M90 0 L110 260 M420 0 L440 260" stroke="#2C2C2C" stroke-width="10"></path>
+<path d="M230 0 L300 260" stroke="#FFFFFF" stroke-width="16"></path>
+<text x="318" y="236" fill="#FFFFFF" font-family="Archivo, sans-serif" font-size="14" font-weight="700" letter-spacing="2">AV. ITALIA</text>
+<path d="M266 132 l0 -14" stroke="#FFD400" stroke-width="4"></path>
+<circle cx="266" cy="96" r="24" fill="#FFD400" stroke="#0A0A0A" stroke-width="4"></circle>
+<circle cx="257" cy="90" r="3.5" fill="#0A0A0A"></circle><circle cx="275" cy="90" r="3.5" fill="#0A0A0A"></circle>
+<path d="M254 101 Q266 113 278 101" fill="none" stroke="#0A0A0A" stroke-width="3.5" stroke-linecap="round"></path>
+</svg>
+<span style="position: absolute; left: 12px; bottom: 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #A8A8A8">Mapa ilustrativo · reemplazar por embed</span>
+</div>
+<dl style="margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 24px; font-size: 17px">
+<dt style="font-weight: 700">Lunes</dt><dd style="margin: 0; color: #D6D6D6">Cerrado</dd>
+<dt style="font-weight: 700">Mar – Jue</dt><dd style="margin: 0; color: #D6D6D6">13:00–15:30 · 16:30–20:30</dd>
+<dt style="font-weight: 700">Viernes</dt><dd style="margin: 0; color: #D6D6D6">13:00–15:30 · 16:30–21:00</dd>
+<dt style="font-weight: 700">Sábado</dt><dd style="margin: 0; color: #D6D6D6">13:00–15:30 · 16:30–21:30</dd>
+<dt style="font-weight: 700">Domingo</dt><dd style="margin: 0; color: #D6D6D6">13:00–15:30 · 16:30–19:00</dd>
+<dt style="font-weight: 700; color: #FFD400">Colación</dt><dd style="margin: 0; color: #FFD400">Cerrado de 15:30 a 16:30</dd>
+</dl>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a class="btn dsp" href="https://www.google.com/maps/search/?api=1&amp;query=Av.%20Italia%201187%2C%20Providencia%2C%20Santiago" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 26px; border-radius: 999px; border: 3px solid #FFFFFF; color: #FFFFFF; text-decoration: none; font-size: 20px">Cómo llegar</a>
+<a class="btn dsp" href="https://www.ubereats.com/cl/store/dokebi-providencia/rYDa6_ZzUDK76ZOCxcTVFQ" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 26px; border-radius: 999px; background: #FFD400; color: #0A0A0A; text-decoration: none; font-size: 20px">Pedir delivery</a>
+</div>
+</article>
+<article style="background: #FFFFFF; color: #0A0A0A; padding: 160px clamp(16px, 4vw, 64px) 80px; display: flex; flex-direction: column; gap: 24px">
+<p style="margin: 0; font-size: 14px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase">Providencia</p>
+<h3 class="dsp" style="margin: 0; font-size: clamp(52px, 5.5vw, 84px); line-height: 0.9">Los Leones</h3>
+<p style="margin: 0; font-size: 20px; line-height: 1.4">Av. Providencia 2345<br>Providencia, Santiago</p>
+<div style="position: relative; border-radius: 8px; overflow: hidden; border: 2px solid #0A0A0A">
+<svg role="img" aria-label="Mapa ilustrativo del local de Av. Providencia 2345" viewBox="0 0 560 260" preserveAspectRatio="xMidYMid slice" style="display: block; width: 100%; height: 260px">
+<rect width="560" height="260" fill="#F2F2F2"></rect>
+<path d="M60 0 L70 260 M180 0 L186 260 M440 0 L452 260 M0 40 L560 30 M0 220 L560 214" stroke="#D9D9D9" stroke-width="10"></path>
+<path d="M0 140 L560 120" stroke="#0A0A0A" stroke-width="16"></path>
+<path d="M318 0 L326 260" stroke="#0A0A0A" stroke-width="8"></path>
+<text x="20" y="168" fill="#0A0A0A" font-family="Archivo, sans-serif" font-size="14" font-weight="700" letter-spacing="2">AV. PROVIDENCIA</text>
+<text x="336" y="246" fill="#0A0A0A" font-family="Archivo, sans-serif" font-size="13" font-weight="700" letter-spacing="2">LOS LEONES</text>
+<path d="M280 112 l0 -14" stroke="#0A0A0A" stroke-width="4"></path>
+<circle cx="280" cy="76" r="24" fill="#FFD400" stroke="#0A0A0A" stroke-width="4"></circle>
+<circle cx="271" cy="70" r="3.5" fill="#0A0A0A"></circle><circle cx="289" cy="70" r="3.5" fill="#0A0A0A"></circle>
+<path d="M268 81 Q280 93 292 81" fill="none" stroke="#0A0A0A" stroke-width="3.5" stroke-linecap="round"></path>
+</svg>
+<span style="position: absolute; left: 12px; bottom: 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #555555">Mapa ilustrativo · reemplazar por embed</span>
+</div>
+<dl style="margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 24px; font-size: 17px">
+<dt style="font-weight: 700">Lunes</dt><dd style="margin: 0; color: #3A3A3A">Cerrado</dd>
+<dt style="font-weight: 700">Mar – Jue</dt><dd style="margin: 0; color: #3A3A3A">13:00–15:30 · 16:30–20:30</dd>
+<dt style="font-weight: 700">Viernes</dt><dd style="margin: 0; color: #3A3A3A">13:00–15:30 · 16:30–21:00</dd>
+<dt style="font-weight: 700">Sábado</dt><dd style="margin: 0; color: #3A3A3A">13:00–15:30 · 16:30–21:30</dd>
+<dt style="font-weight: 700">Domingo</dt><dd style="margin: 0; color: #3A3A3A">13:00–15:30 · 16:30–19:00</dd>
+<dt style="font-weight: 700; background: #FFD400; padding: 0 6px">Colación</dt><dd style="margin: 0; font-weight: 700">Cerrado de 15:30 a 16:30</dd>
+</dl>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a class="btn dsp" href="https://www.google.com/maps/search/?api=1&amp;query=Av.%20Providencia%202345%2C%20Providencia%2C%20Santiago" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 26px; border-radius: 999px; border: 3px solid #0A0A0A; color: #0A0A0A; text-decoration: none; font-size: 20px">Cómo llegar</a>
+<a class="btn dsp" href="https://www.ubereats.com/cl/store/dokebi-providencia/rYDa6_ZzUDK76ZOCxcTVFQ" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 26px; border-radius: 999px; background: #0A0A0A; color: #FFD400; text-decoration: none; font-size: 20px">Pedir delivery</a>
+</div>
+</article>
+</div>
+</section>
+
+<!-- 6 MERCH -->
+<section id="merch" aria-labelledby="h2-merch" style="position: relative; overflow: hidden; background: #FFD400; padding: 120px 0 136px">
+<svg aria-hidden="true" viewBox="0 0 100 100" width="110" height="110" style="position: absolute; right: 5%; top: 70px; rotate: 16deg"><path class="draw" pathLength="400" d="M10 75 L18 30 L38 55 L50 18 L62 55 L82 30 L90 75 Z M10 86 L90 86" fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"></path></svg>
+<div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); display: flex; flex-direction: column; gap: 56px">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<h2 id="h2-merch" class="dsp" style="margin: 0; font-size: clamp(64px, 9vw, 140px); line-height: 0.88">Merch</h2>
+<p style="margin: 0; font-size: 19px; line-height: 1.5; max-width: 520px; font-weight: 500">Lleva al dokebi contigo. Disponible en ambos locales.</p>
+</div>
+<ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr)); gap: 36px 28px">
+<li style="background: #FFFFFF; border-radius: 22px; padding: 14px; box-shadow: 0 0 0 3px #0A0A0A, 8px 10px 0 3px #0A0A0A; rotate: -5deg; display: flex; flex-direction: column; gap: 12px">
+<div style="aspect-ratio: 1; border-radius: 12px; background: repeating-linear-gradient(135deg, #1B1B1B 0 10px, #141414 10px 20px); display: flex; align-items: flex-end; padding: 10px; box-sizing: border-box"><span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #A8A8A8">Foto · Polera</span></div>
+<h3 class="dsp" style="margin: 0; font-size: 26px; line-height: 1">Polera Dokebi</h3>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span class="dsp" style="font-size: 20px">[PRECIO]</span><a href="#" style="font-weight: 700; min-height: 44px; display: inline-flex; align-items: center">Lo quiero</a></div>
+</li>
+<li style="background: #FFFFFF; border-radius: 22px; padding: 14px; box-shadow: 0 0 0 3px #0A0A0A, 8px 10px 0 3px #0A0A0A; rotate: 3deg; translate: 0 18px; display: flex; flex-direction: column; gap: 12px">
+<div style="aspect-ratio: 1; border-radius: 12px; background: repeating-linear-gradient(135deg, #1B1B1B 0 10px, #141414 10px 20px); display: flex; align-items: flex-end; padding: 10px; box-sizing: border-box"><span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #A8A8A8">Foto · Gorro</span></div>
+<h3 class="dsp" style="margin: 0; font-size: 26px; line-height: 1">Gorro con colmillos</h3>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span class="dsp" style="font-size: 20px">[PRECIO]</span><a href="#" style="font-weight: 700; min-height: 44px; display: inline-flex; align-items: center">Lo quiero</a></div>
+</li>
+<li style="background: #FFFFFF; border-radius: 22px; padding: 14px; box-shadow: 0 0 0 3px #0A0A0A, 8px 10px 0 3px #0A0A0A; rotate: -2deg; display: flex; flex-direction: column; gap: 12px">
+<div style="aspect-ratio: 1; border-radius: 12px; background: repeating-linear-gradient(135deg, #1B1B1B 0 10px, #141414 10px 20px); display: flex; align-items: flex-end; padding: 10px; box-sizing: border-box"><span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #A8A8A8">Foto · Tote bag</span></div>
+<h3 class="dsp" style="margin: 0; font-size: 26px; line-height: 1">Tote bag</h3>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span class="dsp" style="font-size: 20px">[PRECIO]</span><a href="#" style="font-weight: 700; min-height: 44px; display: inline-flex; align-items: center">Lo quiero</a></div>
+</li>
+<li style="background: #FFFFFF; border-radius: 22px; padding: 14px; box-shadow: 0 0 0 3px #0A0A0A, 8px 10px 0 3px #0A0A0A; rotate: 6deg; translate: 0 28px; display: flex; flex-direction: column; gap: 12px">
+<div style="aspect-ratio: 1; border-radius: 12px; background: repeating-linear-gradient(135deg, #1B1B1B 0 10px, #141414 10px 20px); display: flex; align-items: flex-end; padding: 10px; box-sizing: border-box"><span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #A8A8A8">Foto · Pack de stickers</span></div>
+<h3 class="dsp" style="margin: 0; font-size: 26px; line-height: 1">Pack de stickers</h3>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span class="dsp" style="font-size: 20px">[PRECIO]</span><a href="#" style="font-weight: 700; min-height: 44px; display: inline-flex; align-items: center">Lo quiero</a></div>
+</li>
+<li style="background: #FFFFFF; border-radius: 22px; padding: 14px; box-shadow: 0 0 0 3px #0A0A0A, 8px 10px 0 3px #0A0A0A; rotate: -4deg; translate: 0 6px; display: flex; flex-direction: column; gap: 12px">
+<div style="aspect-ratio: 1; border-radius: 12px; background: repeating-linear-gradient(135deg, #1B1B1B 0 10px, #141414 10px 20px); display: flex; align-items: flex-end; padding: 10px; box-sizing: border-box"><span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #A8A8A8">Foto · Llavero</span></div>
+<h3 class="dsp" style="margin: 0; font-size: 26px; line-height: 1">Llavero smiley</h3>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span class="dsp" style="font-size: 20px">[PRECIO]</span><a href="#" style="font-weight: 700; min-height: 44px; display: inline-flex; align-items: center">Lo quiero</a></div>
+</li>
+</ul>
+</div>
+</section>
+
+<!-- 7 FAQ -->
+<section id="faq" aria-labelledby="h2-faq" style="position: relative; overflow: hidden; background: #FFFFFF; padding: 120px 0">
+<div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 56px; align-items: start">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<h2 id="h2-faq" class="dsp" style="margin: 0; font-size: clamp(52px, 6vw, 92px); line-height: 0.92">Preguntas frecuentes</h2>
+<svg aria-hidden="true" viewBox="0 0 200 60" width="200" height="60"><path class="draw" pathLength="400" d="M6 34 C 26 4, 44 58, 64 30 S 102 4, 122 30 S 162 58, 194 22" fill="none" stroke="#0A0A0A" stroke-width="5" stroke-linecap="round"></path></svg>
+</div>
+<div style="display: flex; flex-direction: column; border-top: 3px solid #0A0A0A">
+<details open="" style="border-bottom: 3px solid #0A0A0A; padding: 8px 0">
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 64px"><h3 class="dsp" style="margin: 0; font-size: 30px; line-height: 1.05">¿Qué es un corndog coreano?</h3><span class="plus dsp" aria-hidden="true" style="flex: 0 0 auto; width: 44px; height: 44px; border-radius: 50%; background: #FFD400; display: flex; align-items: center; justify-content: center; font-size: 30px; transition: rotate .2s">+</span></summary>
+<p style="margin: 0 0 20px; font-size: 18px; line-height: 1.55; color: #3A3A3A; max-width: 620px">Un snack callejero de Corea: salchicha, mozzarella (o las dos) en un palito, cubiertas con masa, panko y a veces cubos de papa, y fritas al momento. Se terminan con azúcar y salsas. Crujiente por fuera, elástico por dentro.</p>
+</details>
+<details style="border-bottom: 3px solid #0A0A0A; padding: 8px 0">
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 64px"><h3 class="dsp" style="margin: 0; font-size: 30px; line-height: 1.05">¿Tienen opciones veganas?</h3><span class="plus dsp" aria-hidden="true" style="flex: 0 0 auto; width: 44px; height: 44px; border-radius: 50%; background: #FFD400; display: flex; align-items: center; justify-content: center; font-size: 30px; transition: rotate .2s">+</span></summary>
+<p style="margin: 0 0 20px; font-size: 18px; line-height: 1.55; color: #3A3A3A; max-width: 620px">Sí, tenemos menú vegano. Corndogs con salchicha vegana, pastel de arroz o mixto, en seis coberturas: papa, camote, Doritos chili, queso vegano, ramen y quinoa. Además: nuggets, mandu, to kkochi y ramyeon vegano. Usa el filtro «Solo vegano» del menú para verlos todos.</p>
+</details>
+<details style="border-bottom: 3px solid #0A0A0A; padding: 8px 0">
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 64px"><h3 class="dsp" style="margin: 0; font-size: 30px; line-height: 1.05">¿Hacen delivery?</h3><span class="plus dsp" aria-hidden="true" style="flex: 0 0 auto; width: 44px; height: 44px; border-radius: 50%; background: #FFD400; display: flex; align-items: center; justify-content: center; font-size: 30px; transition: rotate .2s">+</span></summary>
+<p style="margin: 0 0 20px; font-size: 18px; line-height: 1.55; color: #3A3A3A; max-width: 620px">Sí, por Uber Eats [Y OTRAS APPS]. Toca «Pedir» y elige el local más cercano. Zona de reparto: [ZONA].</p>
+</details>
+</div>
+</div>
+</section>
+</main>
+
+<!-- 8 FOOTER -->
+<footer aria-labelledby="h2-footer" style="position: relative; overflow: hidden; background: #0A0A0A; color: #FFFFFF">
+<div aria-hidden="true" style="position: relative; height: 230px">
+<sc-for list="{{ rain }}" as="d" hint-placeholder-count="16">
+<div style="{{ d.style }}">
+<dc-import name="Smiley" size="{{ d.size }}" wink="{{ d.wink }}" fangs="{{ true }}" hint-size="{{ d.hs }}"></dc-import>
+</div>
+</sc-for>
+</div>
+<div style="max-width: 1280px; margin: 0 auto; padding: 24px clamp(16px, 4vw, 40px) 40px; display: flex; flex-direction: column; gap: 56px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<h2 id="h2-footer" class="dsp" style="margin: 0; font-size: clamp(56px, 8vw, 120px); line-height: 0.9; color: #FFD400">¿Te dio hambre?</h2>
+<p style="margin: 0; font-size: 19px; color: #D6D6D6">Pide delivery o pásate por Barrio Italia o Los Leones.</p>
+</div>
+<a class="btn dsp" href="https://www.ubereats.com/cl/store/dokebi-providencia/rYDa6_ZzUDK76ZOCxcTVFQ" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 12px; min-height: 64px; padding: 0 40px; border-radius: 999px; background: #FFD400; color: #0A0A0A; text-decoration: none; font-size: 26px; box-shadow: 5px 5px 0 #FFFFFF">Pedir ahora
+<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</a>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 32px; padding-top: 40px; border-top: 2px solid #2A2A2A">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #FFD400">Locales</p>
+<address style="font-style: normal; font-size: 16px; line-height: 1.6; color: #D6D6D6">Av. Italia 1187, local 2 · Barrio Italia<br>Av. Providencia 2345 · Los Leones</address>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #FFD400">Redes</p>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px">
+<li><a class="navl" href="#" style="display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-size: 16px"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"></circle></svg>Instagram · @[USUARIO]</a></li>
+<li><a class="navl" href="#" style="display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-size: 16px"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"></path><path d="M14 3c.5 3 2.5 5 5.5 5"></path></svg>TikTok · @[USUARIO]</a></li>
+</ul>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #FFD400">Explora</p>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 20px; font-size: 16px">
+<li><a class="navl" href="#menu" style="display: inline-flex; min-height: 44px; align-items: center">Menú</a></li>
+<li><a class="navl" href="#barrio" style="display: inline-flex; min-height: 44px; align-items: center">El barrio</a></li>
+<li><a class="navl" href="#locales" style="display: inline-flex; min-height: 44px; align-items: center">Locales</a></li>
+<li><a class="navl" href="#merch" style="display: inline-flex; min-height: 44px; align-items: center">Merch</a></li>
+<li><a class="navl" href="#faq" style="display: inline-flex; min-height: 44px; align-items: center">FAQ</a></li>
+</ul>
+</div>
+</div>
+<p style="margin: 0; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 13px; color: #A8A8A8"><span>© 2026 DOKEBI · Korean Street Food · Santiago de Chile</span><span class="mk" style="color: #FFD400; font-size: 16px">sonríe, pero con colmillo</span></p>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":8000}}'>
+var DOKEBI_ITEMS = [
+  { cat: 'corndogs', name: 'Doritos Corea', desc: 'Rebozado en Doritos sabor galbi BBQ coreano.', price: '$6.550' },
+  { cat: 'corndogs', name: 'Takis Original', desc: 'Cubierto con Takis originales.', price: '$6.550', spicy: true },
+  { cat: 'corndogs', name: 'Doritos Flamin’ Hot', desc: 'Rebozado en Doritos Flamin’ Hot.', price: '$6.550', spicy: true },
+  { cat: 'corndogs', name: 'Dokebi Seúl', desc: 'El picante de la casa.', price: '$6.550', spicy: true },
+  { cat: 'corndogs', name: 'Panko', desc: 'El clásico: masa y panko crujiente.', price: '$5.895' },
+  { cat: 'corndogs', name: 'Ramen', desc: 'Envuelto en fideos de ramen crujientes.', price: '$6.550', tag: 'opción vegana' },
+  { cat: 'corndogs', name: 'Zucarita', desc: 'Cubierto con Zucaritas.', price: '$6.550' },
+  { cat: 'corndogs', name: 'Calamar', desc: 'Corndog con calamar.', price: '$6.550' },
+  { cat: 'corndogs', name: 'Papa', desc: 'Cubierto con cubos de papa crocante.', price: '$7.205', tag: 'opción vegana' },
+  { cat: 'corndogs', name: 'Camote', desc: 'Cubos de camote, dulce y crocante.', price: '$7.860', tag: 'opción vegana' },
+  { cat: 'corndogs', name: 'Quinoa Pop', desc: 'Rebozado en quinoa inflada de colores.', price: '$5.895', tag: 'opción vegana' },
+  { cat: 'corndogs', name: 'Queso Vegano', desc: 'Cubierto con queso vegano rallado.', tag: 'vegano' },
+  { cat: 'corndogs', name: 'Doritos Chili Vegano', desc: 'Rebozado en Doritos sabor chili.', tag: 'vegano' },
+  { cat: 'pollo', name: 'Dak Kkochi', desc: 'Brocheta de pollo frito con salsa agridulce.', price: '$8.515' },
+  { cat: 'pollo', name: 'Dak Kkochi con Queso', desc: 'Pollo frito con salsa agridulce y queso.', price: '$9.170' },
+  { cat: 'pollo', name: 'Tteokkochi', desc: 'Pastel de arroz tostado con salsa agridulce coreana y mix de semillas.', price: '$5.895', tag: 'vegano' },
+  { cat: 'pollo', name: 'Sotteok Sotteok', desc: 'Brocheta de pastel de arroz y longanicilla.', price: '$7.205' },
+  { cat: 'picar', name: 'Rose Tteokbokki', desc: 'Pasteles de arroz en salsa rosé picante.', price: '$11.776', spicy: true },
+  { cat: 'picar', name: 'Mandu', desc: '6 empanadas coreanas fritas, de verdura o kimchi.', price: '$7.205', tag: 'vegano' },
+  { cat: 'picar', name: 'Kimari', desc: '6 rollitos de algas rellenos de fideos de camote.', price: '$7.205' },
+  { cat: 'picar', name: 'Nuggets Originales', desc: '10 unidades.', price: '$7.860' },
+  { cat: 'picar', name: 'Nuggets Veganos', desc: '6 unidades, con salsa chili y BBQ.', price: '$7.860', tag: 'vegano' },
+  { cat: 'picar', name: 'Ramyeon Vegano', desc: 'Ramyeon vegano semi picante.', price: '$5.500', tag: 'vegano', spicy: true },
+  { cat: 'compartir', name: 'Solo Set', desc: '1 Corndog Panko + 1 Rose Tteokbokki de 180 g.', price: '$13.755' },
+  { cat: 'compartir', name: 'Couple Set', desc: '1 Corndog Papa + 1 Corndog Panko + 1 Rose Tteokbokki de 180 g.', price: '$20.960' },
+  { cat: 'compartir', name: '3 Corndogs', desc: 'Tres corndogs.', price: '$19.650' },
+  { cat: 'compartir', name: '5 Corndogs', desc: 'Cinco corndogs.', price: '$34.060' },
+  { cat: 'compartir', name: '5 Pankos', desc: 'Cinco corndogs Panko.', price: '$29.475' },
+  { cat: 'compartir', name: 'Triple Dak Kkochis', desc: 'Tres brochetas de pollo frito: agridulce, teriyaki y sin salsa.', price: '$25.545' },
+  { cat: 'bebidas', name: 'Coco Palm Mango', desc: 'Bebida coreana · 355 ml.', price: '$3.500' },
+  { cat: 'bebidas', name: 'Coco Palm Durazno', desc: 'Bebida coreana · 355 ml.', price: '$3.500' },
+  { cat: 'bebidas', name: 'Melón Soda', desc: 'Bebida coreana · 350 ml.', price: '$3.500' },
+  { cat: 'bebidas', name: 'Mango Soda', desc: 'Bebida coreana · 350 ml.', price: '$3.500' },
+  { cat: 'bebidas', name: 'Coca-Cola Original', desc: '350 ml.', price: '$2.500' },
+  { cat: 'bebidas', name: 'Fanta Naranja', desc: '350 ml.', price: '$2.500' }
+];
+var DOKEBI_RAIN = [
+  [3, 120, -14, 72, false], [10, 30, 18, 44, true], [17, 150, 6, 56, false], [25, 60, -22, 38, false],
+  [31, 140, 12, 84, true], [39, 20, -8, 46, false], [46, 120, 24, 60, false], [53, 50, -16, 40, true],
+  [59, 150, 4, 70, false], [66, 24, -26, 52, false], [72, 130, 16, 44, true], [78, 60, -6, 64, false],
+  [84, 150, 20, 50, false], [90, 26, -12, 40, true], [95, 120, 8, 58, false], [1, 20, 10, 36, false]
+];
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { cat: 'corndogs', vegan: false };
+  }
+  renderVals() {
+    var cat = this.state.cat;
+    var vegan = this.state.vegan;
+    var self = this;
+    var base = 'font-size: 18px; padding: 0 22px; min-height: 48px; border-radius: 999px; cursor: pointer; border: 2px solid #FFD400; ';
+    var chips = [['todo', 'Todo'], ['corndogs', 'Corndogs'], ['pollo', 'Pollo y brochetas'], ['picar', 'Para picar'], ['compartir', 'Para compartir'], ['bebidas', 'Bebidas']].map(function (c) {
+      var on = cat === c[0];
+      return {
+        label: c[1],
+        pressed: on ? 'true' : 'false',
+        style: base + (on ? 'background: #FFD400; color: #0A0A0A' : 'background: transparent; color: #FFD400'),
+        pick: function () { self.setState({ cat: c[0] }); }
+      };
+    });
+    var shown = DOKEBI_ITEMS.filter(function (i) {
+      return (cat === 'todo' || i.cat === cat) && (!vegan || !!i.tag);
+    }).map(function (i) {
+      return { name: i.name, desc: i.desc, tag: i.tag || '', hasTag: !!i.tag, spicy: !!i.spicy, price: i.price || '[PRECIO]', photo: 'Foto · ' + i.name };
+    });
+    var rain = DOKEBI_RAIN.map(function (r) {
+      return {
+        style: 'position: absolute; left: ' + r[0] + '%; top: ' + r[1] + 'px; rotate: ' + r[2] + 'deg',
+        size: String(r[3]),
+        hs: r[3] + 'px,' + r[3] + 'px',
+        wink: r[4]
+      };
+    });
+    return {
+      chips: chips,
+      shown: shown,
+      empty: shown.length === 0,
+      countLabel: shown.length + (shown.length === 1 ? ' producto' : ' productos · desliza →'),
+      veganPressed: vegan ? 'true' : 'false',
+      veganStarFill: vegan ? '#0A0A0A' : '#FFD400',
+      veganStyle: 'display: inline-flex; align-items: center; gap: 12px; min-height: 60px; padding: 0 28px; border-radius: 999px; cursor: pointer; font-size: 24px; background: #FFFFFF; color: #0A0A0A; border: 3px solid #FFFFFF; rotate: -3deg; ' + (vegan ? 'box-shadow: 0 0 0 5px #FFD400, 6px 6px 0 5px #FFD400' : 'box-shadow: 5px 5px 0 #FFD400'),
+      toggleVegan: function () { self.setState({ vegan: !vegan }); },
+      rain: rain
+    };
+  }
+}
+</script>
+</body>
+</html>
