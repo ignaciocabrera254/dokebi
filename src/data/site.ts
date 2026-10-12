@@ -9,16 +9,29 @@ export const site = {
   ubereats,
   nav: [
     { href: "/#menu", label: "Menú" },
-    { href: "/#barrio", label: "El barrio" },
     { href: "/#locales", label: "Locales" },
+    { href: "/#barrio", label: "El barrio" },
     { href: "/#merch", label: "Merch" },
     { href: "/#faq", label: "FAQ" },
   ],
   social: [
-    { id: "instagram", label: "Instagram", handle: "@[USUARIO]", href: "#" },
-    { id: "tiktok", label: "TikTok", handle: "@[USUARIO]", href: "#" },
+    { id: "instagram", label: "Instagram", handle: "@dokebi.cl", href: "https://www.instagram.com/dokebi.cl/" },
   ],
-  merchLink: "#", // [LINK "Lo quiero": ¿tienda, Instagram, WhatsApp?]
+  /** Número internacional sin "+", ej. 569XXXXXXXX. null = aún no definido. */
+  whatsapp: null as string | null,
   deliveryApps: "[Y OTRAS APPS]",
   deliveryZone: "[ZONA]",
 } as const;
+
+/** Link de WhatsApp con mensaje. Sin número aún: lleva a #locales (se compra en el local). */
+let avisado = false;
+export function whatsappLink(mensaje: string) {
+  if (!site.whatsapp) {
+    if (process.env.NODE_ENV === "development" && !avisado) {
+      avisado = true;
+      console.warn("[site] whatsapp es null: los botones de merch llevan a #locales.");
+    }
+    return { href: "/#locales", external: false };
+  }
+  return { href: `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(mensaje)}`, external: true };
+}

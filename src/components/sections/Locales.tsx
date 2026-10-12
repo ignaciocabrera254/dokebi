@@ -10,7 +10,7 @@ export function Locales() {
         id="h2-locales"
         className="font-display bg-paper md:bg-yolk border-ink absolute top-[-40px] right-4 z-[2] m-0 flex size-[120px] rotate-8 items-center justify-center rounded-full border-4 text-center text-[28px] leading-[0.9] md:top-10 md:right-auto md:left-1/2 md:size-[180px] md:-translate-x-1/2 md:-rotate-6 md:text-[40px]"
       >
-        Dos<br />locales
+        Dos{" "}<br />locales
       </h2>
       <div className="grid md:grid-cols-[repeat(auto-fit,minmax(min(560px,100%),1fr))]">
         {locales.map((l, idx) => {

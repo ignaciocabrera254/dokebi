@@ -17,6 +17,7 @@
 
   --font-sans: var(--nf-archivo), system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-display: var(--nf-anton), Impact, "Arial Narrow Bold", sans-serif;
+  --font-korean: var(--nf-korean), var(--nf-anton), Impact, sans-serif;
   --font-marker: var(--nf-marker), "Comic Sans MS", cursive;
 
   --text-h1: clamp(56px, 9.6vw, 140px);
@@ -132,6 +133,7 @@
 .hero-capture #titulo-principal .hero-word { opacity: 1; transform: none; }
 @media (max-width: 767px) {
   .hero-motion .hero-intro { height: 154svh; }
+  .hero-motion .hero-title { padding-top: 88px; }
   .hero-capture .hero-title { margin-top: 64px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -167,3 +169,6 @@
   .hero-fallback { visibility: hidden; }
   .hero-static .hero-fallback { visibility: visible; }
 }
+
+/* Al llegar del notebook el H1 ya se vio en la pantalla: aparece completo, sin animar palabra por palabra. */
+.hero-motion.hero-title-on .hero-word { opacity: 1; transform: none; transition: none; }

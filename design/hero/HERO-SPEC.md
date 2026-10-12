@@ -1,6 +1,6 @@
 # Hero 3D — recorrido y variantes
 
-Recorrido por scroll (p → u en `camera-path.ts`): patio 0–0.38, guiño 0.48–0.52 (pausa), pantalla hasta 0.72, fundido amarillo 0.72–0.76, escena pausada desde 0.77 y desmontada al salir del hero. Pin de 2.8 pantallas, FOV 50 (horizontal) / 68 (vertical), dpr máx. 1.5.
+Recorrido por scroll (p → u en `camera-path.ts`): patio 0–0.38, guiño 0.48–0.52 (pausa), pantalla hasta 0.72, fundido amarillo 0.70–0.77, escena pausada desde 0.77 y desmontada al salir del hero. Pin de 2.8 pantallas, FOV 50 (horizontal) / 68 (vertical), dpr máx. 1.5.
 
 ## Variante según orientación
 

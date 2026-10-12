@@ -100,6 +100,11 @@ export function MenuFilter({ categorias, rellenos, items }: Props) {
                   {i.picante && (
                     <span className="bg-ink text-yolk rounded-full px-2 py-0.5 text-[11px] font-extrabold tracking-[0.06em] uppercase md:px-2.5 md:py-[3px] md:text-xs">Picante</span>
                   )}
+                  {i.favorito && (
+                    <span className="font-marker bg-paper border-ink -rotate-4 inline-flex items-center gap-1 rounded-full border-2 px-2.5 py-0.5 text-[13px] whitespace-nowrap md:text-sm">
+                      <span lang="ko" className="font-korean">인기</span> · Favorito
+                    </span>
+                  )}
                   {i.etiqueta && (
                     <span className="font-marker bg-paper border-ink -rotate-4 inline-flex items-center gap-1 rounded-full border-2 px-2.5 py-0.5 text-[13px] whitespace-nowrap md:text-sm">
                       <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" className="fill-leaf stroke-leaf" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

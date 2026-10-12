@@ -36,7 +36,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/doritos-corea.webp"
+      "foto": "/menu/doritos-corea.webp",
+      "favorito": false
     },
     {
       "id": "takis-original",
@@ -47,7 +48,8 @@
       "picante": true,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/takis-original.webp"
+      "foto": "/menu/takis-original.webp",
+      "favorito": false
     },
     {
       "id": "doritos-flamin-hot",
@@ -58,7 +60,8 @@
       "picante": true,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/doritos.webp"
+      "foto": "/menu/doritos.webp",
+      "favorito": false
     },
     {
       "id": "dokebi-seul",
@@ -69,7 +72,8 @@
       "picante": true,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/dokebi-seul.webp"
+      "foto": "/menu/dokebi-seul.webp",
+      "favorito": true
     },
     {
       "id": "panko",
@@ -80,7 +84,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/panko.webp"
+      "foto": "/menu/panko.webp",
+      "favorito": true
     },
     {
       "id": "ramen",
@@ -91,7 +96,8 @@
       "picante": false,
       "vegano": true,
       "etiqueta": "opción vegana",
-      "foto": "/menu/ramen.webp"
+      "foto": "/menu/ramen.webp",
+      "favorito": false
     },
     {
       "id": "zucarita",
@@ -102,7 +108,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/zucarita.webp"
+      "foto": "/menu/zucarita.webp",
+      "favorito": false
     },
     {
       "id": "calamar",
@@ -113,7 +120,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/calamar.webp"
+      "foto": "/menu/calamar.webp",
+      "favorito": false
     },
     {
       "id": "camote",
@@ -124,7 +132,8 @@
       "picante": false,
       "vegano": true,
       "etiqueta": "opción vegana",
-      "foto": "/menu/camote.webp"
+      "foto": "/menu/camote.webp",
+      "favorito": false
     },
     {
       "id": "quinoa-pop",
@@ -135,7 +144,8 @@
       "picante": false,
       "vegano": true,
       "etiqueta": "opción vegana",
-      "foto": "/menu/quinoa-pop.webp"
+      "foto": "/menu/quinoa-pop.webp",
+      "favorito": false
     },
     {
       "id": "dak-kkochi",
@@ -146,7 +156,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/dak-kkochi.webp"
+      "foto": "/menu/dak-kkochi.webp",
+      "favorito": false
     },
     {
       "id": "dak-kkochi-con-queso",
@@ -157,7 +168,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/dak-kkochi-con-queso.webp"
+      "foto": "/menu/dak-kkochi-con-queso.webp",
+      "favorito": false
     },
     {
       "id": "tteokkochi",
@@ -168,7 +180,8 @@
       "picante": false,
       "vegano": true,
       "etiqueta": "vegano",
-      "foto": "/menu/tteokkochi.webp"
+      "foto": "/menu/tteokkochi.webp",
+      "favorito": false
     },
     {
       "id": "sotteok-sotteok",
@@ -179,7 +192,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/sotteok-sotteok.webp"
+      "foto": "/menu/sotteok-sotteok.webp",
+      "favorito": false
     },
     {
       "id": "rose-tteokbokki",
@@ -190,7 +204,8 @@
       "picante": true,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/rose-tteokbokki.webp"
+      "foto": "/menu/rose-tteokbokki.webp",
+      "favorito": false
     },
     {
       "id": "mandu",
@@ -201,7 +216,8 @@
       "picante": false,
       "vegano": true,
       "etiqueta": "vegano",
-      "foto": "/menu/mandu.webp"
+      "foto": "/menu/mandu.webp",
+      "favorito": false
     },
     {
       "id": "kimari",
@@ -212,7 +228,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/kimari.webp"
+      "foto": "/menu/kimari.webp",
+      "favorito": false
     },
     {
       "id": "nuggets-originales",
@@ -223,7 +240,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/nuggets-originales.webp"
+      "foto": "/menu/nuggets-originales.webp",
+      "favorito": false
     },
     {
       "id": "solo-set",
@@ -234,7 +252,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/solo-set.webp"
+      "foto": "/menu/solo-set.webp",
+      "favorito": false
     },
     {
       "id": "couple-set",
@@ -245,7 +264,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/couple-set.webp"
+      "foto": "/menu/couple-set.webp",
+      "favorito": false
     },
     {
       "id": "3-corndogs",
@@ -256,7 +276,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/3-corn-dogs.webp"
+      "foto": "/menu/3-corn-dogs.webp",
+      "favorito": false
     },
     {
       "id": "5-corndogs",
@@ -267,7 +288,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/5-corn-dogs.webp"
+      "foto": "/menu/5-corn-dogs.webp",
+      "favorito": false
     },
     {
       "id": "5-pankos",
@@ -278,7 +300,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/5-pankos.webp"
+      "foto": "/menu/5-pankos.webp",
+      "favorito": false
     },
     {
       "id": "coco-palm-durazno",
@@ -289,7 +312,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/coco-palm-durazno-355-ml.webp"
+      "foto": "/menu/coco-palm-durazno-355-ml.webp",
+      "favorito": false
     },
     {
       "id": "sandia-soda",
@@ -300,7 +324,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/sandia-soda-350-ml.webp"
+      "foto": "/menu/sandia-soda-350-ml.webp",
+      "favorito": false
     },
     {
       "id": "milkis",
@@ -311,7 +336,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/milkis-340-ml.webp"
+      "foto": "/menu/milkis-340-ml.webp",
+      "favorito": false
     },
     {
       "id": "coca-cola-original",
@@ -322,7 +348,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/coca-cola-original-350-ml.webp"
+      "foto": "/menu/coca-cola-original-350-ml.webp",
+      "favorito": false
     },
     {
       "id": "coca-cola-zero",
@@ -333,7 +360,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/coca-cola-zero-350-ml.webp"
+      "foto": "/menu/coca-cola-zero-350-ml.webp",
+      "favorito": false
     },
     {
       "id": "fanta-naranja-zero",
@@ -344,7 +372,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/fanta-naranja-zero-350-ml.webp"
+      "foto": "/menu/fanta-naranja-zero-350-ml.webp",
+      "favorito": false
     },
     {
       "id": "kem-pina",
@@ -355,7 +384,8 @@
       "picante": false,
       "vegano": false,
       "etiqueta": null,
-      "foto": "/menu/kem-pina-350-ml.webp"
+      "foto": "/menu/kem-pina-350-ml.webp",
+      "favorito": false
     }
   ]
 }

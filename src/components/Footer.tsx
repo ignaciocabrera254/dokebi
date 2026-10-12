@@ -74,7 +74,7 @@ export function Footer() {
             <ul className="m-0 flex list-none flex-col gap-1 p-0">
               {site.social.map((s) => (
                 <li key={s.id}>
-                  <a href={s.href} className={`${link} gap-2.5 text-base`}>
+                  <a href={s.href} target="_blank" rel="noopener" className={`${link} gap-2.5 text-base`}>
                     <Icono id={s.id} />
                     {s.label} · {s.handle}
                   </a>

@@ -5,6 +5,7 @@ import { Corndog } from "@/components/sections/Corndog";
 import { Faq } from "@/components/sections/Faq";
 import { Hero } from "@/components/sections/Hero";
 import { Locales } from "@/components/sections/Locales";
+import { PorQueDokebi } from "@/components/sections/PorQueDokebi";
 import { Menu } from "@/components/sections/Menu";
 import { Merch } from "@/components/sections/Merch";
 import { jsonLd } from "@/lib/jsonld";
@@ -15,10 +16,11 @@ export default function Home() {
       <Header immersive />
       <main>
         <Hero />
-        <Corndog />
         <Menu />
-        <Barrio />
+        <Corndog />
         <Locales />
+        <PorQueDokebi />
+        <Barrio />
         <Merch />
         <Faq />
       </main>

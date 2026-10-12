@@ -93,14 +93,16 @@ export function HeroIntro({ children }: { children: ReactNode }) {
       const p = reduced() || failed.current ? 0 : progress.current;
       element.dataset.progress = p.toFixed(4);
       const solid = capture || reduced() || p > 0.74 || rect.bottom < stageHeight;
-      root.classList.toggle("hero-title-on", reduced() || capture || p >= 0.76);
+      root.classList.toggle("hero-title-on", reduced() || capture || p >= 0.765);
       if (solid !== lastSolid) { root.classList.toggle("hero-header-solid", solid); lastSolid = solid; }
       if (decoration.current) decoration.current.style.opacity = String(1 - clamp(p / 0.12));
-      if (wash.current) wash.current.style.opacity = String(clamp((p - 0.72) / 0.04));
+      if (wash.current) wash.current.style.opacity = String(clamp((p - 0.70) / 0.07));
       if (skip.current) {
-        const hidden = p >= 0.85;
-        skip.current.style.opacity = String(1 - clamp((p - 0.75) / 0.1));
+        // El pin termina en END (0.77): se oculta antes del fundido y vuelve al subir.
+        const hidden = p >= 0.7;
+        skip.current.style.opacity = String(1 - clamp((p - 0.6) / 0.1));
         skip.current.style.visibility = hidden ? "hidden" : "visible";
+        skip.current.style.pointerEvents = hidden ? "none" : "";
         skip.current.tabIndex = hidden ? -1 : 0;
       }
       if (hud.current) hud.current.value = `${variantRef.current} · p ${p.toFixed(3)} · ${p < 0.38 ? "Patio" : p < 0.52 ? "Guiño" : p < 0.72 ? "Pantalla" : "Amarillo"}`;

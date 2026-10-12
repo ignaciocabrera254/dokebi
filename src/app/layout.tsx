@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
 import { Anton, Archivo, Permanent_Marker } from "next/font/google";
 import { site } from "@/data/site";
 import "./globals.css";
@@ -10,6 +11,9 @@ const archivo = Archivo({
   variable: "--nf-archivo",
 });
 const marker = Permanent_Marker({ weight: "400", subsets: ["latin"], variable: "--nf-marker" });
+
+// Subset de Black Han Sans (Google Fonts) con solo 도깨비 + 인기: next/font/google no trae el subset coreano completo.
+const korean = localFont({ src: "../fonts/BlackHanSans-dokkaebi.woff2", weight: "400", display: "swap", preload: false, variable: "--nf-korean" });
 
 const title = "DOKEBI · Korean Street Food · Santiago";
 
@@ -33,7 +37,7 @@ export const viewport: Viewport = { themeColor: "#0A0A0A" };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es" className={`${anton.variable} ${archivo.variable} ${marker.variable}`}>
+    <html lang="es" className={`${anton.variable} ${archivo.variable} ${marker.variable} ${korean.variable}`}>
       <body suppressHydrationWarning className="overflow-x-clip antialiased">{children}</body>
     </html>
   );

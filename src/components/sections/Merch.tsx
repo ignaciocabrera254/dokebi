@@ -3,8 +3,10 @@ import { Section } from "@/components/ui/Section";
 import { MerchCard } from "@/components/MerchCard";
 import { Button } from "@/components/ui/Button";
 import { merchHome } from "@/data/merch";
+import { whatsappLink } from "@/data/site";
 
 export function Merch() {
+  const wa = whatsappLink("¡Hola Dokebi! Quiero ver toda la merch.");
   return (
     <Section id="merch" labelledBy="h2-merch" className="on-light bg-yolk pt-16 pb-18 md:pt-30 md:pb-34" contained={false}>
       <Doodle variant="crown" size={110} strokeWidth={5} className="absolute top-[70px] right-[5%] rotate-16 max-md:hidden" />
@@ -20,7 +22,7 @@ export function Merch() {
             <MerchCard key={m.id} item={m} index={i} className="w-[200px] flex-none md:w-auto" />
           ))}
         </ul>
-        <Button href="/merch" variant="ink" size="lg" className="self-start max-md:w-full">
+        <Button href={wa.href} aria-label="Ver toda la merch por WhatsApp" variant="ink" size="lg" className="self-start max-md:w-full">
           Ver toda la merch
         </Button>
       </div>

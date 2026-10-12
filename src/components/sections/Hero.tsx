@@ -55,7 +55,7 @@ export function Hero() {
                 <span aria-hidden="true">★</span>
                 <span>Opciones veganas</span>
                 <span aria-hidden="true">★</span>
-                <span>Merch</span>
+                <span>2 locales</span>
               </p>
             </div>
             <CajaIlustrada />

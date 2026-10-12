@@ -5,6 +5,8 @@ type SmileyProps = {
   spicy?: boolean;
   /** Cara verde (hoja). Se ignora si `spicy`. */
   vegan?: boolean;
+  /** Dos cuernitos de dokkaebi detrás de la cara. */
+  horns?: boolean;
   className?: string;
 };
 
@@ -16,7 +18,7 @@ const flames = [
 ];
 
 /** Cada parte es un <g> con clase `smiley-*` para poder animarla después. */
-export function Smiley({ size = 240, wink = false, fangs = true, spicy = false, vegan = false, className }: SmileyProps) {
+export function Smiley({ size = 240, wink = false, fangs = true, spicy = false, vegan = false, horns = false, className }: SmileyProps) {
   const winking = wink && !spicy;
   return (
     <svg
@@ -27,6 +29,12 @@ export function Smiley({ size = 240, wink = false, fangs = true, spicy = false, 
       className={className}
       style={{ display: "block", overflow: "visible" }}
     >
+      {horns && (
+        <g className="smiley-horns" fill="#FFD400" stroke={ink} strokeWidth="7" strokeLinejoin="round">
+          <path className="smiley-horn-left" d="M60 26 Q50 -14 66 -36 Q74 -8 88 14" />
+          <path className="smiley-horn-right" d="M140 26 Q150 -14 134 -36 Q126 -8 112 14" />
+        </g>
+      )}
       <circle className="smiley-face" cx="100" cy="100" r="94" fill={spicy ? "#E4002B" : vegan ? "#1F9D55" : "#FFD400"} stroke={ink} strokeWidth="7" />
 
       {!spicy && (

@@ -23,6 +23,7 @@ type ButtonProps = {
   shadow?: boolean;
   arrow?: boolean;
   className?: string;
+  "aria-label"?: string;
   children: ReactNode;
 };
 
@@ -33,6 +34,7 @@ export function Button({
   shadow = false,
   arrow = false,
   className = "",
+  "aria-label": ariaLabel,
   children,
 }: ButtonProps) {
   const external = href.startsWith("http");
@@ -41,6 +43,7 @@ export function Button({
   return (
     <Tag
       href={href}
+      aria-label={ariaLabel}
       {...(external && { target: "_blank", rel: "noopener" })}
       className={`btn-lift font-display inline-flex items-center justify-center gap-2.5 rounded-full no-underline ${variants[variant]} ${sizes[size]} ${shadow ? "shadow-sticker-paper" : ""} ${className}`}
     >

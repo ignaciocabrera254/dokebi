@@ -16,7 +16,7 @@ export function Corndog() {
     <Section
       id="como-se-arma"
       labelledBy="h2-arma"
-      className="on-light bg-paper py-16 md:py-30"
+      className="on-light bg-yolk py-16 md:py-30"
       innerClassName="grid items-center gap-8 md:gap-16 md:grid-cols-2"
     >
       <div className="flex flex-col gap-6 md:gap-7">
@@ -35,7 +35,7 @@ export function Corndog() {
             <li
               key={c.n}
               aria-current={i === ultima ? "step" : undefined}
-              className={`border-ink grid grid-cols-[48px_1fr] items-baseline gap-2 border-t-2 px-2.5 py-3 md:grid-cols-[72px_1fr] md:gap-3 md:px-4 md:py-3.5 ${i === ultima ? "bg-yolk" : ""}`}
+              className={`border-ink grid grid-cols-[48px_1fr] items-baseline gap-2 border-t-2 px-2.5 py-3 md:grid-cols-[72px_1fr] md:gap-3 md:px-4 md:py-3.5 ${i === ultima ? "bg-ink text-yolk" : ""}`}
             >
               <span className="font-display text-2xl md:text-3xl">{c.n}</span>
               <span>
@@ -53,7 +53,7 @@ export function Corndog() {
       </div>
 
       <div className="relative flex min-h-[470px] items-center justify-center max-md:hidden md:min-h-[760px]">
-        <div aria-hidden="true" className="bg-yolk absolute aspect-square w-[560px] max-w-full rounded-full" />
+        <div aria-hidden="true" className="bg-paper absolute aspect-square w-[560px] max-w-full rounded-full" />
         <Doodle variant="crown" size={110} strokeWidth={5} className="absolute top-[6%] left-[4%] -rotate-12" />
         <span className="font-marker absolute top-[22%] right-[4%] rotate-10 text-[30px]">¡crunch!</span>
         <span className="font-marker absolute bottom-[18%] left-[2%] -rotate-8 text-2xl">se estira ↓</span>
