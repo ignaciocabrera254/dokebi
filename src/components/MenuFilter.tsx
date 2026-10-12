@@ -87,16 +87,16 @@ export function MenuFilter({ categorias, rellenos, items }: Props) {
               ) : (
                 <span className="text-[11px] font-bold tracking-[0.08em] text-gray-400 uppercase md:text-xs">Foto · {i.nombre}</span>
               )}
-              <div className="absolute -top-2 -right-1 rotate-10 md:-top-2.5 md:-right-1.5">
+              <div className="absolute top-1.5 right-1.5 rotate-10 md:top-2 md:right-2">
                 <Smiley size={52} spicy={i.picante} className="max-md:size-11" />
               </div>
             </div>
             <div className="flex flex-1 flex-col gap-1.5 p-3.5 md:gap-2 md:p-[18px] md:pb-5">
               <h3 className="font-display m-0 text-2xl leading-none md:text-[28px]">{i.nombre}</h3>
               <p className="m-0 flex-1 text-sm leading-[1.4] md:text-[15px] md:leading-[1.45]">{i.descripcion}</p>
-              <div className="border-ink flex items-center justify-between gap-2 border-t-2 border-dashed pt-2 md:pt-2.5">
+              <div className="border-ink flex flex-wrap items-center justify-between gap-x-2 gap-y-2 border-t-2 border-dashed pt-2 md:pt-2.5">
                 <span className="font-display text-xl md:text-[22px]">{precio(i.precio)}</span>
-                <div className="flex items-center gap-1.5">
+                <div className="flex flex-wrap items-center gap-1.5">
                   {i.picante && (
                     <span className="bg-ink text-yolk rounded-full px-2 py-0.5 text-[11px] font-extrabold tracking-[0.06em] uppercase md:px-2.5 md:py-[3px] md:text-xs">Picante</span>
                   )}

@@ -8,6 +8,7 @@ import { Locales } from "@/components/sections/Locales";
 import { PorQueDokebi } from "@/components/sections/PorQueDokebi";
 import { Menu } from "@/components/sections/Menu";
 import { Merch } from "@/components/sections/Merch";
+import { menu } from "@/data/menu";
 import { jsonLd } from "@/lib/jsonld";
 
 export default function Home() {
@@ -17,7 +18,7 @@ export default function Home() {
       <main>
         <Hero />
         <Menu />
-        <Corndog />
+        <Corndog rellenos={menu.rellenosCorndog} />
         <Locales />
         <PorQueDokebi />
         <Barrio />

@@ -132,10 +132,24 @@ export function HeroIntro({ children }: { children: ReactNode }) {
     window.addEventListener("resize", schedule);
     document.addEventListener("visibilitychange", schedule);
     // Leave the server-rendered image as the initial, meaningful paint.
-    const startup = requestAnimationFrame(syncPreference);
+    // El ancla nativa se resuelve antes de que el hero cambie de alto (pin): se reaplica con el layout final.
+    let hashY = -1;
+    const goHash = () => {
+      const target = location.hash.length > 1 && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (!target) return;
+      root.style.scrollBehavior = "auto";
+      target.scrollIntoView();
+      root.style.scrollBehavior = "";
+      hashY = window.scrollY;
+    };
+    // Si el usuario aún no se movió, una segunda pasada corrige el corrimiento por imágenes y fuentes.
+    const onLoad = () => { if (hashY >= 0 && Math.abs(window.scrollY - hashY) < 4) goHash(); };
+    window.addEventListener("load", onLoad);
+    const startup = requestAnimationFrame(() => { syncPreference(); goHash(); });
     return () => {
       disposed = true;
       cancelAnimationFrame(startup);
+      window.removeEventListener("load", onLoad);
       cancelAnimationFrame(frame);
       smoothScroll?.destroy();
       lenis.current = null;
