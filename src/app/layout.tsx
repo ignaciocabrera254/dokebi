@@ -37,7 +37,7 @@ export const viewport: Viewport = { themeColor: "#0A0A0A" };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es" className={`${anton.variable} ${archivo.variable} ${marker.variable} ${korean.variable}`}>
+    <html lang="es" data-scroll-behavior="smooth" className={`${anton.variable} ${archivo.variable} ${marker.variable} ${korean.variable}`}>
       <body suppressHydrationWarning className="overflow-x-clip antialiased">{children}</body>
     </html>
   );
