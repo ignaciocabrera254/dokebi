@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { Group, Mesh, Quaternion, Vector3 } from "three";
-import { createCameraPath, progressToParameter } from "../src/components/hero/camera-path.ts";
+import { createCameraPath, progressToParameter, START, START_TARGET } from "../src/components/hero/camera-path.ts";
 
 test("scroll pauses on the face, reaches the screen at 72%, and stays there", () => {
   assert.equal(progressToParameter(-1), 0);
@@ -13,15 +13,16 @@ test("scroll pauses on the face, reaches the screen at 72%, and stays there", ()
 });
 
 test("paired parametric curves align at the sign and finish 17cm from the tilted screen", () => {
-  const notebook = new Group(); notebook.position.set(-1.9, 1.11, 0.22); notebook.rotation.y = 0.25;
+  const notebook = new Group(); notebook.position.set(-1.9, 1.11, 0.22); notebook.rotation.y = -0.35;
   const lid = new Group(); lid.position.set(0, 0.018, -0.12); lid.rotation.x = -0.25; notebook.add(lid);
   const screen = new Mesh(); screen.position.set(0, 0.112, 0.0065); lid.add(screen);
   notebook.updateMatrixWorld(true);
   const center = screen.getWorldPosition(new Vector3());
   const orientation = screen.getWorldQuaternion(new Quaternion());
-  const path = createCameraPath(center, orientation);
-  const mouth = new Vector3(-3.263, 2.796, 0.637);
-  const signNormal = new Vector3(Math.sin(0.4), 0, Math.cos(0.4));
+  const mouth = new Vector3(-3.3, 2.8, 0.64);
+  const signNormal = new Vector3(Math.sin(-0.45), 0, Math.cos(-0.45));
+  const path = createCameraPath(center, orientation, "notebook", mouth, signNormal);
+  assert.ok(path.camera.getPoint(0).distanceTo(START) < 1e-9 && path.target.getPoint(0).distanceTo(START_TARGET) < 1e-9);
   assert.ok(path.camera.getPoint(0.5).distanceTo(mouth.clone().addScaledVector(signNormal, 1.5)) < 1e-9);
   assert.ok(path.target.getPoint(0.5).distanceTo(mouth.clone().add(new Vector3(0, 0.1, 0))) < 1e-9);
   const aim = center.clone().addScaledVector(new Vector3(0, 1, 0).applyQuaternion(orientation), -0.008);
@@ -36,7 +37,7 @@ test("paired parametric curves align at the sign and finish 17cm from the tilted
 });
 
 test("phone variant ends 11cm from the screen and the screen fills a 390x844 view", () => {
-  const phone = new Group(); phone.position.set(-1.9, 1.11, 0.22); phone.rotation.y = 0.25;
+  const phone = new Group(); phone.position.set(-1.9, 1.11, 0.22); phone.rotation.y = -0.35;
   const body = new Group(); body.position.set(0, 0.103, -0.012); body.rotation.x = -0.2; phone.add(body);
   const screen = new Mesh(); screen.position.set(0, 0, 0.0042); body.add(screen);
   phone.updateMatrixWorld(true);

@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Image from "next/image";
+import { getImageProps } from "next/image";
 import { Component, useEffect, useRef, useState, type ReactNode } from "react";
 import type Lenis from "lenis";
 import type { HeroVariant } from "./camera-path";
@@ -17,6 +17,11 @@ class SceneBoundary extends Component<{ children: ReactNode; onError: () => void
   componentDidCatch() { this.props.onError(); }
   render() { return this.state.failed ? null : this.props.children; }
 }
+
+// Primer cuadro de la escena 3D renderizado (LCP): apaisado y vertical, con la misma cámara inicial.
+const imageProps = (src: string, width: number, height: number) =>
+  getImageProps({ src, alt: "Fachada del local DOKEBI con el letrero luminoso del smiley", width, height, priority: true, sizes: "100vw", className: "hero-fallback object-cover", style: { position: "absolute", inset: 0, width: "100%", height: "100%" } }).props;
+const fallback = { desktop: imageProps("/hero/fachada.webp", 1920, 1080), movil: imageProps("/hero/fachada-movil.webp", 780, 1688) };
 
 export function HeroIntro({ children }: { children: ReactNode }) {
   const intro = useRef<HTMLDivElement>(null);
@@ -47,6 +52,7 @@ export function HeroIntro({ children }: { children: ReactNode }) {
     const capture = query.has("captureHero");
     const reduced = () => media.matches || query.has("reducedMotion");
     const isDebug = query.has("debug");
+    if (isDebug) (window as unknown as { __heroProgress?: unknown }).__heroProgress = progress; // para capturas automáticas
     const element = intro.current!;
     const title = document.getElementById("titulo-principal")!;
     let frame = 0;
@@ -60,6 +66,7 @@ export function HeroIntro({ children }: { children: ReactNode }) {
       const animate = !reduced() && !capture && !failed.current;
       setEnabled(animate);
       setDebug(isDebug);
+      if (query.has("follow")) setOrbit(false); // ?debug&follow: cámara del recorrido en vez de órbita libre
       root.classList.toggle("hero-motion", animate);
       root.classList.toggle("hero-static", !animate);
       root.classList.toggle("hero-capture", capture);
@@ -147,7 +154,11 @@ export function HeroIntro({ children }: { children: ReactNode }) {
   return (
     <div ref={intro} className="hero-intro" data-scene={mounted ? "mounted" : "paused"}>
       <div className="hero-stage bg-ink">
-        <Image src="/hero-fachada.svg" alt="Fachada del local DOKEBI con el letrero luminoso del smiley" fill priority sizes="100vw" className="hero-fallback object-cover" />
+        <picture>
+          <source media="(max-aspect-ratio: 1/1)" srcSet={fallback.movil.srcSet} />
+          {/* eslint-disable-next-line jsx-a11y/alt-text */}
+          <img {...fallback.desktop} />
+        </picture>
         {enabled && mounted && (
           <SceneBoundary onError={() => {
             failed.current = true;

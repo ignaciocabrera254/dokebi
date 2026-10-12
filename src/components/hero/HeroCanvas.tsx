@@ -1,87 +1,22 @@
 "use client";
 
-import { Suspense, useEffect, useLayoutEffect, useMemo, useRef, useState, type RefObject } from "react";
+import { Suspense, lazy, useEffect, useLayoutEffect, useMemo, useRef, useState, type RefObject } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Line, OrbitControls, RoundedBox, useTexture } from "@react-three/drei";
 import { Group, Mesh, MeshBasicMaterial, PerspectiveCamera, Quaternion, SRGBColorSpace, Vector3, type Texture } from "three";
-import { createCameraPath, progressToParameter, type HeroVariant } from "./camera-path";
+import { Ambience, Floor } from "./Ambience";
+import { createCameraPath, progressToParameter, START, type HeroVariant } from "./camera-path";
+import { Kiosk } from "./Kiosk";
+import { Box, Panel, type Point } from "./parts";
 import { createSceneTextures } from "./scene-textures";
 
-type Point = [number, number, number];
+const Effects = lazy(() => import("./Effects"));
 type Props = { variant: HeroVariant; progress: RefObject<number>; active: boolean; debug: boolean; orbit: boolean; onReady: () => void };
-const INK = "#0A0A0A", YOLK = "#FFD400", WHITE = "#F4F4F0";
-
-function Box({ at, size, color = INK, basic = false }: { at: Point; size: Point; color?: string; basic?: boolean }) {
-  return <mesh position={at}><boxGeometry args={size} />{basic ? <meshBasicMaterial color={color} toneMapped={false} /> : <meshLambertMaterial color={color} />}</mesh>;
-}
-function Panel({ at, size, texture }: { at: Point; size: [number, number]; texture: Texture }) {
-  return <mesh position={at}><planeGeometry args={size} /><meshBasicMaterial map={texture} transparent toneMapped={false} /></mesh>;
-}
-function Counter({ x, width, height }: { x: number; width: number; height: number }) {
-  return <group>
-    <Box at={[x, (height - 0.07) / 2, 0.18]} size={[width, height - 0.07, 0.55]} color={YOLK} />
-    {Array.from({ length: Math.round(width / 0.09) }, (_, i) => <Box key={i} at={[x - width / 2 + i * 0.09 + 0.025, (height - 0.07) / 2, 0.465]} size={[0.018, height - 0.07, 0.022]} color="#D9AE00" />)}
-    <Box at={[x, height - 0.035, 0.2]} size={[width + 0.06, 0.07, 0.66]} color={WHITE} />
-    <Box at={[x, height - 0.08, 0.52]} size={[width, 0.025, 0.018]} color="white" basic />
-  </group>;
-}
-function Patio() {
-  return <group>
-    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 4]}><planeGeometry args={[40, 40]} /><meshLambertMaterial color="#4B4B48" /></mesh>
-    <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, 4.7, 4]}><planeGeometry args={[40, 40]} /><meshLambertMaterial color="#0D0D0D" /></mesh>
-    {Array.from({ length: 8 }, (_, i) => <Box key={i} at={[-8.8 + i * 2.2, 4.53, 6]} size={[0.22, 0.32, 24]} color="#171717" />)}
-    <Box at={[-5.4, 4.34, 4.2]} size={[0.12, 0.07, 2.2]} color="white" basic />
-    <Line points={Array.from({ length: 33 }, (_, i) => [-9 + i * 0.175, 3.75 - Math.sin(i / 32 * Math.PI) * 0.35, 1.2] as Point)} color="#171717" lineWidth={1} />
-    {Array.from({ length: 9 }, (_, i) => <mesh key={i} position={[-9 + i * 0.7, 3.75 - Math.sin(i / 8 * Math.PI) * 0.35, 1.2]}><sphereGeometry args={[0.05, 8, 8]} /><meshBasicMaterial color="#FFF1C2" toneMapped={false} /></mesh>)}
-    {([[-6.6, 3.2], [-8.2, 6.5]] as const).map(([x, z]) => <group key={x}>
-      <Box at={[x, 1.2, z]} size={[0.06, 2.4, 0.06]} />
-      <mesh position={[x, 2.55, z]}><coneGeometry args={[1.5, 0.55, 8]} /><meshLambertMaterial color="#2F3B3B" /></mesh>
-      <Box at={[x, 0.75, z]} size={[1.1, 0.05, 0.75]} color="#3A3A3A" />
-      <Box at={[x, 0.36, z]} size={[0.05, 0.72, 0.05]} />
-      {[-0.8, 0.8].map((offset) => <Box key={offset} at={[x + offset, 0.23, z]} size={[0.45, 0.45, 0.45]} color="#222222" />)}
-    </group>)}
-  </group>;
-}
-function Kiosk({ textures }: { textures: ReturnType<typeof createSceneTextures> }) {
-  return <group>
-    {[-2.45, 2.45].map((x) => <Box key={x} at={[x, 2.35, 0.1]} size={[0.24, 4.7, 0.4]} />)}
-    <Box at={[0, 4.31, 0.1]} size={[5.14, 0.78, 0.4]} />
-    {[-2.6, 2.6].map((x) => <Box key={x} at={[x, 2.35, -1.6]} size={[0.2, 4.7, 3.5]} />)}
-    <Box at={[3.3, 2.35, -0.05]} size={[1.3, 4.7, 0.25]} color="#7A4E2C" />
-    <Box at={[0, 3.35, 0.12]} size={[4.66, 1.14, 0.36]} color={YOLK} basic />
-    <Panel at={[0, 3.35, 0.305]} size={[4.66, 1.14]} texture={textures.fascia} />
-    <Box at={[0, 2.72, 0.05]} size={[4.66, 0.12, 0.3]} color="#9A9A96" />
-    <mesh position={[-1.1, 2.5, -0.2]} rotation={[0, 0, Math.PI / 2]}><cylinderGeometry args={[0.17, 0.17, 1.9, 20]} /><meshLambertMaterial color="#9A9A96" /></mesh>
-    {Array.from({ length: 12 }, (_, i) => <Box key={i} at={[-2.02 + i * 0.16, 2.5, -0.021]} size={[0.008, 0.22, 0.008]} color="#71716E" />)}
-    <Box at={[0, 1.4, -3.25]} size={[4.72, 2.8, 0.1]} color={YOLK} basic />
-    {[-2.36, 2.36].map((x) => <Box key={x} at={[x, 1.39, -1.6]} size={[0.05, 2.78, 3.4]} color={YOLK} />)}
-    <Box at={[0, 2.8, -1.6]} size={[4.66, 0.06, 3.4]} color={WHITE} />
-    <Box at={[-0.4, 2.48, -2.95]} size={[2.4, 0.5, 0.45]} color={WHITE} />
-    <Box at={[0, 2.7, -1.2]} size={[4, 0.04, 0.04]} />
-    {Array.from({ length: 6 }, (_, i) => <mesh key={i} position={[-1.6 + i * 0.65, 2.6, -1.2]}><cylinderGeometry args={[0.06, 0.07, 0.14, 12]} /><meshBasicMaterial color="white" /></mesh>)}
-    <Box at={[-1.75, 0.875, -2.75]} size={[0.85, 1.75, 0.6]} />
-    <Panel at={[-1.75, 0.875, -2.444]} size={[0.85, 1.75]} texture={textures.fridge} />
-    <Box at={[0.9, 0.45, -2.9]} size={[2.7, 0.9, 0.55]} color={WHITE} />
-    {[1.55, 1.95].map((y) => <group key={y}>
-      <Box at={[1.5, y, -3.05]} size={[1.3, 0.04, 0.3]} color={WHITE} />
-      {["#2E8B3A", "#E8742A", "#2E8B3A", "#111111", "#E8742A"].map((color, i) => <Box key={i} at={[1 + i * 0.25, y + 0.17, -3.05]} size={[0.2, 0.3, 0.08]} color={color} />)}
-    </group>)}
-    <Box at={[1.55, 2.42, -2.75]} size={[0.9, 0.5, 0.6]} color="#9A9A96" />
-    <Counter x={-1.03} width={2.6} height={1.11} />
-    <Counter x={1.3} width={2.06} height={0.8} />
-    {[0.75, 1.28].map((x) => <group key={x}>
-      <Box at={[x, 0.93, 0.3]} size={[0.5, 0.26, 0.36]} color={YOLK} />
-      {Array.from({ length: 5 }, (_, i) => <Box key={i} at={[x - 0.19 + i * 0.09, 0.93, 0.486]} size={[0.055, 0.07, 0.01]} color="#C99F00" />)}
-    </group>)}
-    <mesh position={[1.85, 1.03, 0.25]}><cylinderGeometry args={[0.15, 0.15, 0.45, 20]} /><meshLambertMaterial color="#BFD8F0" transparent opacity={0.75} /></mesh>
-    {[2.27, 1.36].map((y) => <group key={y}><Box at={[1.9, y, 0.12]} size={[0.86, 0.86, 0.06]} /><Panel at={[1.9, y, 0.155]} size={[0.8, 0.8]} texture={textures.menu} /></group>)}
-    {[-1.25, -0.95, -0.65].map((x) => <group key={x} position={[x, 1.27, 0.32]} rotation={[-0.12, 0, 0]}><Panel at={[0, 0, 0]} size={[0.24, 0.32]} texture={textures.menu} /></group>)}
-    <Panel at={[-2, 1.75, -0.3]} size={[0.55, 1.1]} texture={textures.merch} />
-  </group>;
-}
+const SIGN_ROT = -0.45;
+const BG = "#080B14";
 
 function Notebook({ screen, texture }: { screen: RefObject<Mesh | null>; texture: Texture }) {
-  return <group position={[-1.9, 1.11, 0.22]} rotation={[0, 0.25, 0]}>
+  return <group position={[-1.9, 1.11, 0.33]} rotation={[0, -0.35, 0]}>
     <Box at={[0, 0.009, 0]} size={[0.34, 0.018, 0.24]} color="#2B2B2B" />
     <mesh position={[0, 0.0185, -0.03]} rotation={[-Math.PI / 2, 0, 0]}><planeGeometry args={[0.3, 0.12]} /><meshLambertMaterial color="#141414" /></mesh>
     <group position={[0, 0.018, -0.12]} rotation={[-0.25, 0, 0]}>
@@ -91,7 +26,7 @@ function Notebook({ screen, texture }: { screen: RefObject<Mesh | null>; texture
   </group>;
 }
 function Telefono({ screen, texture }: { screen: RefObject<Mesh | null>; texture: Texture }) {
-  return <group position={[-1.9, 1.11, 0.22]} rotation={[0, 0.25, 0]}>
+  return <group position={[-1.9, 1.11, 0.33]} rotation={[0, -0.35, 0]}>
     <Box at={[0, 0.006, -0.01]} size={[0.09, 0.012, 0.07]} color="#1B1B1B" />
     <Box at={[0, 0.022, 0.018]} size={[0.07, 0.02, 0.012]} color="#1B1B1B" />
     <group position={[0, 0.103, -0.012]} rotation={[-0.2, 0, 0]}>
@@ -104,11 +39,12 @@ function Telefono({ screen, texture }: { screen: RefObject<Mesh | null>; texture
 function Scene({ variant, progress, debug, orbit, onReady }: Omit<Props, "active">) {
   const sign = useRef<Group>(null);
   const face = useRef<Mesh>(null);
+  const mouthRef = useRef<Mesh>(null);
   const screen = useRef<Mesh>(null);
   const phone = variant === "telefono";
   const path = useRef<ReturnType<typeof createCameraPath> | null>(null);
   const [route, setRoute] = useState<Point[]>([]);
-  const { camera, size } = useThree();
+  const { camera, size, gl } = useThree();
   const textures = useMemo(() => createSceneTextures(), []);
   const screenshot = useTexture(phone ? "/hero/pantalla-movil.webp" : "/hero/pantalla.webp");
   const look = useMemo(() => new Vector3(), []);
@@ -119,7 +55,10 @@ function Scene({ variant, progress, debug, orbit, onReady }: Omit<Props, "active
   useLayoutEffect(() => {
     const mesh = screen.current!;
     mesh.updateWorldMatrix(true, false);
-    path.current = createCameraPath(mesh.getWorldPosition(new Vector3()), mesh.getWorldQuaternion(new Quaternion()), variant);
+    sign.current!.updateWorldMatrix(true, true);
+    const mouth = mouthRef.current!.getWorldPosition(new Vector3());
+    const normal = new Vector3(0, 0, 1).applyQuaternion(sign.current!.getWorldQuaternion(new Quaternion()));
+    path.current = createCameraPath(mesh.getWorldPosition(new Vector3()), mesh.getWorldQuaternion(new Quaternion()), variant, mouth, normal);
     if (debug) setRoute(path.current.camera.getPoints(100).map((p) => p.toArray() as Point));
     if (!debug || !orbit) {
       path.current.camera.getPoint(progressToParameter(progress.current), position);
@@ -144,35 +83,41 @@ function Scene({ variant, progress, debug, orbit, onReady }: Omit<Props, "active
       const winking = p > 0.43 && p < 0.53;
       (face.current.material as MeshBasicMaterial).map = winking ? textures.wink : textures.face;
       sign.current.scale.setScalar(winking ? 1 + Math.sin((p - 0.43) / 0.1 * Math.PI) * 0.08 : 1);
-      sign.current.rotation.y = 0.4 + Math.sin(clock.elapsedTime / 1.1) * 0.03 * (1 - Math.min(1, Math.max(0, (p - 0.5) / 0.1)));
+      sign.current.rotation.y = SIGN_ROT + Math.sin(clock.elapsedTime / 1.1) * 0.03 * (1 - Math.min(1, Math.max(0, (p - 0.5) / 0.1)));
     }
+    if (debug) (window as unknown as { __heroInfo?: () => unknown }).__heroInfo = () => ({ ...gl.info.render, geometries: gl.info.memory.geometries, textures: gl.info.memory.textures });
     if (!announced.current) { announced.current = true; requestAnimationFrame(onReady); }
   });
 
   return <>
-    <color attach="background" args={[INK]} />
-    <fog attach="fog" args={[INK, 14, 30]} />
-    <ambientLight intensity={0.5} />
-    <directionalLight position={[-3, 7, 8]} intensity={1.2} color="#FFF8E7" />
-    <pointLight position={[0, 2.3, -1.4]} intensity={4} distance={9} color="#FFF1B0" decay={1} />
-    <pointLight position={[0, 3.1, 1.7]} intensity={2} distance={7} color="#FFE680" decay={1} />
-    <pointLight position={[-2.9, 3, 1.3]} intensity={2} distance={4} color={YOLK} decay={1} />
-    <pointLight position={[-5.5, 4.2, 4]} intensity={2} distance={10} color="#DFE8FF" decay={1} />
-    <Patio /><Kiosk textures={textures} />
-    {[3.22, 2.78].map((y) => <Box key={y} at={[-2.8, y, 0.38]} size={[0.62, 0.035, 0.035]} color="#9A9A96" />)}
-    <group ref={sign} position={[-3.3, 3, 0.55]} rotation={[0, 0.4, 0]}>
+    <color attach="background" args={[BG]} />
+    <fog attach="fog" args={[BG, 12, 38]} />
+    {/* Ambiente frío y oscuro; el local, las guirnaldas, los faroles y el neón en cálido. Máx. 4 luces puntuales. */}
+    <hemisphereLight args={["#5A7AB8", "#262A38", 2]} />
+    <directionalLight position={[-4, 8, 6]} intensity={0.8} color="#8FA8E8" />
+    <pointLight position={[-0.3, 2.4, -1.4]} intensity={4} distance={9} color="#FFE9A8" decay={1} />
+    <pointLight position={[-1, 3.1, 2.2]} intensity={2.5} distance={9} color="#FFC860" decay={1} />
+    <pointLight position={[-6.5, 3.4, 3.5]} intensity={2.5} distance={10} color="#FFB45A" decay={1} />
+    <pointLight position={[3.6, 2.4, 1.6]} intensity={2} distance={6} color="#FF8A3A" decay={1} />
+    <Floor reflective={!phone} /><Ambience textures={textures} /><Kiosk textures={textures} />
+    {[3.22, 2.78].map((y) => <Box key={y} at={[-2.82, y, 0.42]} size={[0.7, 0.035, 0.035]} color="#9A9A96" />)}
+    <group ref={sign} position={[-3.3, 3, 0.55]} rotation={[0, SIGN_ROT, 0]}>
       <mesh rotation={[Math.PI / 2, 0, 0]}><cylinderGeometry args={[0.66, 0.66, 0.18, 48]} /><meshLambertMaterial color="#E2B200" /></mesh>
       <mesh ref={face} position={[0, 0, 0.095]}><planeGeometry args={[1.32, 1.32]} /><meshBasicMaterial map={textures.face} transparent toneMapped={false} /></mesh>
       <group rotation={[0, Math.PI, 0]}><Panel at={[0, 0, 0.095]} size={[1.32, 1.32]} texture={textures.face} /></group>
+      <mesh ref={mouthRef} position={[0, -0.2, 0.095]} visible={false}><boxGeometry args={[0.01, 0.01, 0.01]} /></mesh>
+      <sprite position={[0, 0, -0.2]} scale={[2.4, 2.4, 1]}><spriteMaterial map={textures.glow} color="#FFD400" transparent opacity={0.35} depthWrite={false} blending={2} fog={false} /></sprite>
     </group>
     {phone ? <Telefono screen={screen} texture={screenshot} /> : <Notebook screen={screen} texture={screenshot} />}
-    {debug && <>{orbit && <OrbitControls makeDefault target={[-1, 2, 0]} />}<Line points={route.length ? route : [[0.3, 1.75, 12], [-3, 3, 2]]} color="#FF7657" lineWidth={2} /></>}
+    {!phone && <Suspense fallback={null}><Effects /></Suspense>}
+    {debug && <>{orbit && <OrbitControls makeDefault target={[-1, 2, 0]} />}{!location.search.includes("clean") && <Line points={route.length ? route : [[0.3, 1.75, 12], [-3, 3, 2]]} color="#FF7657" lineWidth={2} />}</>}
   </>;
 }
 
 export default function HeroCanvas(props: Props) {
   const { active, variant } = props;
-  return <Canvas key={variant} dpr={[1, 1.5]} frameloop={active ? "always" : "never"} camera={{ position: [0.3, 1.75, 12], fov: variant === "telefono" ? 68 : 50, near: 0.01, far: 60 }} gl={{ antialias: true, powerPreference: "low-power" }} flat fallback={null}>
+  const phone = variant === "telefono";
+  return <Canvas key={variant} dpr={[1, 1.5]} frameloop={active ? "always" : "never"} camera={{ position: START.toArray(), fov: phone ? 68 : 50, near: 0.01, far: 70 }} gl={{ antialias: phone, powerPreference: "low-power", preserveDrawingBuffer: props.debug }} flat fallback={null}>
     <Suspense fallback={null}><Scene {...props} /></Suspense>
   </Canvas>;
 }

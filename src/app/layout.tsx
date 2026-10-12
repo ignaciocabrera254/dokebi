@@ -12,7 +12,7 @@ const archivo = Archivo({
 });
 const marker = Permanent_Marker({ weight: "400", subsets: ["latin"], variable: "--nf-marker" });
 
-// Subset de Black Han Sans (Google Fonts) con solo 도깨비 + 인기: next/font/google no trae el subset coreano completo.
+// Subset de Black Han Sans (Google Fonts) con solo 도깨비 인기 핫도그 떡볶이: next/font/google no trae el subset coreano completo.
 const korean = localFont({ src: "../fonts/BlackHanSans-dokkaebi.woff2", weight: "400", display: "swap", preload: false, variable: "--nf-korean" });
 
 const title = "DOKEBI · Korean Street Food · Santiago";
