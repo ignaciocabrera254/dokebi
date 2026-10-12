@@ -16,7 +16,7 @@ export function Faq() {
               <h3 className="font-display m-0 text-2xl leading-[1.05] md:text-3xl">{f.q}</h3>
               <span aria-hidden="true" className="plus font-display bg-yolk flex size-11 flex-none items-center justify-center rounded-full text-[26px] transition-[rotate] duration-200 motion-reduce:transition-none md:text-3xl">+</span>
             </summary>
-            <p className="text-gray-700 m-0 mb-4 max-w-[620px] text-base leading-[1.55] md:mb-5 md:text-lg">{f.a}</p>
+            <p className="text-gray-700 m-0 mb-4 max-w-[620px] text-base leading-[1.55] md:mb-5 md:text-lg">{f.a.split("도깨비").flatMap((t, k) => (k ? [<span key={k} lang="ko" className="font-korean">도깨비</span>, t] : [t]))}</p>
           </details>
         ))}
       </div>

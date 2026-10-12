@@ -5,7 +5,7 @@ import { Header } from "@/components/Header";
 import { MerchTabs } from "@/components/MerchTabs";
 import { Doodle } from "@/components/ui/Doodle";
 import { Section } from "@/components/ui/Section";
-import { categorias, merch } from "@/data/merch";
+import { categorias, merch, merchBajada } from "@/data/merch";
 
 export const metadata: Metadata = {
   title: "Merch · DOKEBI",
@@ -24,7 +24,7 @@ export default function MerchPage() {
           <div className="flex flex-col gap-3 md:gap-4">
             <h1 id="h1-merch" className="font-display m-0 text-[84px] leading-[0.88] md:text-h2-xl">Merch</h1>
             <p className="m-0 max-w-[520px] text-base font-medium md:text-[19px] md:leading-normal">
-              Lleva al dokebi contigo. Disponible en ambos locales.
+              {merchBajada}
             </p>
           </div>
           <MerchTabs categorias={categorias} items={merch} />

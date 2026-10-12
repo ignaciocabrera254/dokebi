@@ -1,6 +1,43 @@
 # Hero 3D — recorrido y variantes
 
-Recorrido por scroll (p → u en `camera-path.ts`): patio 0–0.38, guiño 0.48–0.52 (pausa), pantalla hasta 0.72, fundido amarillo 0.70–0.77, escena pausada desde 0.77 y desmontada al salir del hero. Pin de 177svh (154svh en móvil), FOV 50 (horizontal) / 68 (vertical), dpr máx. 1.5. Tiempos y empalme con el H1 sin cambios.
+Recorrido del pin (p = progreso 0–1; `camera-path.ts`, `HeroIntro.tsx`):
+
+| p | fase | control |
+|---|---|---|
+| 0 – 0.30 | aproximación por el patio | scroll |
+| 0.30 – 0.45 | zoom a la carita del letrero; guiño 0.36–0.45 | scroll |
+| 0.45 – 0.90 | la cámara baja al dispositivo y entra en su pantalla hasta llenar la vista | **automático** |
+| 0.90 – 0.98 | fundido a amarillo `#FFD400` sobre el canvas | automático |
+| 1 | se suelta el pin, el stage se oculta y llega el bloque del H1 | — |
+
+Mapeo p → u de la curva: `[[0,0],[.30,.50],[.38,.60],[.45,.60],[.90,1],[1,1]]`. Alto del hero: 260svh en desktop (pin de 1.6 pantallas) y 220svh en móvil (1.2), FOV 50 (horizontal) / 68 (vertical), dpr máx. 1.5. `near` 0.02 (notebook) / 0.01 (teléfono).
+
+## Curva final y `dFill`
+
+La curva de cámara tiene 6 puntos (u = 0, .2, .4, .6, .8, 1): inicio, dos del patio, zoom a la carita (boca + normal del letrero · 1.5), sobre el dispositivo (centro de pantalla + normal · 1.0 + 0.18 arriba) y frente a la pantalla a `dFill`. El objetivo termina en el centro de la pantalla. Todo sale de posiciones reales (`getWorldPosition` / `getWorldQuaternion`).
+
+```
+half  = tan(fov / 2)
+dFill = min((altoPantalla / 2) / half, (anchoPantalla / 2) / (half · aspect)) · 0.88
+```
+
+La pantalla mide 0.32 × 0.2075 m (notebook) y 0.074 × 0.158 m (teléfono). `dFill` se recalcula al cambiar el tamaño de la ventana (`fillDistance` en `camera-path.ts`; cubierto por `tests/hero-camera.test.mjs`).
+
+## Tramo automático (lenis)
+
+`HeroIntro` escucha el evento `scroll` de Lenis. Con dirección hacia abajo y p entre 0.46 y 0.995 llama a `lenis.scrollTo(finDelPin, { duration: 1.5, easing: easeInOutCubic, lock: true, force: true })`. Hacia arriba, con p entre 0.46 y 0.99, devuelve el scroll a p = 0.45 (duración proporcional a la distancia, mínimo 0.45 s). Mientras dura (`auto`), la cámara toma el progreso directo, sin el suavizado de 0.12, y `html.lenis-locked` aplica `touch-action: none` para que el gesto táctil no pelee con la animación. Un temporizador de seguridad libera el estado si Lenis no avisa el final. "Saltar intro" usa el mismo tramo hacia p = 1. `?noauto` lo desactiva (capturas).
+
+## Llegada al H1
+
+El bloque amarillo del H1 tiene `margin-top: -100svh`, `min-height: 100svh` y `z-index` bajo el hero; su contenido está en `opacity: 0` mientras el pin dura. Al llegar a p = 1 (`html.hero-arrived`): el stage pasa a `visibility: hidden` (el bloque queda interactivo), el contenido aparece con un fade de 450 ms y el H1 se revela palabra por palabra (`title-in`). Al subir se resetea. El header pasa a negro sólido con p > 0.68.
+
+## Variante según orientación
+
+`matchMedia('(max-aspect-ratio: 1/1)')` en `HeroIntro`: vertical = **teléfono**, horizontal = **notebook**. Se evalúa al montar y en cada cambio; el `<Canvas key={variant}>` se remonta y el recorrido se recalcula. Solo se monta el objeto de la variante activa.
+
+## Pantalla del dispositivo
+
+Fondo amarillo `#FFD400` con la carita del logo del header centrada (~21 % del ancho en el notebook, ~40 % en el teléfono): `createScreenTexture` toma el `<svg>` real del logo (`header a[aria-label^='DOKEBI'] svg`), lo serializa → `Image` → canvas → `CanvasTexture` (1024×664 / 727×1553). `MeshBasicMaterial`, sin iluminación ni tone mapping.
 
 ## Ángulo y ambientación (rediseño)
 
@@ -25,18 +62,8 @@ Objetivo: 60 fps en un notebook medio y 30+ en un celular de gama media. Medido 
 
 `?debug` muestra el HUD y la cámara libre; `?debug&follow` usa la cámara del recorrido; `&clean` oculta la línea del recorrido. En debug, `window.__heroProgress.current` permite fijar el progreso y `window.__heroInfo()` devuelve `renderer.info`.
 
-## Variante según orientación
+## Dispositivos
 
-`matchMedia('(max-aspect-ratio: 1/1)')` en `HeroIntro`: vertical = **teléfono**, horizontal = **notebook**. Se evalúa al montar y en cada cambio; el `<Canvas key={variant}>` se remonta y el recorrido se recalcula. Solo se monta el objeto de la variante activa. `?debug` muestra la variante en el HUD.
-
-## Notebook (horizontal)
-Ubicación (−1.9, 1.11, 0.33), rotY −0.35. Textura `public/hero/pantalla.webp`. Puntos 4–6: pantalla + normal·1.5 (+0.3 y), ·0.55, ·0.17; objetivo = centro de pantalla (−0.008 en su up).
-
-## Teléfono (vertical)
-Misma ubicación y rotY. Cuerpo 0.08 × 0.165 × 0.008 m, `#2B2B2B`, `RoundedBox`, sobre soporte simple, inclinado −0.2 rad. Pantalla 0.074 × 0.158 m, `MeshBasicMaterial` con `public/hero/pantalla-movil.webp` (captura de la home a 390 × 844 con `/?captureHero=1`, 727 × 1553).
-Puntos 0–3 iguales al notebook. Con S = centro de pantalla y sn = su normal:
-- 4: S + sn·0.8 + (0, 0.2, 0), objetivo S + (0, −0.03, 0)
-- 5: S + sn·0.3, objetivo S
-- 6: S + sn·0.11, objetivo S
-
-A 0.11 m con FOV 68 la vista cubre 0.148 × 0.068 m < 0.158 × 0.074: la pantalla llena el encuadre sin mostrar el borde del cuerpo. `near = 0.01` en ambas variantes. Cubierto en `tests/hero-camera.test.mjs`.
+- **Notebook (horizontal)**: ubicación (−1.9, 1.11, 0.33), rotY −0.35, pantalla 0.32 × 0.2075 m. `?debug` muestra la variante en el HUD.
+- **Teléfono (vertical)**: misma ubicación y rotY. Cuerpo 0.08 × 0.165 × 0.008 m, `#2B2B2B`, `RoundedBox`, sobre soporte simple, inclinado −0.2 rad; pantalla 0.074 × 0.158 m.
+- Las dos variantes comparten la curva de 6 puntos (arriba); solo cambian el FOV y el tamaño de pantalla que entran en `dFill`.

@@ -170,3 +170,23 @@ function drawNeon(ctx: CanvasRenderingContext2D) {
   ctx.shadowBlur = 0; ctx.textAlign = "left";
   ctx.shadowColor = "#FF6A00"; ctx.shadowBlur = 20; smile(ctx, 78, 640, 100, "#FFD9A8"); ctx.shadowBlur = 0;
 }
+
+/** Pantalla del dispositivo: amarillo con la carita del logo del header (mismo SVG) centrada. ~21 % del ancho en el notebook, ~40 % en el teléfono. */
+export function createScreenTexture(phone: boolean) {
+  const [w, h] = phone ? [727, 1553] : [1024, 664];
+  const texture = canvasTexture(w, h, (ctx) => { ctx.fillStyle = "#FFD400"; ctx.fillRect(0, 0, w, h); });
+  const logo = document.querySelector("header a[aria-label^='DOKEBI'] svg");
+  if (!logo) return texture;
+  const size = Math.round(w * (phone ? 0.4 : 0.21));
+  const svg = logo.cloneNode(true) as SVGElement;
+  svg.setAttribute("width", String(size));
+  svg.setAttribute("height", String(size));
+  const image = new Image();
+  image.onload = () => {
+    const ctx = (texture.image as HTMLCanvasElement).getContext("2d")!;
+    ctx.drawImage(image, (w - size) / 2, (h - size) / 2, size, size);
+    texture.needsUpdate = true;
+  };
+  image.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(new XMLSerializer().serializeToString(svg))}`;
+  return texture;
+}

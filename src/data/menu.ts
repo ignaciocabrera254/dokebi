@@ -3,6 +3,8 @@ import data from "./menu.json";
 export type MenuItem = (typeof data.items)[number];
 export const menu = data;
 
+export const menuBajada = "Todo se fríe cuando lo pides y llega en nuestra caja amarilla.";
+
 // Manual para no depender del ICU del runtime (mismo resultado en servidor y cliente).
 export const clp = (n: number) => `$${String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
 export const precio = (n: number | null) => (n == null ? "[PRECIO]" : clp(n));

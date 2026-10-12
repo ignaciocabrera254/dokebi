@@ -8,6 +8,8 @@ export type MerchItem = {
   precio: string | null;
 };
 
+export const merchBajada = "Lleva al dokebi contigo. Disponible en los dos locales.";
+
 export const categorias = [
   { id: "poleras", label: "Poleras" },
   { id: "gorros", label: "Gorros" },
@@ -19,7 +21,7 @@ export const categorias = [
 // Agregar productos aquí: aparecen solos en /merch (tab de su categoría).
 export const merch: readonly MerchItem[] = [
   { id: "polera", nombre: "Polera Dokebi", categoria: "poleras", foto: "/merch/poleras/polera-v1.webp", precio: "$24.990" }, // FICTICIO
-  { id: "gorro-1", nombre: "Gorro Dokebi burdeo", categoria: "gorros", foto: "/merch/gorros/gorro-dokebi-burdeo-600.webp", precio: "$19.990" },
+  { id: "gorro-1", nombre: "Jockey Dokebi burdeo", categoria: "gorros", foto: "/merch/gorros/gorro-dokebi-burdeo-600.webp", precio: "$19.990" },
   { id: "gorro-2", nombre: "Gorro Dokebi oliva", categoria: "gorros", foto: "/merch/gorros/gorro-dokebi-oliva-600.webp", precio: "$19.990" },
   { id: "gorro-3", nombre: "Gorro Dokebi verde", categoria: "gorros", foto: "/merch/gorros/gorro-dokebi-verde-600.webp", precio: "$19.990" },
   { id: "gorro-4", nombre: "Gorro Dokebi lila", categoria: "gorros", foto: "/merch/gorros/gorro-dokebi-lila-600.webp", precio: "$19.990" },

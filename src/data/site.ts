@@ -4,13 +4,13 @@ export const site = {
   url: "https://dokebi.cl",
   name: "DOKEBI",
   description:
-    "Korean Street Food en Santiago: corndogs coreanos, tteokbokki y bebidas coreanas, fritos al momento en Barrio Italia y Los Leones. Delivery y opciones veganas.",
+    "Corndogs coreanos, tteokbokki y bebidas de Corea, fritos al momento en Barrio Italia y Los Leones, Providencia. Delivery y opciones veganas.",
   // ponytail: ambos locales apuntan a la tienda de Providencia hasta tener el link de Los Leones.
   ubereats,
   nav: [
     { href: "/#menu", label: "Menú" },
     { href: "/#locales", label: "Locales" },
-    { href: "/#barrio", label: "El barrio" },
+    { href: "/#fuera-del-meson", label: "Fuera del mesón" },
     { href: "/#merch", label: "Merch" },
     { href: "/#faq", label: "FAQ" },
   ],
@@ -19,8 +19,8 @@ export const site = {
   ],
   /** Número internacional sin "+", ej. 569XXXXXXXX. null = aún no definido. */
   whatsapp: null as string | null,
-  deliveryApps: "[Y OTRAS APPS]",
-  deliveryZone: "[ZONA]",
+  deliveryApps: "[y otras apps]",
+  deliveryZone: "[zona]",
 } as const;
 
 /** Link de WhatsApp con mensaje. Sin número aún: lleva a #locales (se compra en el local). */

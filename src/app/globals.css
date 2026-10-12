@@ -103,7 +103,7 @@
   }
 }
 
-/* The sticky stage pins for 2.4 desktop / 1.8 mobile viewports. */
+/* Hero: 2.6 pantallas de alto en desktop (pin de 1.6) y 2.2 en móvil (pin de 1.2). */
 .hero-intro { height: 100svh; position: relative; }
 .hero-stage { position: relative; height: 100svh; overflow: hidden; }
 .hero-canvas, .hero-decoration, .hero-wash { position: absolute; inset: 0; }
@@ -111,11 +111,16 @@
 .hero-decoration, .hero-wash { pointer-events: none; }
 .hero-wash { background: var(--color-yolk); opacity: 0; }
 .hero-skip { z-index: 2; background: rgb(10 10 10 / 65%); }
-.hero-title { z-index: 3; }
-.hero-motion .hero-intro { height: 177svh; }
-.hero-motion .hero-stage { position: sticky; top: 0; }
-.hero-motion .hero-title { margin-top: -100svh; }
-.hero-motion:not(.hero-title-on) .hero-title { visibility: hidden; }
+.hero-title { z-index: 1; }
+.hero-motion .hero-intro { height: 260svh; }
+.hero-motion .hero-stage { position: sticky; top: 0; z-index: 2; }
+/* El bloque del H1 queda bajo el hero durante el pin; al llegar (p = 1) el stage se oculta y su contenido aparece con un fade. */
+.hero-motion .hero-title { margin-top: -100svh; min-height: 100svh; }
+.hero-motion .hero-title > * { opacity: 0; transition: opacity 450ms ease-out; }
+.hero-motion.hero-arrived .hero-title > * { opacity: 1; }
+.hero-motion.hero-arrived .hero-stage { visibility: hidden; }
+/* Mientras lenis anima el tramo automático (lock), el gesto táctil no debe pelear con la animación. */
+.lenis-locked { touch-action: none; }
 .site-header[data-immersive] { position: fixed; inset: 0 0 auto; background: transparent; border-color: transparent; transition: background-color 200ms ease-out, border-color 200ms ease-out; }
 .hero-header-solid .site-header[data-immersive], .hero-capture .site-header[data-immersive] { background: var(--color-ink); border-color: var(--color-gray-850); }
 .hero-header-solid .site-header[data-immersive] > div { height: 64px; }
@@ -132,14 +137,15 @@
 .hero-capture .hero-title { margin-top: 76px; min-height: calc(100svh - 76px); }
 .hero-capture #titulo-principal .hero-word { opacity: 1; transform: none; }
 @media (max-width: 767px) {
-  .hero-motion .hero-intro { height: 154svh; }
+  .hero-motion .hero-intro { height: 220svh; }
   .hero-motion .hero-title { padding-top: 88px; }
   .hero-capture .hero-title { margin-top: 64px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-motion .hero-intro { height: 100svh; }
   .hero-motion .hero-stage { position: relative; }
-  .hero-motion .hero-title { margin-top: 0; visibility: visible; }
+  .hero-motion .hero-title { margin-top: 0; min-height: 0; }
+  .hero-motion .hero-title > * { opacity: 1; transition: none; }
   .hero-motion .hero-word { opacity: 1; transform: none; transition: none; }
   .hero-canvas, .hero-wash { display: none; }
   .site-header[data-immersive], .hero-canvas { transition: none; }
@@ -171,4 +177,3 @@
 }
 
 /* Al llegar del notebook el H1 ya se vio en la pantalla: aparece completo, sin animar palabra por palabra. */
-.hero-motion.hero-title-on .hero-word { opacity: 1; transform: none; transition: none; }

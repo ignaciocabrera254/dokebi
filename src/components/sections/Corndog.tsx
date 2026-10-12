@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Doodle } from "@/components/ui/Doodle";
 import { Section } from "@/components/ui/Section";
-import { capas } from "@/data/corndog";
+import { bajada, capas } from "@/data/corndog";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -151,7 +151,7 @@ export function Corndog({ rellenos }: { rellenos: readonly string[] }) {
           Cómo se arma un corndog
         </h2>
         <p className="text-gray-700 m-0 max-w-[520px] text-[19px] leading-normal max-md:hidden">
-          Míralo armarse capa por capa, igual que en la freidora.
+          {bajada}
         </p>
       </div>
 

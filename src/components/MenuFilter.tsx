@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Smiley } from "@/components/ui/Smiley";
 import type { MenuItem } from "@/data/menu";
-import { precio } from "@/data/menu";
+import { menuBajada, precio } from "@/data/menu";
 
 type Props = {
   categorias: readonly { id: string; label: string }[];
@@ -29,7 +29,7 @@ export function MenuFilter({ categorias, rellenos, items }: Props) {
         <div className="flex max-w-[640px] flex-col gap-3.5 md:gap-4">
           <h2 id="h2-menu" className="font-display text-yolk m-0 text-[84px] leading-[0.88] md:text-h2-xl">Menú</h2>
           <p className="m-0 text-base leading-normal text-gray-200 md:text-[19px]">
-            Todo frito al momento y servido en nuestra caja amarilla. {items.length} productos, de los corndogs a las bebidas coreanas.
+            {menuBajada}
           </p>
         </div>
         <button

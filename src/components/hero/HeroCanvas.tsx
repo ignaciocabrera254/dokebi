@@ -2,13 +2,13 @@
 
 import { Suspense, lazy, useEffect, useLayoutEffect, useMemo, useRef, useState, type RefObject } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Line, OrbitControls, RoundedBox, useTexture } from "@react-three/drei";
-import { Group, Mesh, MeshBasicMaterial, PerspectiveCamera, Quaternion, SRGBColorSpace, Vector3, type Texture } from "three";
+import { Line, OrbitControls, RoundedBox } from "@react-three/drei";
+import { Group, Mesh, MeshBasicMaterial, PerspectiveCamera, Quaternion, Vector3, type Texture } from "three";
 import { Ambience, Floor } from "./Ambience";
-import { createCameraPath, progressToParameter, START, type HeroVariant } from "./camera-path";
+import { createCameraPath, fillDistance, progressToParameter, SCREEN_SIZE, START, type HeroVariant } from "./camera-path";
 import { Kiosk } from "./Kiosk";
 import { Box, Panel, type Point } from "./parts";
-import { createSceneTextures } from "./scene-textures";
+import { createSceneTextures, createScreenTexture } from "./scene-textures";
 
 const Effects = lazy(() => import("./Effects"));
 type Props = { variant: HeroVariant; progress: RefObject<number>; active: boolean; debug: boolean; orbit: boolean; onReady: () => void };
@@ -21,7 +21,7 @@ function Notebook({ screen, texture }: { screen: RefObject<Mesh | null>; texture
     <mesh position={[0, 0.0185, -0.03]} rotation={[-Math.PI / 2, 0, 0]}><planeGeometry args={[0.3, 0.12]} /><meshLambertMaterial color="#141414" /></mesh>
     <group position={[0, 0.018, -0.12]} rotation={[-0.25, 0, 0]}>
       <Box at={[0, 0.11, 0]} size={[0.34, 0.22, 0.012]} color="#2B2B2B" />
-      <mesh ref={screen} position={[0, 0.112, 0.0065]}><planeGeometry args={[0.32, 0.2075]} /><meshBasicMaterial map={texture} map-colorSpace={SRGBColorSpace} map-anisotropy={4} toneMapped={false} /></mesh>
+      <mesh ref={screen} position={[0, 0.112, 0.0065]}><planeGeometry args={[0.32, 0.2075]} /><meshBasicMaterial map={texture} toneMapped={false} /></mesh>
     </group>
   </group>;
 }
@@ -31,7 +31,7 @@ function Telefono({ screen, texture }: { screen: RefObject<Mesh | null>; texture
     <Box at={[0, 0.022, 0.018]} size={[0.07, 0.02, 0.012]} color="#1B1B1B" />
     <group position={[0, 0.103, -0.012]} rotation={[-0.2, 0, 0]}>
       <RoundedBox args={[0.08, 0.165, 0.008]} radius={0.008} smoothness={4}><meshLambertMaterial color="#2B2B2B" /></RoundedBox>
-      <mesh ref={screen} position={[0, 0, 0.0042]}><planeGeometry args={[0.074, 0.158]} /><meshBasicMaterial map={texture} map-colorSpace={SRGBColorSpace} map-anisotropy={4} toneMapped={false} /></mesh>
+      <mesh ref={screen} position={[0, 0, 0.0042]}><planeGeometry args={[0.074, 0.158]} /><meshBasicMaterial map={texture} toneMapped={false} /></mesh>
     </group>
   </group>;
 }
@@ -46,19 +46,24 @@ function Scene({ variant, progress, debug, orbit, onReady }: Omit<Props, "active
   const [route, setRoute] = useState<Point[]>([]);
   const { camera, size, gl } = useThree();
   const textures = useMemo(() => createSceneTextures(), []);
-  const screenshot = useTexture(phone ? "/hero/pantalla-movil.webp" : "/hero/pantalla.webp");
+  const screenTexture = useMemo(() => createScreenTexture(phone), [phone]);
   const look = useMemo(() => new Vector3(), []);
   const position = useMemo(() => new Vector3(), []);
   const announced = useRef(false);
 
   useEffect(() => () => { Object.values(textures).forEach((texture) => texture.dispose()); }, [textures]);
+  useEffect(() => () => screenTexture.dispose(), [screenTexture]);
   useLayoutEffect(() => {
     const mesh = screen.current!;
     mesh.updateWorldMatrix(true, false);
     sign.current!.updateWorldMatrix(true, true);
     const mouth = mouthRef.current!.getWorldPosition(new Vector3());
     const normal = new Vector3(0, 0, 1).applyQuaternion(sign.current!.getWorldQuaternion(new Quaternion()));
-    path.current = createCameraPath(mesh.getWorldPosition(new Vector3()), mesh.getWorldQuaternion(new Quaternion()), variant, mouth, normal);
+    // La pantalla debe llenar toda la vista sin mostrar el borde: se recalcula al cambiar el tamaño de la ventana.
+    const aspect = size.width / size.height;
+    const [sw, sh] = SCREEN_SIZE[variant];
+    const dFill = fillDistance(sw, sh, aspect <= 1 ? 68 : 50, aspect);
+    path.current = createCameraPath(mesh.getWorldPosition(new Vector3()), mesh.getWorldQuaternion(new Quaternion()), mouth, normal, dFill);
     if (debug) setRoute(path.current.camera.getPoints(100).map((p) => p.toArray() as Point));
     if (!debug || !orbit) {
       path.current.camera.getPoint(progressToParameter(progress.current), position);
@@ -80,10 +85,10 @@ function Scene({ variant, progress, debug, orbit, onReady }: Omit<Props, "active
       camera.position.copy(position); camera.lookAt(look);
     }
     if (sign.current && face.current) {
-      const winking = p > 0.43 && p < 0.53;
+      const winking = p > 0.36 && p < 0.45;
       (face.current.material as MeshBasicMaterial).map = winking ? textures.wink : textures.face;
-      sign.current.scale.setScalar(winking ? 1 + Math.sin((p - 0.43) / 0.1 * Math.PI) * 0.08 : 1);
-      sign.current.rotation.y = SIGN_ROT + Math.sin(clock.elapsedTime / 1.1) * 0.03 * (1 - Math.min(1, Math.max(0, (p - 0.5) / 0.1)));
+      sign.current.scale.setScalar(winking ? 1 + Math.sin((p - 0.36) / 0.09 * Math.PI) * 0.08 : 1);
+      sign.current.rotation.y = SIGN_ROT + Math.sin(clock.elapsedTime / 1.1) * 0.03 * (1 - Math.min(1, Math.max(0, (p - 0.45) / 0.1)));
     }
     if (debug) (window as unknown as { __heroInfo?: () => unknown }).__heroInfo = () => ({ ...gl.info.render, geometries: gl.info.memory.geometries, textures: gl.info.memory.textures });
     if (!announced.current) { announced.current = true; requestAnimationFrame(onReady); }
@@ -108,7 +113,7 @@ function Scene({ variant, progress, debug, orbit, onReady }: Omit<Props, "active
       <mesh ref={mouthRef} position={[0, -0.2, 0.095]} visible={false}><boxGeometry args={[0.01, 0.01, 0.01]} /></mesh>
       <sprite position={[0, 0, -0.2]} scale={[2.4, 2.4, 1]}><spriteMaterial map={textures.glow} color="#FFD400" transparent opacity={0.35} depthWrite={false} blending={2} fog={false} /></sprite>
     </group>
-    {phone ? <Telefono screen={screen} texture={screenshot} /> : <Notebook screen={screen} texture={screenshot} />}
+    {phone ? <Telefono screen={screen} texture={screenTexture} /> : <Notebook screen={screen} texture={screenTexture} />}
     {!phone && <Suspense fallback={null}><Effects /></Suspense>}
     {debug && <>{orbit && <OrbitControls makeDefault target={[-1, 2, 0]} />}{!location.search.includes("clean") && <Line points={route.length ? route : [[0.3, 1.75, 12], [-3, 3, 2]]} color="#FF7657" lineWidth={2} />}</>}
   </>;
@@ -117,7 +122,7 @@ function Scene({ variant, progress, debug, orbit, onReady }: Omit<Props, "active
 export default function HeroCanvas(props: Props) {
   const { active, variant } = props;
   const phone = variant === "telefono";
-  return <Canvas key={variant} dpr={[1, 1.5]} frameloop={active ? "always" : "never"} camera={{ position: START.toArray(), fov: phone ? 68 : 50, near: 0.01, far: 70 }} gl={{ antialias: phone, powerPreference: "low-power", preserveDrawingBuffer: props.debug }} flat fallback={null}>
+  return <Canvas key={variant} dpr={[1, 1.5]} frameloop={active ? "always" : "never"} camera={{ position: START.toArray(), fov: phone ? 68 : 50, near: phone ? 0.01 : 0.02, far: 70 }} gl={{ antialias: phone, powerPreference: "low-power", preserveDrawingBuffer: props.debug }} flat fallback={null}>
     <Suspense fallback={null}><Scene {...props} /></Suspense>
   </Canvas>;
 }

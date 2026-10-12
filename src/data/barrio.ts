@@ -1,3 +1,8 @@
+export const seccion = {
+  titulo: "Fuera del mesón",
+  bajada: "Lo que no sale de la freidora: colabs, eventos y lo que dicen de nosotros.",
+} as const;
+
 export const polaroids = [
   { id: "fila", src: "/images/barrio/fila-v1.webp", alt: "Escena generada de clientes frente al local amarillo de DOKEBI", foto: "Fila en Av. Italia", caption: "viernes, 8 pm", ratio: "aspect-[3/4]", pos: "-rotate-3 lg:translate-y-6" },
   { id: "mordisco", src: "/images/barrio/mordisco-v1.webp", alt: "Escena generada de un corndog con un mordisco frente a DOKEBI", foto: "Corndog en mano frente al local", caption: "el primer mordisco", ratio: "aspect-[4/5]", pos: "rotate-2" },

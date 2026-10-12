@@ -1,20 +1,22 @@
 import Image from "next/image";
 import { Doodle } from "@/components/ui/Doodle";
 import { Section } from "@/components/ui/Section";
-import { colaboraciones, eventos, polaroids, prensa } from "@/data/barrio";
+import { colaboraciones, eventos, polaroids, prensa, seccion } from "@/data/barrio";
 
 const card = "flex flex-col gap-3 rounded-lg p-6 md:gap-[18px] md:p-8";
 
 export function Barrio() {
   return (
-    <Section id="barrio" labelledBy="h2-barrio" className="bg-ink text-paper pt-16 pb-18 md:pt-30 md:pb-32" innerClassName="flex flex-col gap-7 md:gap-14">
-      <Doodle variant="crown" size={130} stroke="#FFD400" className="absolute top-[60px] left-[3%] -rotate-10 max-md:top-10 max-md:right-3.5 max-md:left-auto max-md:size-[70px]" />
+    <Section id="fuera-del-meson" labelledBy="h2-fuera-del-meson" className="bg-ink text-paper pt-16 pb-18 md:pt-30 md:pb-32" innerClassName="flex flex-col gap-7 md:gap-14">
+      {/* Ancla antigua (#barrio): los enlaces ya compartidos siguen llegando a la sección. */}
+      <span id="barrio" aria-hidden="true" className="absolute top-0 left-0" />
+      <Doodle variant="crown" size={130} stroke="#FFD400" className="absolute top-[50px] right-[4%] rotate-10 max-md:top-2 max-md:right-3.5 max-md:size-[48px]" />
       <Doodle variant="squiggle" size={260} stroke="#FFD400" className="absolute top-[420px] right-[4%] -rotate-6 max-md:hidden" />
 
       <div className="flex flex-wrap items-end justify-between gap-6">
-        <h2 id="h2-barrio" className="font-display m-0 text-[84px] leading-[0.88] md:text-h2-xl">El barrio</h2>
+        <h2 id="h2-fuera-del-meson" className="font-display m-0 text-[84px] leading-[0.88] md:text-h2-xl">{seccion.titulo}</h2>
         <p className="m-0 max-w-[520px] text-base leading-normal font-medium text-gray-200 md:text-[19px]">
-          Nacimos en la calle y ahí seguimos: Barrio Italia, Los Leones y todo lo que pasa entre medio. Colabs, eventos y la fila de siempre.
+          {seccion.bajada}
         </p>
       </div>
 

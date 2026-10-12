@@ -2,7 +2,7 @@ import { Doodle } from "@/components/ui/Doodle";
 import { Section } from "@/components/ui/Section";
 import { MerchCard } from "@/components/MerchCard";
 import { Button } from "@/components/ui/Button";
-import { merchHome } from "@/data/merch";
+import { merchBajada, merchHome } from "@/data/merch";
 
 export function Merch() {
   return (
@@ -12,7 +12,7 @@ export function Merch() {
         <div className="flex flex-col gap-3 md:gap-4">
           <h2 id="h2-merch" className="font-display m-0 text-[84px] leading-[0.88] md:text-h2-xl">Merch</h2>
           <p className="m-0 max-w-[520px] text-base font-medium md:text-[19px] md:leading-normal">
-            Lleva al dokebi contigo. Disponible en ambos locales.
+            {merchBajada}
           </p>
         </div>
         <ul className="scrollbar-none -mx-gutter px-gutter m-0 flex list-none gap-[22px] overflow-x-auto p-0 pt-5 pb-7 md:mx-0 md:grid md:grid-cols-[repeat(auto-fit,minmax(min(210px,100%),1fr))] md:gap-x-7 md:gap-y-9 md:overflow-visible md:p-0">

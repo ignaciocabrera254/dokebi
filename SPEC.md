@@ -32,7 +32,7 @@ Se usa en: logo del header (44 px), tarjetas del menú (52 px, `spicy` según el
 
 ## Header
 
-**Contenido:** Smiley 44 px + "Dokebi" en display · nav (Menú, El barrio, Locales, Merch, FAQ) · botón amarillo "Pedir →" a Uber Eats.
+**Contenido:** Smiley 44 px + "Dokebi" en display · nav (Menú, Locales, Fuera del mesón, Merch, FAQ) · botón amarillo "Pedir →" a Uber Eats.
 Móvil: logo + Pedir + botón de menú (hamburguesa con panel).
 
 **Motion:** fijo. Transparente sobre el hero; al pasar el hero pasa a negro sólido y baja de 76 a 60 px. "Pedir" siempre visible.
@@ -95,9 +95,9 @@ Filtro: componente cliente. El HTML inicial debe incluir **todos** los productos
 
 ---
 
-## 4 · El barrio
+## 4 · Fuera del mesón (antes "El barrio", id `fuera-del-meson`)
 
-**Contenido:** H2 "El barrio" · bajada "Nacimos en la calle y ahí seguimos: Barrio Italia, Los Leones y todo lo que pasa entre medio. Colabs, eventos y la fila de siempre." · 4 fotos tipo polaroid rotadas con caption en marker:
+**Contenido:** H2 "Fuera del mesón" · bajada "Lo que no sale de la freidora: colabs, eventos y lo que dicen de nosotros." · 4 fotos tipo polaroid rotadas con caption en marker:
 - Fila en Av. Italia — "viernes, 8 pm"
 - Corndog en mano, mural detrás — "el primer mordisco"
 - Cajas amarillas en la vereda — "delivery saliendo"

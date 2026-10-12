@@ -12,5 +12,5 @@ export const porQue = {
     "Trajimos esa misma energía a Providencia: comida callejera coreana, frita al momento, para comer con las manos y salir sonriendo. Por eso nuestra carita sonríe, pero con colmillo.",
   ko: "도깨비",
   caption: "dokkaebi · el duende",
-  sticker: "sonríe, pero con colmillo",
+  sticker: "ojo, que muerde",
 } as const;

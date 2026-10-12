@@ -8,8 +8,12 @@ import type { HeroVariant } from "./camera-path";
 
 const HeroCanvas = dynamic(() => import("./HeroCanvas"), { ssr: false });
 const clamp = (value: number) => Math.max(0, Math.min(1, value));
-// El pin termina con el fundido completo: sin tramo muerto antes del H1.
-const END = 0.77;
+// Fases (p = progreso del pin): 0–0.30 patio, 0.30–0.45 zoom a la carita y guiño (ambas con scroll),
+// 0.45–0.90 vuelo automático al dispositivo, 0.90–0.98 fundido a amarillo, 1 llegada al H1.
+const AUTO_FROM = 0.46; // al pasar este p hacia abajo, el tramo automático lleva el scroll al final del pin
+const BACK_TO = 0.45; // y hacia arriba lo devuelve aquí
+const ARRIVE = 0.999;
+const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
 
 class SceneBoundary extends Component<{ children: ReactNode; onError: () => void }, { failed: boolean }> {
   state = { failed: false };
@@ -32,6 +36,7 @@ export function HeroIntro({ children }: { children: ReactNode }) {
   const progress = useRef(0);
   const variantRef = useRef<HeroVariant>("notebook");
   const failed = useRef(false);
+  const skipTo = useRef<() => void>(() => {});
   const lenis = useRef<Lenis | null>(null);
   const [enabled, setEnabled] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -80,6 +85,7 @@ export function HeroIntro({ children }: { children: ReactNode }) {
           if (disposed || reduced() || failed.current) return;
           smoothScroll = new Lenis({ autoRaf: true, anchors: true, lerp: 0.1 });
           lenis.current = smoothScroll;
+          smoothScroll.on("scroll", onLenisScroll);
           root.classList.add("hero-lenis");
         });
       } else {
@@ -90,32 +96,71 @@ export function HeroIntro({ children }: { children: ReactNode }) {
       schedule();
     };
 
+    const metrics = () => {
+      const rect = element.getBoundingClientRect();
+      const stage = element.firstElementChild!.clientHeight;
+      const range = Math.max(1, element.offsetHeight - stage);
+      return { rect, stage, range, top: rect.top + window.scrollY, f: clamp(-rect.top / range) };
+    };
+    // Tramo automático: lenis lleva el scroll (bloqueado) hasta el final del pin o de vuelta a p = 0.45.
+    let auto = false;
+    let autoTimer = 0;
+    const goTo = (f: number, duration: number, onDone?: () => void) => {
+      const l = lenis.current;
+      const { top, range } = metrics();
+      const y = top + f * range;
+      if (!l) { window.scrollTo({ top: y, behavior: "smooth" }); return; }
+      auto = true;
+      clearTimeout(autoTimer);
+      const finish = () => { clearTimeout(autoTimer); if (!auto) return; auto = false; onDone?.(); schedule(); };
+      autoTimer = window.setTimeout(finish, duration * 1000 + 600); // por si algo interrumpe la animación
+      l.scrollTo(y, { duration, easing: easeInOutCubic, lock: true, force: true, onComplete: finish });
+    };
+    // Solo el scroll del usuario (rueda, tacto, teclado, barra) dispara el tramo; los anclas y saltos programáticos no.
+    let lastInput = -1e9;
+    const markInput = () => { lastInput = performance.now(); };
+    const onKey = (e: KeyboardEvent) => { if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", " ", "Home", "End"].includes(e.key)) markInput(); };
+    const onPointer = (e: PointerEvent) => { if (e.target === root) markInput(); }; // barra de scroll del navegador
+    window.addEventListener("wheel", markInput, { passive: true });
+    window.addEventListener("touchmove", markInput, { passive: true });
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("pointerdown", onPointer);
+    const onLenisScroll = (l: Lenis) => {
+      if (auto || reduced() || failed.current || capture || query.has("noauto") || performance.now() - lastInput > 2000) return;
+      const { f } = metrics();
+      if (l.direction > 0 && f > AUTO_FROM && f < 0.995) goTo(1, 1.5);
+      else if (l.direction < 0 && f > AUTO_FROM && f < 0.99) goTo(BACK_TO, Math.max(0.45, (1.5 * (f - BACK_TO)) / (1 - BACK_TO)));
+    };
+    skipTo.current = () => goTo(1, 1.5, () => { const t = document.getElementById("titulo-principal"); history.replaceState(null, "", "#titulo-principal"); t?.focus({ preventScroll: true }); });
+
     const tick = () => {
       frame = 0;
-      const rect = element.getBoundingClientRect();
-      const stageHeight = element.firstElementChild!.clientHeight;
-      const target = clamp(-rect.top / Math.max(1, element.offsetHeight - stageHeight)) * END;
-      progress.current += (target - progress.current) * 0.12;
+      const { rect, stage, f } = metrics();
+      const target = f;
+      // Durante el tramo automático la cámara sigue el scroll sin suavizado, para que el tiempo sea exacto.
+      progress.current = auto ? target : progress.current + (target - progress.current) * 0.12;
       if (Math.abs(target - progress.current) < 0.0005) progress.current = target;
       const p = reduced() || failed.current ? 0 : progress.current;
       element.dataset.progress = p.toFixed(4);
-      const solid = capture || reduced() || p > 0.74 || rect.bottom < stageHeight;
-      root.classList.toggle("hero-title-on", reduced() || capture || p >= 0.765);
+      const motion = !reduced() && !capture && !failed.current;
+      const arrived = motion && f >= ARRIVE;
+      root.classList.toggle("hero-arrived", arrived);
+      if (motion) title.classList.toggle("title-in", arrived);
+      const solid = capture || reduced() || p > 0.68 || rect.bottom < stage;
       if (solid !== lastSolid) { root.classList.toggle("hero-header-solid", solid); lastSolid = solid; }
       if (decoration.current) decoration.current.style.opacity = String(1 - clamp(p / 0.12));
-      if (wash.current) wash.current.style.opacity = String(clamp((p - 0.70) / 0.07));
+      if (wash.current) wash.current.style.opacity = String(clamp((p - 0.9) / 0.08));
       if (skip.current) {
-        // El pin termina en END (0.77): se oculta antes del fundido y vuelve al subir.
-        const hidden = p >= 0.7;
-        skip.current.style.opacity = String(1 - clamp((p - 0.6) / 0.1));
+        const hidden = p >= 0.9;
+        skip.current.style.opacity = String(1 - clamp((p - 0.8) / 0.1));
         skip.current.style.visibility = hidden ? "hidden" : "visible";
         skip.current.style.pointerEvents = hidden ? "none" : "";
         skip.current.tabIndex = hidden ? -1 : 0;
       }
-      if (hud.current) hud.current.value = `${variantRef.current} · p ${p.toFixed(3)} · ${p < 0.38 ? "Patio" : p < 0.52 ? "Guiño" : p < 0.72 ? "Pantalla" : "Amarillo"}`;
-      // La escena sigue montada mientras el hero esté en pantalla (el scroll de vuelta no espera a reconstruirla); solo se pausa tras el fundido.
+      if (hud.current) hud.current.value = `${variantRef.current} · p ${p.toFixed(3)} · ${p < 0.3 ? "Patio" : p < 0.45 ? "Guiño" : p < 0.9 ? "Vuelo" : p < 0.999 ? "Amarillo" : "H1"}${auto ? " · auto" : ""}`;
+      // La escena sigue montada mientras el hero esté en pantalla (el scroll de vuelta no espera a reconstruirla); se pausa tras el fundido.
       const needsScene = !capture && !reduced() && !failed.current && visible && !document.hidden;
-      setActive(needsScene && (p < 0.77 || isDebug));
+      setActive(needsScene && (p < 0.99 || isDebug));
       if (needsScene !== sceneMounted) { sceneMounted = needsScene; setMounted(needsScene); if (!needsScene) setReady(false); }
       if (visible && !document.hidden && !reduced() && !capture && !failed.current && Math.abs(target - progress.current) >= 0.0005) schedule();
     };
@@ -123,6 +168,7 @@ export function HeroIntro({ children }: { children: ReactNode }) {
     const visibility = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; schedule(); });
     visibility.observe(element);
     const reveal = new IntersectionObserver(([entry]) => {
+      if (root.classList.contains("hero-motion")) return; // en movimiento, la revelación la marca la llegada (p = 1)
       if (reduced() || capture || entry.intersectionRatio >= 0.4) title.classList.add("title-in");
       else if (entry.boundingClientRect.top > 0) title.classList.remove("title-in");
     }, { threshold: [0, 0.4] });
@@ -150,6 +196,11 @@ export function HeroIntro({ children }: { children: ReactNode }) {
       disposed = true;
       cancelAnimationFrame(startup);
       window.removeEventListener("load", onLoad);
+      window.removeEventListener("wheel", markInput);
+      window.removeEventListener("touchmove", markInput);
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("pointerdown", onPointer);
+      clearTimeout(autoTimer);
       cancelAnimationFrame(frame);
       smoothScroll?.destroy();
       lenis.current = null;
@@ -160,7 +211,7 @@ export function HeroIntro({ children }: { children: ReactNode }) {
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
       document.removeEventListener("visibilitychange", schedule);
-      root.classList.remove("hero-motion", "hero-static", "hero-title-on", "hero-capture", "hero-debug", "hero-lenis", "hero-header-solid");
+      root.classList.remove("hero-motion", "hero-static", "hero-arrived", "hero-capture", "hero-debug", "hero-lenis", "hero-header-solid");
       title.classList.remove("title-in");
     };
   }, []);
@@ -191,11 +242,10 @@ export function HeroIntro({ children }: { children: ReactNode }) {
         <div ref={wash} className="hero-wash" aria-hidden="true" />
         <a ref={skip} href="#titulo-principal" className="hero-skip border-paper/60 text-paper hover:border-yolk hover:text-yolk absolute right-[clamp(16px,4vw,40px)] bottom-6 inline-flex min-h-11 items-center rounded-full border-2 px-4 text-sm font-bold tracking-[0.08em] uppercase no-underline md:bottom-9"
           onClick={(event) => {
-            const title = document.getElementById("titulo-principal");
-            if (!title || !lenis.current) return;
+            if (!lenis.current) return; // sin Lenis (p. ej. reduced motion) el enlace nativo salta al H1
             event.preventDefault();
             event.stopPropagation();
-            lenis.current.scrollTo(title, { offset: -88, onComplete: () => { history.replaceState(null, "", "#titulo-principal"); title.focus({ preventScroll: true }); } });
+            skipTo.current();
           }}>Saltar intro</a>
         {debug && <div className="hero-hud">
           <output ref={hud} aria-live="off">notebook · p 0.000 · Patio</output>
@@ -204,7 +254,7 @@ export function HeroIntro({ children }: { children: ReactNode }) {
             event.preventDefault();
             const element = intro.current!;
             const value = Number(new FormData(event.currentTarget).get("progress"));
-            const target = element.getBoundingClientRect().top + window.scrollY + clamp(value / END) * (element.offsetHeight - element.firstElementChild!.clientHeight);
+            const target = element.getBoundingClientRect().top + window.scrollY + clamp(value) * (element.offsetHeight - element.firstElementChild!.clientHeight);
             if (lenis.current) lenis.current.scrollTo(target, { immediate: true });
             else window.scrollTo({ top: target, behavior: "instant" });
           }}>
